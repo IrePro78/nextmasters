@@ -1,6 +1,6 @@
-import { ProductCoverCoverImage } from '@/ui/atoms/ProductCoverCoverImage';
-import { ProductListItemDescription } from '@/ui/atoms/ProductListItemDescription';
-import { type ProductItemType } from '@/ui/types/types';
+import { ProductCoverCoverImage } from '@/components/atoms/ProductCoverCoverImage';
+import { ProductListItemDescription } from '@/components/atoms/ProductListItemDescription';
+import { type ProductItemType } from '@/types/types';
 
 export const ProductListItem = ({ product }: ProductItemType) => {
 	return (

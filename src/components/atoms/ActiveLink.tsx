@@ -22,9 +22,7 @@ export const ActiveLink = ({
 					` text-blue-400 hover:text-blue-600`,
 
 					{ undefined: isActive },
-					pathname === href
-						? 'active'
-						: '',
+					pathname === href ? 'active' : '',
 				)}
 			>
 				Poducts

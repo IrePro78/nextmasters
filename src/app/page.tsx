@@ -1,4 +1,4 @@
-import { ProductList } from '@/ui/organism/ProductList';
+import { ProductList } from '@/components/organism/ProductList';
 
 const products = [
 	{
@@ -13,6 +13,7 @@ const products = [
 			},
 		},
 	},
+
 	{
 		id: '2',
 		product: {
@@ -78,9 +79,7 @@ const products = [
 export default function All() {
 	return (
 		<section className="mx-auto max-w-md bg-stone-400 p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
-			<ProductList
-				products={products}
-			/>
+			<ProductList products={products} />
 		</section>
 	);
 }

@@ -3,5 +3,4 @@ export const formatMoney = (value: number) => {
 		style: 'currency',
 		currency: 'PLN',
 	});
-}
-
+};
