@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { ActiveLink } from '@/components/atoms/ActiveLink';
+import { Navbar } from '@/components/Navbar';
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -19,13 +19,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<>
-			<html lang="en">
+			<html lang="pl">
 				<body className={inter.className}>
-					<nav className="flex space-x-4">
-						<ActiveLink href="/products">Products</ActiveLink>
-
-						<ActiveLink href="/">Home</ActiveLink>
-					</nav>
+					<Navbar />
 					{children}
 				</body>
 			</html>
