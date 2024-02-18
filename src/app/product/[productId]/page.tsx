@@ -12,7 +12,7 @@ export default async function ProductPage({
 		<>
 			<div>
 				{/* // <SingleProduct product={product} /> */}
-				{product.name}
+				<h1>{product.name}</h1>
 			</div>
 		</>
 	);
