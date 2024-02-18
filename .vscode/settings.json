@@ -3,9 +3,6 @@
 	"tailwindCSS.classAttributes": ["className", "tw", "clerkAppearance.*"],
 	"typescript.preferences.importModuleSpecifier": "non-relative",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-
-	"graphql-config.dotEnvPath": "./ .env",
-	"graphql-config.load.configName": "graphql",
 	"files.associations": {
 		"*.css": "tailwindcss"
 	},
