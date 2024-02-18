@@ -74,12 +74,11 @@ const products = [
 		},
 	},
 ];
-=======
+
 import React from 'react';
 
 export default function HomePage() {
 	return (
-<>
 		<section className="mx-auto max-w-md bg-stone-400 p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
 			<ProductList products={products} />
 		</section>
@@ -88,7 +87,6 @@ export default function HomePage() {
 				<h1>Welcome to the Home Page</h1>
 				<p>This is the content of the Home Page.</p>
 			</div>
-	</>
 	
 	);
 }
