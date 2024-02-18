@@ -23,6 +23,9 @@ export default function RootLayout({
 				<body className={inter.className}>
 					<Navbar />
 					{children}
+					<footer>
+						<p className="text-center text-sm ">© 2024</p>
+					</footer>
 				</body>
 			</html>
 		</>
