@@ -1,3 +1,6 @@
+import ts from 'typescript';
+
+//@ts-check
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
@@ -15,6 +18,6 @@ const nextConfig = {
 };
 
 // const withMdx = require('@next/mdx')();
-// module.exports = withMdx(nextConfig);
+// export default withMDX()(nextConfig);
 
 export default nextConfig;

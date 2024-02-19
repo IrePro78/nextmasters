@@ -3,7 +3,7 @@ import { ActiveLink } from '@/components/ActiveLink';
 
 export const Navbar = async () => {
 	return (
-		<nav className=" mx-auto flex max-w-7xl justify-between bg-zinc-500  p-6 py-6">
+		<nav className=" mx-auto flex max-w-7xl justify-between bg-zinc-500 p-6 py-6">
 			<Link href={'/'}>
 				<span className=" flex-grow-0 p-2 text-3xl font-semibold text-zinc-950">
 					My Shop

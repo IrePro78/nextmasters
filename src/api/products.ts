@@ -1,5 +1,7 @@
 import { type ProductItemType } from '@/types/types';
 
+const BASE_URL = 'https://naszsklep-api.vercel.app/api/products';
+
 type ProductResponseItem = {
 	id: string;
 	title: string;
@@ -15,9 +17,7 @@ type ProductResponseItem = {
 };
 
 export const getProductsList = async () => {
-	const res = await fetch(
-		'https://naszsklep-api.vercel.app/api/products',
-	);
+	const res = await fetch(BASE_URL);
 	const productsResponse =
 		(await res.json()) as ProductResponseItem[];
 
@@ -30,9 +30,7 @@ export const getProductsList = async () => {
 export const getProductById = async (
 	productId: ProductResponseItem['id'],
 ) => {
-	const res = await fetch(
-		`https://naszsklep-api.vercel.app/api/products/${productId}`,
-	);
+	const res = await fetch(`${BASE_URL}/${productId}`);
 	const productResponse = (await res.json()) as ProductResponseItem;
 	return productResponseItemToProductItemType(productResponse);
 };
