@@ -21,8 +21,6 @@ export const getProductsList = async (
 	take?: number,
 	skip?: number,
 ) => {
-	console.log('take', take, 'offset', skip);
-
 	const res = await fetch(`${BASE_URL}?take=${take}&offset=${skip}`);
 	const productsResponse =
 		(await res.json()) as ProductResponseItem[];
