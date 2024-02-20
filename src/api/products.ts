@@ -21,8 +21,7 @@ export const getProductsList = async (
 	take?: number,
 	skip?: number,
 ) => {
-	// pageNumber = Number(pageNumber) < 0 ? '1' : pageNumber;
-	// const nextPage = Number(pageNumber) * Number(countOfProduct);
+	console.log('take', take, 'offset', skip);
 
 	const res = await fetch(`${BASE_URL}?take=${take}&offset=${skip}`);
 	const productsResponse =

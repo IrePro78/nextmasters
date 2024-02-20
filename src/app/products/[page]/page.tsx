@@ -1,31 +1,40 @@
 import { getProductsList } from '@/api/products';
+import { Pagination } from '@/components/molecules/Pagination';
+import { ProductList } from '@/components/organism/ProductList';
 
 export default async function ProductsPage({
+	props,
 	params,
 }: {
 	params: { page: number };
+	props: number;
 }) {
-	const pageNumber = params.page;
+	const { page } = params;
+	const numOfProducts = 4;
 
-	console.log(pageNumber);
+	const pageNumber = page === 1 ? 0 : page - 1;
+	const nextNumberOfPproducts =
+		page <= 1 ? pageNumber : pageNumber * numOfProducts;
 
-	// pageNumber = pageNumber <= 0 ? 1 : pageNumber;
-	const nextPage = Number(pageNumber) * Number(countOfProduct);
+	// if (page <= 1) {
+	// 	console.log();
 
-	const products = await getProductsList(pageNumber);
-	console.log(products);
+	// }
 
-	// return (
-	// 	<main className="container mx-auto">
-	// 		<h1 className="py-4 text-center text-3xl">Strona produktów</h1>
-	// 		<div className="flex justify-end">
-	// 			<Pagination
-	// 			// currentPage={products.paginations.currentPage}
-	// 			// totalPages={data.paginations.totalPages}
-	// 			// limit={4}
-	// 			/>
-	// 		</div>
-	// 		<ProductsList products={data.products} />
-	// 	</main>
-	// );
+	console.log(numOfProducts, page, pageNumber, nextNumberOfPproducts);
+
+	const products = await getProductsList(
+		numOfProducts,
+		nextNumberOfPproducts,
+	);
+
+	return (
+		<main className="container mx-auto">
+			<h1 className="py-4 text-center text-3xl">Pdoduct Page</h1>
+			<div className="flex justify-end">
+				<Pagination numOfPages={props} />
+			</div>
+			<ProductList products={products} />
+		</main>
+	);
 }

@@ -7,7 +7,7 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }) {
 	const products = await getProductsList();
-	const numOfPages = Math.ceil(products.length / 4);
+	const numOfPages = Math.ceil(products.length / 3);
 
 	return (
 		<>

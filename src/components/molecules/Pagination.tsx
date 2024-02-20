@@ -3,6 +3,7 @@
 import Link from 'next/link';
 
 import { usePathname } from 'next/navigation';
+import { type Route } from 'next';
 import { ActiveLink } from '@/components/ActiveLink';
 
 export const Pagination = ({
@@ -10,8 +11,10 @@ export const Pagination = ({
 }: {
 	numOfPages: number;
 }) => {
-	const currentNumberPage = usePathname().split('/').pop();
-	console.log(currentNumberPage);
+	const currentpathname = usePathname();
+	const currentNumberPage = currentpathname?.includes('/')
+		? currentpathname.split('/').pop()
+		: 1;
 
 	return (
 		<>
@@ -25,33 +28,29 @@ export const Pagination = ({
 					>
 						{'<'}
 					</Link>
-					{numOfPages === 0 ? (
+					{numOfPages === 1 ? (
 						<li>
-							<Link href={`/products/${1}`}>
+							<ActiveLink
+								href={`/products/${1}` as Route}
+								className="border-b-2 border-b-transparent text-lg"
+								activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+							>
 								1
-								<ActiveLink
-									href={`/products/${1}`}
-									className="border-b-2 border-b-transparent text-lg"
-									activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
-								/>
-							</Link>
+							</ActiveLink>
 						</li>
 					) : (
 						Array.from({ length: numOfPages }, (_, i) => i + 1).map(
 							(page) => {
 								return (
-									<>
-										<li key={page}>
-											<Link href={`/products/${page}`}>
-												{page}
-												<ActiveLink
-													href={`/products/${page}`}
-													className="border-b-2 border-b-transparent text-lg"
-													activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
-												/>
-											</Link>
-										</li>
-									</>
+									<li key={page}>
+										<ActiveLink
+											href={`/products/${page}` as Route}
+											className="border-b-2 border-b-transparent text-lg"
+											activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+										>
+											{page}
+										</ActiveLink>
+									</li>
 								);
 							},
 						)
