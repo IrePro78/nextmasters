@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation';
-import React from 'react';
 import { type ComponentType } from 'react';
 
 export default async function StaticPage({
