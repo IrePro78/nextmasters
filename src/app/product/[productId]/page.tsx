@@ -1,18 +1,49 @@
-import { get } from 'http';
+import { Suspense } from 'react';
+import { type Metadata } from 'next';
+import { getProductById } from '@/api/products';
+import { ProductCoverCoverImage } from '@/components/atoms/ProductCoverCoverImage';
+import { ProductListItemDescription } from '@/components/atoms/ProductListItemDescription';
+import { SuggestedProducts } from '@/components/organism/SuggestedProducts';
+
+// export const generateStaticParams = async () => {
+// 	const products = await getProductsList();
+// 	return products.map((product) => ({
+// 		productId: product.id,
+// 	}));
+// };
+
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { productId: string; description: string };
+}): Promise<Metadata> => {
+	const product = await getProductById(params.productId);
+
+	return {
+		title: product.name,
+		description: product.description,
+	};
+};
 
 export default async function ProductPage({
 	params,
 }: {
-	productId: string;
+	params: { productId: string };
 }) {
-	const product = await get(`/api/products/${params.productId}`);
+	const product = await getProductById(params.productId);
 
 	return (
 		<>
-			<div className=" mx-auto min-h-full bg-zinc-400 p-12 text-zinc-900 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
-				<h1>Welcome to the Product Page</h1>
-				<p>This is the content of the Product Page.</p>
-			</div>
+			<article className=" mx-auto max-w-md text-center text-cyan-50">
+				<h1>{product.name}</h1>
+				<ProductCoverCoverImage {...product.coverImage} />
+				<ProductListItemDescription {...product} />
+			</article>
+			<aside>
+				<Suspense>
+					<SuggestedProducts />
+				</Suspense>
+			</aside>
 		</>
 	);
 }
