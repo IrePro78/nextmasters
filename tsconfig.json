@@ -2,11 +2,7 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
 		"target": "ES2022",
-		"lib": [
-			"dom",
-			"dom.iterable",
-			"esnext"
-		],
+		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": true,
@@ -34,7 +30,8 @@
 		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		".next/types/**/*.ts"
+		".next/types/**/*.ts",
+		".graphqlrc.ts"
 	],
 	"exclude": ["node_modules"]
 }
