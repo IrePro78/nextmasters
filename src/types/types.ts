@@ -1,11 +1,25 @@
+type CategoryType = {
+	id: string;
+	name: string;
+};
+
 export type ProductItemType = {
 	id?: string;
 	name: string;
-	category: string;
 	price: number;
 	description: string;
+	category: CategoryType[];
 	coverImage: {
 		src: string;
 		alt: string;
 	};
+};
+
+export type ProductResponseItem = {
+	id: string;
+	name: string;
+	price: number;
+	description: string;
+	categories: CategoryType[];
+	product_image: string;
 };

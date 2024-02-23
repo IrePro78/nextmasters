@@ -1,21 +1,15 @@
-import { log } from 'console';
 import {
+	ProductGetByIdDocument,
 	ProductsGetListDocument,
 	type TypedDocumentString,
 } from '@/gql/graphql';
-import { type ProductItemType } from '@/types/types';
+import {
+	type ProductResponseItem,
+	type ProductItemType,
+} from '@/types/types';
 
 // export const BASE_URL = 'https://graphql.hyperfunctor.com/graphql';
 // 'https://naszsklep-api.vercel.app/api/products';
-
-type ProductResponseItem = {
-	id: string;
-	name: string;
-	price: number;
-	description: string;
-	category: string;
-	product_image: string;
-};
 
 const executeGraphQLQuery = async <TResult, TVariables>(
 	query: TypedDocumentString<TResult, TVariables>,
@@ -58,34 +52,50 @@ export const getProductsList = async (
 		ProductsGetListDocument,
 		variables,
 	);
-	return graphqlResponse.getProducts?.map((product) => {
-		log(product);
-		return productResponseItemToProductItemType(product);
+	const products = graphqlResponse.products?.map((product) => {
+		return {
+			id: product.id,
+			name: product.name,
+			description: product.description,
+			price: product.price,
+			category: product.categories?.map((category) => ({
+				id: category.id,
+				name: category.name,
+			})),
+			coverImage: {
+				alt: product.name,
+				src: product.product_image,
+			},
+		} as ProductItemType;
 	});
+	products;
+	return products;
 };
-
 export const getProductById = async (
-	productId: ProductResponseItem['id'],
+	id: ProductResponseItem['id'],
 ) => {
-	const res = await fetch(
-		`${process.env.GRAPHQL_API_URL}/${productId}`,
+	const graphqlResponse = await executeGraphQLQuery(
+		ProductGetByIdDocument,
+		{ id },
 	);
-	const productResponse = (await res.json()) as ProductResponseItem;
-	return productResponseItemToProductItemType(productResponse);
-};
+	if (!graphqlResponse.product) {
+		throw new Error('Product not found');
+	}
+	const { name, description, price, categories, product_image } =
+		graphqlResponse.product;
 
-const productResponseItemToProductItemType = (
-	product: ProductResponseItem,
-): ProductItemType => {
 	return {
-		id: product.id,
-		name: product.name,
-		category: product.category,
-		description: product.description,
-		price: product.price,
+		id,
+		name,
+		description,
+		price,
+		category: categories?.map((category) => ({
+			id: category.id,
+			name: category.name,
+		})),
 		coverImage: {
-			alt: product.name,
-			src: product.image,
+			alt: name,
+			src: product_image,
 		},
-	};
+	} as ProductItemType;
 };

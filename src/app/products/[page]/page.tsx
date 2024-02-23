@@ -3,6 +3,7 @@ import { ProductList } from '@/components/organism/ProductList';
 
 export async function generateStaticParams() {
 	const products = await getProductsList();
+	if (!products) return [];
 
 	const numOfPages = Math.ceil(products.length / 4);
 	const pages = Array.from({ length: numOfPages }, (_, i) => i + 1);

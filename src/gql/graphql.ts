@@ -27,7 +27,7 @@ export type Category = {
 
 /** Create product input object type. */
 export type CreateProductInput = {
-  category_id: Scalars['String']['input'];
+  category_id: Array<Scalars['String']['input']>;
   description: Scalars['String']['input'];
   name: Scalars['String']['input'];
   price: Scalars['Float']['input'];
@@ -63,21 +63,28 @@ export type Query = {
   /** Get All Categories */
   getCategories?: Maybe<Array<Category>>;
   /** Get Product By ID */
-  getProduct?: Maybe<Product>;
+  product?: Maybe<Product>;
   /** Get All Products */
-  getProducts?: Maybe<Array<Product>>;
+  products?: Maybe<Array<Product>>;
 };
 
 
-export type QueryGetProductArgs = {
+export type QueryProductArgs = {
   id: Scalars['ID']['input'];
 };
 
 
-export type QueryGetProductsArgs = {
+export type QueryProductsArgs = {
   skip?: Scalars['Int']['input'];
   take?: Scalars['Int']['input'];
 };
+
+export type ProductGetByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ProductGetByIdQuery = { product?: { id: string, name: string, description?: string | null, product_image: string, price: number, categories?: Array<{ id: string, name: string }> | null } | null };
 
 export type ProductsGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -85,7 +92,7 @@ export type ProductsGetListQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListQuery = { getProducts?: Array<{ id: string, name: string, description?: string | null, product_image: string, price: number }> | null };
+export type ProductsGetListQuery = { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, price: number, categories?: Array<{ id: string, name: string }> | null }> | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -102,14 +109,33 @@ export class TypedDocumentString<TResult, TVariables>
   }
 }
 
-export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList($take: Int, $skip: Int) {
-  getProducts(take: $take, skip: $skip) {
+export const ProductGetByIdDocument = new TypedDocumentString(`
+    query ProductGetById($id: ID!) {
+  product(id: $id) {
     id
     name
     description
     product_image
     price
+    categories {
+      id
+      name
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
+export const ProductsGetListDocument = new TypedDocumentString(`
+    query ProductsGetList($take: Int, $skip: Int) {
+  products(take: $take, skip: $skip) {
+    id
+    name
+    description
+    product_image
+    price
+    categories {
+      id
+      name
+    }
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
