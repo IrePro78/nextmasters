@@ -31,7 +31,7 @@ export default async function ProductsPage({
 		<main className="container mx-auto">
 			<h1 className="py-4 text-center text-3xl">Pdoduct Page</h1>
 			<div className="flex justify-end"></div>
-			<ProductList products={products} />
+			{products && <ProductList products={products} />}
 		</main>
 	);
 }

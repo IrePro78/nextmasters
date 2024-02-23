@@ -6,7 +6,7 @@ export const SuggestedProducts = async () => {
 	return (
 		<div>
 			<h2>Suggested Products</h2>
-			<ProductList products={products.slice(-4)} />
+			{products && <ProductList products={products.slice(-4)} />}
 		</div>
 	);
 };
