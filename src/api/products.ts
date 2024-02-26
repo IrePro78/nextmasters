@@ -3,10 +3,6 @@ import {
 	ProductsGetListDocument,
 	type TypedDocumentString,
 } from '@/gql/graphql';
-import {
-	type ProductResponseItem,
-	type ProductItemType,
-} from '@/types/types';
 
 // export const BASE_URL = 'https://graphql.hyperfunctor.com/graphql';
 // 'https://naszsklep-api.vercel.app/api/products';
@@ -66,14 +62,12 @@ export const getProductsList = async (
 				alt: product.name,
 				src: product.product_image,
 			},
-		} as ProductItemType;
+		};
 	});
 	products;
 	return products;
 };
-export const getProductById = async (
-	id: ProductResponseItem['id'],
-) => {
+export const getProductById = async (id: string) => {
 	const graphqlResponse = await executeGraphQLQuery(
 		ProductGetByIdDocument,
 		{ id },
@@ -85,7 +79,7 @@ export const getProductById = async (
 		graphqlResponse.product;
 
 	return {
-		id,
+		id: graphqlResponse.product.id,
 		name,
 		description,
 		price,
@@ -97,5 +91,5 @@ export const getProductById = async (
 			alt: name,
 			src: product_image,
 		},
-	} as ProductItemType;
+	};
 };

@@ -7,6 +7,9 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }) {
 	const products = await getProductsList();
+	if (!products) {
+		throw new Error('No products found');
+	}
 	const numOfPages = Math.ceil(products.length / 3);
 
 	return (
