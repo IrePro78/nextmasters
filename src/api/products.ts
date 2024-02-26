@@ -93,3 +93,27 @@ export const getProductById = async (id: string) => {
 		},
 	};
 };
+
+export const getProductsByCategoryId = async (categoryId: string) => {
+	const graphqlResponse = await executeGraphQLQuery(
+		ProductsGetListDocument,
+		{ categoryId },
+	);
+	const products = graphqlResponse.products?.map((product) => {
+		return {
+			id: product.id,
+			name: product.name,
+			description: product.description,
+			price: product.price,
+			category: product.categories?.map((category) => ({
+				id: category.id,
+				name: category.name,
+			})),
+			coverImage: {
+				alt: product.name,
+				src: product.product_image,
+			},
+		};
+	});
+	return products;
+};

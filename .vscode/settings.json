@@ -10,7 +10,7 @@
 	"files.associations": {
 		"*.css": "tailwindcss"
 	},
-	"editor.formatOnSave": false,
+	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "always"
 	},

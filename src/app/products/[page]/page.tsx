@@ -1,5 +1,5 @@
-import { getProductsList } from '@/api/products';
 import { ProductList } from '@/components/organism/ProductList';
+import { getProductsList } from '@/api/products';
 
 export async function generateStaticParams() {
 	const products = await getProductsList();

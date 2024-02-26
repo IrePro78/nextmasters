@@ -8,7 +8,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'naszsklep-api.vercel.app',
+				hostname: 'static-ourstore.hyperfunctor.com',
 				pathname: '**',
 			},
 		],

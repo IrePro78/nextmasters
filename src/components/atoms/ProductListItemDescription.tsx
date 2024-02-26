@@ -1,5 +1,6 @@
-import { type ProductItemType } from '@/types/types';
 import { formatMoney } from '@/utils/formater';
+
+import { type ProductItemType } from '@/types/types';
 
 export const ProductListItemDescription = ({
 	name,
