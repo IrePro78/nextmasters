@@ -14,7 +14,7 @@ export default async function RootLayout({
 
 	return (
 		<>
-			<Pagination numOfPages={numOfPages} />
+			<Pagination numOfPages={numOfPages} baseUrl={`products`} />
 			<section>{children}</section>
 		</>
 	);

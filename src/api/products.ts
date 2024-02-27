@@ -1,5 +1,7 @@
 import {
 	ProductGetByIdDocument,
+	ProductsGetByCategoryIdDocument,
+	ProductsGetByCategorySlugDocument,
 	ProductsGetListDocument,
 	type TypedDocumentString,
 } from '@/gql/graphql';
@@ -94,26 +96,45 @@ export const getProductById = async (id: string) => {
 	};
 };
 
-export const getProductsByCategoryId = async (categoryId: string) => {
+export const getProductsByCategorySlug = async (slug: string) => {
 	const graphqlResponse = await executeGraphQLQuery(
-		ProductsGetListDocument,
-		{ categoryId },
+		ProductsGetByCategorySlugDocument,
+		{ slug },
 	);
-	const products = graphqlResponse.products?.map((product) => {
-		return {
-			id: product.id,
-			name: product.name,
-			description: product.description,
-			price: product.price,
-			category: product.categories?.map((category) => ({
-				id: category.id,
-				name: category.name,
-			})),
-			coverImage: {
-				alt: product.name,
-				src: product.product_image,
-			},
-		};
-	});
+
+	const products = graphqlResponse.categoryBySlug?.products?.map(
+		(product) => {
+			return {
+				id: product.id,
+				name: product.name,
+				description: product.description,
+				price: product.price,
+				coverImage: {
+					alt: product.name,
+					src: product.product_image,
+				},
+			};
+		},
+	);
 	return products;
 };
+// export const getProductsByCategoryId = async (categoryId: string) => {
+// 	const graphqlResponse = await executeGraphQLQuery(
+// 		ProductsGetByCategoryIdDocument,
+// 		{ categoryId },
+// 	);
+
+// 	const products = graphqlResponse.products?.map((product) => {
+// 		return {
+// 			id: product.id,
+// 			name: product.name,
+// 			description: product.description,
+// 			price: product.price,
+// 			coverImage: {
+// 				alt: product.name,
+// 				src: product.product_image,
+// 			},
+// 		};
+// 	});
+// 	return products;
+// };

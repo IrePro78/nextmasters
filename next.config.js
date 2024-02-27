@@ -13,6 +13,15 @@ const nextConfig = {
 			},
 		],
 	},
+	redirects: async () => {
+		return [
+			{
+				source: '/categories/:slug',
+				destination: '/categories/:slug/1',
+				permanent: true,
+			},
+		];
+	},
 };
 
 const withMDX = require('@next/mdx')();
