@@ -1,14 +1,14 @@
 import { ProductList } from '@/components/organism/ProductList';
 import { getProductsList } from '@/api/products';
 
-export async function generateStaticParams() {
-	const products = await getProductsList();
-	if (!products) return [];
+// export async function generateStaticParams() {
+// 	const products = await getProductsList();
+// 	if (!products) return [];
 
-	const numOfPages = Math.ceil(products.length / 4);
-	const pages = Array.from({ length: numOfPages }, (_, i) => i + 1);
-	return pages.map((page) => ({ params: { page: page.toString() } }));
-}
+// 	const numOfPages = Math.ceil(products.length / 4);
+// 	const pages = Array.from({ length: numOfPages }, (_, i) => i + 1);
+// 	return pages.map((page) => ({ params: { page: page.toString() } }));
+// }
 
 export default async function ProductsPage({
 	params,

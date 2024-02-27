@@ -1,6 +1,5 @@
 import {
 	ProductGetByIdDocument,
-	ProductsGetByCategoryIdDocument,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetListDocument,
 	type TypedDocumentString,
