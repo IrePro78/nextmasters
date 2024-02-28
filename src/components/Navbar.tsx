@@ -38,6 +38,7 @@ export const Navbar = async () => {
 							href={`/categories/${category.slug}` as Route}
 							className="border-b-2 border-b-transparent text-lg"
 							activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+							exact={false}
 						>
 							{category.name}
 						</ActiveLink>
@@ -50,6 +51,7 @@ export const Navbar = async () => {
 							href={`/collections/${collection.slug}` as Route}
 							className="border-b-2 border-b-transparent text-lg"
 							activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+							exact={false}
 						>
 							{collection.name}
 						</ActiveLink>
