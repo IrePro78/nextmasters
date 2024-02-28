@@ -1,6 +1,7 @@
 import {
 	ProductGetByIdDocument,
 	ProductsGetByCategorySlugDocument,
+	ProductsGetByCollectionSlugDocument,
 	ProductsGetListDocument,
 } from '@/gql/graphql';
 import { executeGraphQLQuery } from '@/lib/graphqlApi';
@@ -90,6 +91,34 @@ export const getProductsByCategorySlug = async (
 	);
 	return products;
 };
+
+export const getProductsByCollectionSlug = async (
+	slug: string,
+	take?: number,
+	skip?: number,
+) => {
+	const graphqlResponse = await executeGraphQLQuery(
+		ProductsGetByCollectionSlugDocument,
+		{ slug, take, skip },
+	);
+
+	const products = graphqlResponse.collectionBySlug?.products?.map(
+		(product) => {
+			return {
+				id: product.id,
+				name: product.name,
+				description: product.description,
+				price: product.price,
+				coverImage: {
+					alt: product.name,
+					src: product.product_image,
+				},
+			};
+		},
+	);
+	return products;
+};
+
 // export const getProductsByCategoryId = async (categoryId: string) => {
 // 	const graphqlResponse = await executeGraphQLQuery(
 // 		ProductsGetByCategoryIdDocument,

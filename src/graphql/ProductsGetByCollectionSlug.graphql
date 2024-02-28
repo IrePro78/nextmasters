@@ -1,0 +1,16 @@
+query ProductsGetByCollectionSlug(
+	$slug: String!
+	$take: Int
+	$skip: Int
+) {
+	collectionBySlug(slug: $slug) {
+		products(take: $take, skip: $skip) {
+			id
+			name
+			description
+			product_image
+			slug
+			price
+		}
+	}
+}

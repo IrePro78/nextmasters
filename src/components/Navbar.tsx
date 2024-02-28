@@ -2,9 +2,11 @@ import Link from 'next/link';
 import { type Route } from 'next';
 import { ActiveLink } from '@/components/ActiveLink';
 import { getCategoriesList } from '@/api/categories';
+import { getCollectionsList } from '@/api/collections';
 
 export const Navbar = async () => {
 	const categories = await getCategoriesList();
+	const collections = await getCollectionsList();
 
 	return (
 		<nav className=" mx-auto flex max-w-7xl items-center justify-between gap-4 bg-zinc-500 p-6 py-6">
@@ -38,6 +40,18 @@ export const Navbar = async () => {
 							activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
 						>
 							{category.name}
+						</ActiveLink>
+					))}
+
+				{collections &&
+					collections.map((collection) => (
+						<ActiveLink
+							key={collection.id}
+							href={`/collections/${collection.slug}` as Route}
+							className="border-b-2 border-b-transparent text-lg"
+							activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+						>
+							{collection.name}
 						</ActiveLink>
 					))}
 			</ul>

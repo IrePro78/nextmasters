@@ -46,6 +46,12 @@ export type Collection = {
   slug: Scalars['String']['output'];
 };
 
+
+export type CollectionProductsArgs = {
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+};
+
 /** Create product input object type. */
 export type CreateProductInput = {
   category_id: Array<Scalars['String']['input']>;
@@ -90,10 +96,12 @@ export type Query = {
   categories?: Maybe<Array<Category>>;
   /** Get Category By ID */
   categoryById?: Maybe<Category>;
-  /** Get Category By ID */
+  /** Get Category By Slug */
   categoryBySlug?: Maybe<Category>;
   /** Get Collection By ID */
   collection?: Maybe<Collection>;
+  /** Get Collection By Slug */
+  collectionBySlug?: Maybe<Collection>;
   /** Get All Collections */
   collections?: Maybe<Array<Collection>>;
   /** Get Product By ID */
@@ -124,6 +132,17 @@ export type QueryCollectionArgs = {
 };
 
 
+export type QueryCollectionBySlugArgs = {
+  slug: Scalars['String']['input'];
+};
+
+
+export type QueryCollectionsArgs = {
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+};
+
+
 export type QueryProductArgs = {
   id: Scalars['ID']['input'];
 };
@@ -142,6 +161,14 @@ export type CategoriesGetListQueryVariables = Exact<{
 
 export type CategoriesGetListQuery = { categories?: Array<{ id: string, name: string, slug: string }> | null };
 
+export type CollectionsGetListQueryVariables = Exact<{
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type CollectionsGetListQuery = { collections?: Array<{ id: string, name: string, slug: string }> | null };
+
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -157,6 +184,15 @@ export type ProductsGetByCategorySlugQueryVariables = Exact<{
 
 
 export type ProductsGetByCategorySlugQuery = { categoryBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number }> | null } | null };
+
+export type ProductsGetByCollectionSlugQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type ProductsGetByCollectionSlugQuery = { collectionBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number }> | null } | null };
 
 export type ProductsGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -197,6 +233,15 @@ export const CategoriesGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
+export const CollectionsGetListDocument = new TypedDocumentString(`
+    query CollectionsGetList($take: Int, $skip: Int) {
+  collections(take: $take, skip: $skip) {
+    id
+    name
+    slug
+  }
+}
+    `) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(id: $id) {
@@ -227,6 +272,20 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetByCategorySlugQuery, ProductsGetByCategorySlugQueryVariables>;
+export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
+    query ProductsGetByCollectionSlug($slug: String!, $take: Int, $skip: Int) {
+  collectionBySlug(slug: $slug) {
+    products(take: $take, skip: $skip) {
+      id
+      name
+      description
+      product_image
+      slug
+      price
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetByCollectionSlugQuery, ProductsGetByCollectionSlugQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($take: Int, $skip: Int) {
   products(take: $take, skip: $skip) {
