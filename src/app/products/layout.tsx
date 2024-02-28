@@ -10,7 +10,7 @@ export default async function RootLayout({
 	if (!products) {
 		throw new Error('No products found');
 	}
-	const numOfPages = Math.ceil(products.length) / 4 + 1;
+	const numOfPages = Math.ceil(products.length / 4);
 	console.log(numOfPages);
 
 	return (
@@ -18,6 +18,7 @@ export default async function RootLayout({
 			{numOfPages > 1 && (
 				<Pagination numOfPages={numOfPages} baseUrl={`products`} />
 			)}
+
 			<section>{children}</section>
 		</>
 	);

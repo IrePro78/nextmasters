@@ -24,19 +24,18 @@ export default async function CategoryLayout({
 		throw new Error('No products found');
 	}
 
-	const numOfPages = Math.ceil(products.length) / 4 + 1;
+	const numOfPages = Math.ceil(products.length / 4);
 	return (
 		<>
-			<h1 className="mx-auto max-w-7xl pb-20 text-4xl font-extrabold first-letter:uppercase">
-				{params.category}
-			</h1>
 			{numOfPages > 1 && (
 				<Pagination
 					numOfPages={numOfPages}
 					baseUrl={`categories/${params.category}`}
 				/>
 			)}
-			<main className="mx-auto max-w-7xl">{children}</main>
+			<main className="mx-auto max-w-7xl first-letter:uppercase">
+				{children}
+			</main>
 		</>
 	);
 }

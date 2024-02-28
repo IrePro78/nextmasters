@@ -1,6 +1,10 @@
-query ProductsGetByCategorySlug($slug: String!) {
+query ProductsGetByCategorySlug(
+	$slug: String!
+	$take: Int
+	$skip: Int
+) {
 	categoryBySlug(slug: $slug) {
-		products {
+		products(take: $take, skip: $skip) {
 			id
 			name
 			description

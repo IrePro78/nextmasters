@@ -27,6 +27,12 @@ export type Category = {
   slug: Scalars['String']['output'];
 };
 
+
+export type CategoryProductsArgs = {
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+};
+
 export type Collection = {
   /** Description of the collection */
   description?: Maybe<Scalars['String']['output']>;
@@ -145,6 +151,8 @@ export type ProductGetByIdQuery = { product?: { id: string, name: string, descri
 
 export type ProductsGetByCategorySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -206,9 +214,9 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
-    query ProductsGetByCategorySlug($slug: String!) {
+    query ProductsGetByCategorySlug($slug: String!, $take: Int, $skip: Int) {
   categoryBySlug(slug: $slug) {
-    products {
+    products(take: $take, skip: $skip) {
       id
       name
       description

@@ -2,42 +2,11 @@ import {
 	ProductGetByIdDocument,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetListDocument,
-	type TypedDocumentString,
 } from '@/gql/graphql';
+import { executeGraphQLQuery } from '@/lib/graphqlApi';
 
 // export const BASE_URL = 'https://graphql.hyperfunctor.com/graphql';
 // 'https://naszsklep-api.vercel.app/api/products';
-
-const executeGraphQLQuery = async <TResult, TVariables>(
-	query: TypedDocumentString<TResult, TVariables>,
-	variables: TVariables,
-): Promise<TResult> => {
-	if (!process.env.GRAPHQL_API_URL)
-		throw new Error('GRAPHQL_API_URL is not defined');
-	const res = await fetch(process.env.GRAPHQL_API_URL, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			query,
-			variables,
-		}),
-	});
-
-	type GraphQLResponse<T> =
-		| { data?: undefined; errors: { message: string }[] }
-		| { data: T; errors?: undefined };
-
-	const graphQLResponse =
-		(await res.json()) as GraphQLResponse<TResult>;
-	if (graphQLResponse.errors) {
-		throw TypeError('GraphQL query error', {
-			cause: graphQLResponse.errors,
-		});
-	}
-	return graphQLResponse.data;
-};
 
 export const getProductsList = async (
 	take?: number,
@@ -95,10 +64,14 @@ export const getProductById = async (id: string) => {
 	};
 };
 
-export const getProductsByCategorySlug = async (slug: string) => {
+export const getProductsByCategorySlug = async (
+	slug: string,
+	take?: number,
+	skip?: number,
+) => {
 	const graphqlResponse = await executeGraphQLQuery(
 		ProductsGetByCategorySlugDocument,
-		{ slug },
+		{ slug, take, skip },
 	);
 
 	const products = graphqlResponse.categoryBySlug?.products?.map(
