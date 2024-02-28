@@ -18,12 +18,15 @@ export const ActiveLink = ({
 	...props
 }: ActiveLinkProps) => {
 	const pathname = usePathname();
+
 	const isActive =
-		exact &&
-		pathname.split('/')[1] === String(href).split('/').slice(-1);
+		(exact
+			? pathname ===
+					(typeof href === 'string' ? href : href.pathname) ?? null
+			: pathname.startsWith(String(href))) || false;
 
 	console.log(pathname);
-	console.log(`href`, String(href).split('/').slice(-1)[0]);
+	console.log(href);
 
 	return (
 		<Link
