@@ -25,9 +25,6 @@ export const ActiveLink = ({
 					(typeof href === 'string' ? href : href.pathname) ?? null
 			: pathname.startsWith(String(href))) || false;
 
-	console.log(pathname);
-	console.log(href);
-
 	return (
 		<Link
 			{...props}

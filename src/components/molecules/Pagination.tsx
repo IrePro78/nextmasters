@@ -1,5 +1,6 @@
 'use client';
 
+import { type UrlObject } from 'url';
 import Link from 'next/link';
 import { type Route } from 'next';
 import { usePathname } from 'next/navigation';
@@ -26,7 +27,7 @@ export const Pagination = ({
 				>
 					<Link
 						href={
-							`/${baseUrl}/${Number(currentNumberPage) > 1 ? Number(currentNumberPage) - 1 : Number(currentNumberPage)}` as Route
+							`/${baseUrl}/${Number(currentNumberPage) > 1 ? Number(currentNumberPage) - 1 : Number(currentNumberPage)}` as unknown as UrlObject
 						}
 					>
 						{'<'}
@@ -34,7 +35,7 @@ export const Pagination = ({
 					{numOfPages === 1 ? (
 						<li>
 							<ActiveLink
-								href={`/${baseUrl}/${1}` as Route}
+								href={`/${baseUrl}/${1}` as unknown as UrlObject}
 								className="border-b-2 border-b-transparent text-lg"
 								activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
 							>
@@ -47,7 +48,9 @@ export const Pagination = ({
 								return (
 									<li key={page}>
 										<ActiveLink
-											href={`/${baseUrl}/${page}` as Route}
+											href={
+												`/${baseUrl}/${page}` as unknown as UrlObject
+											}
 											className="border-b-2 border-b-transparent text-lg"
 											activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
 										>

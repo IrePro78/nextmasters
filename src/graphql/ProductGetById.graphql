@@ -9,6 +9,7 @@ query ProductGetById($id: ID!) {
 		categories {
 			id
 			name
+			slug
 		}
 	}
 }

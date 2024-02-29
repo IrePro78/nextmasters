@@ -32,7 +32,7 @@ export default async function CollectionLayout({
 			{numOfPages > 1 && (
 				<Pagination
 					numOfPages={numOfPages}
-					baseUrl={`collections/${params.collection}`}
+					baseUrl={`/collections/${params.collection}`}
 				/>
 			)}
 			<main className="mx-auto max-w-7xl first-letter:uppercase">

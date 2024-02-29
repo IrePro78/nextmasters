@@ -174,7 +174,7 @@ export type ProductGetByIdQueryVariables = Exact<{
 }>;
 
 
-export type ProductGetByIdQuery = { product?: { id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ id: string, name: string }> | null } | null };
+export type ProductGetByIdQuery = { product?: { id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ id: string, name: string, slug: string }> | null } | null };
 
 export type ProductsGetByCategorySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -254,6 +254,7 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
     categories {
       id
       name
+      slug
     }
   }
 }

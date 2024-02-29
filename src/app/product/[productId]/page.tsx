@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { type Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getProductById } from '@/api/products';
 import { ProductCoverCoverImage } from '@/components/atoms/ProductCoverCoverImage';
 import { ProductListItemDescription } from '@/components/atoms/ProductListItemDescription';
@@ -31,6 +32,9 @@ export default async function ProductPage({
 	params: { productId: string };
 }) {
 	const product = await getProductById(params.productId);
+	if (!product.category) {
+		return notFound();
+	}
 
 	return (
 		<>
@@ -39,10 +43,13 @@ export default async function ProductPage({
 				<ProductCoverCoverImage {...product.coverImage} />
 				<ProductListItemDescription {...product} />
 			</article>
+
 			<aside>
-				<Suspense>
-					<SuggestedProducts />
-				</Suspense>
+				{product.category[0] && (
+					<Suspense>
+						<SuggestedProducts category={product.category[0]} />
+					</Suspense>
+				)}
 			</aside>
 		</>
 	);

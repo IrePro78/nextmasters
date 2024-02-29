@@ -1,3 +1,4 @@
+import { type Metadata } from 'next';
 import { ProductList } from '@/components/organism/ProductList';
 import { getProductsList } from '@/api/products';
 
@@ -9,6 +10,13 @@ import { getProductsList } from '@/api/products';
 // 	const pages = Array.from({ length: numOfPages }, (_, i) => i + 1);
 // 	return pages.map((page) => ({ params: { page: page.toString() } }));
 // }
+
+export const generateMetadata = async (): Promise<Metadata> => {
+	return {
+		title: 'Products',
+		description: 'All the products',
+	};
+};
 
 export default async function ProductsPage({
 	params,

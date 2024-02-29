@@ -11,7 +11,6 @@ export default async function RootLayout({
 		throw new Error('No products found');
 	}
 	const numOfPages = Math.ceil(products.length / 4);
-	console.log(numOfPages);
 
 	return (
 		<>
