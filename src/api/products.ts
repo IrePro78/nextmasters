@@ -1,7 +1,9 @@
 import {
+	type Product,
 	ProductGetByIdDocument,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetByCollectionSlugDocument,
+	ProductsGetByNameDocument,
 	ProductsGetListDocument,
 } from '@/gql/graphql';
 import { executeGraphQLQuery } from '@/lib/graphqlApi';
@@ -35,7 +37,7 @@ export const getProductsList = async (
 			},
 		};
 	});
-	products;
+
 	return products;
 };
 export const getProductById = async (id: string) => {
@@ -64,6 +66,36 @@ export const getProductById = async (id: string) => {
 			src: product_image,
 		},
 	};
+};
+
+export const getProductsByName = async (
+	name: string,
+	take?: number,
+	skip?: number,
+) => {
+	name = name === typeof 'string' ? name : name.toString();
+
+	console.log(name);
+
+	const graphqlResponse = await executeGraphQLQuery(
+		ProductsGetByNameDocument,
+		{ name, take, skip },
+	);
+	if (!graphqlResponse.productsByName) {
+		throw new Error('Product not found');
+	}
+	return graphqlResponse.productsByName.map((product) => {
+		return {
+			id: product.id,
+			name: product.name,
+			description: product.description,
+			price: product.price,
+			coverImage: {
+				alt: product.name,
+				src: product.product_image,
+			},
+		};
+	});
 };
 
 export const getProductsByCategorySlug = async (

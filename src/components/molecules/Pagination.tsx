@@ -35,7 +35,7 @@ export const Pagination = ({
 					{numOfPages === 1 ? (
 						<li>
 							<ActiveLink
-								href={`/${baseUrl}/${1}` as unknown as UrlObject}
+								href={`/${baseUrl}/${1}` as Route}
 								className="border-b-2 border-b-transparent text-lg"
 								activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
 							>
@@ -48,9 +48,7 @@ export const Pagination = ({
 								return (
 									<li key={page}>
 										<ActiveLink
-											href={
-												`/${baseUrl}/${page}` as unknown as UrlObject
-											}
+											href={`/${baseUrl}/${page}` as Route}
 											className="border-b-2 border-b-transparent text-lg"
 											activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
 										>

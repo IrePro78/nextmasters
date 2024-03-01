@@ -25,8 +25,10 @@ export default async function CollectionPage({
 		throw notFound();
 	}
 	return (
-		<main className="container mx-auto">
-			<h1 className="py-4 text-center text-3xl">{collection}</h1>
+		<main className="container mx-auto ">
+			<h1 className="py-4 text-center text-3xl" role="heading">
+				{collection}
+			</h1>
 			<ProductList products={productsInThisCollection} />
 		</main>
 	);

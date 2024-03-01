@@ -3,6 +3,7 @@ import { type Route } from 'next';
 import { ActiveLink } from '@/components/ActiveLink';
 import { getCategoriesList } from '@/api/categories';
 import { getCollectionsList } from '@/api/collections';
+import { SearchField } from '@/components/atoms/SearchField';
 
 export const Navbar = async () => {
 	const categories = await getCategoriesList();
@@ -15,6 +16,7 @@ export const Navbar = async () => {
 					My Shop
 				</span>
 			</Link>
+			<SearchField />
 			<ul className="flex items-center gap-4" role="navigation">
 				<ActiveLink
 					href={'/'}

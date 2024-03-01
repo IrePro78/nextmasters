@@ -1,14 +1,17 @@
 import { type Metadata } from 'next';
 import { Pagination } from '@/components/molecules/Pagination';
 import { getProductsByCollectionSlug } from '@/api/products';
+import { getCollectionBySlug } from '@/api/collections';
 
 export async function generateMetadata({
 	params,
 }: {
 	params: { collection: string };
 }): Promise<Metadata> {
+	const collection = await getCollectionBySlug(params.collection);
+
 	return {
-		title: params.collection,
+		title: collection.collectionBySlug.name,
 	};
 }
 

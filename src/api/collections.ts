@@ -1,4 +1,7 @@
-import { CollectionsGetListDocument } from '@/gql/graphql';
+import {
+	CollectionGetBySlugDocument,
+	CollectionsGetListDocument,
+} from '@/gql/graphql';
 import { executeGraphQLQuery } from '@/lib/graphqlApi';
 
 export const getCollectionsList = async (
@@ -11,7 +14,7 @@ export const getCollectionsList = async (
 		CollectionsGetListDocument,
 		variables,
 	);
-	const categories = graphqlResponse.collections?.map(
+	const collections = graphqlResponse.collections?.map(
 		(collection) => {
 			return {
 				id: collection.id,
@@ -20,5 +23,18 @@ export const getCollectionsList = async (
 			};
 		},
 	);
-	return categories;
+	return collections;
+};
+
+export const getCollectionBySlug = async (slug: string) => {
+	const graphqlResponse = await executeGraphQLQuery(
+		CollectionGetBySlugDocument,
+		{ slug },
+	);
+
+	const collection = graphqlResponse.collectionBySlug;
+	return {
+		id: collection.id,
+		name: collection.name,
+	};
 };

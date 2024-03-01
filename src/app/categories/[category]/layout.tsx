@@ -30,7 +30,7 @@ export default async function CategoryLayout({
 			{numOfPages > 1 && (
 				<Pagination
 					numOfPages={numOfPages}
-					baseUrl={`/categories/${params.category}`}
+					baseUrl={`categories/${params.category}`}
 				/>
 			)}
 			<main className="mx-auto max-w-7xl first-letter:uppercase">
