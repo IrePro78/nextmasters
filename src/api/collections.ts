@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import {
 	CollectionGetBySlugDocument,
 	CollectionsGetListDocument,
@@ -33,6 +34,7 @@ export const getCollectionBySlug = async (slug: string) => {
 	);
 
 	const collection = graphqlResponse.collectionBySlug;
+	if (!collection) notFound();
 	return {
 		id: collection.id,
 		name: collection.name,

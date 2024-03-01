@@ -170,6 +170,13 @@ export type CategoriesGetListQueryVariables = Exact<{
 
 export type CategoriesGetListQuery = { categories?: Array<{ id: string, name: string, slug: string }> | null };
 
+export type CategoryGetBySlugQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type CategoryGetBySlugQuery = { categoryBySlug?: { id: string, name: string } | null };
+
 export type CollectionGetBySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
@@ -258,6 +265,14 @@ export const CategoriesGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
+export const CategoryGetBySlugDocument = new TypedDocumentString(`
+    query CategoryGetBySlug($slug: String!) {
+  categoryBySlug(slug: $slug) {
+    id
+    name
+  }
+}
+    `) as unknown as TypedDocumentString<CategoryGetBySlugQuery, CategoryGetBySlugQueryVariables>;
 export const CollectionGetBySlugDocument = new TypedDocumentString(`
     query CollectionGetBySlug($slug: String!) {
   collectionBySlug(slug: $slug) {

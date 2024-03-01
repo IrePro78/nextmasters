@@ -1,4 +1,8 @@
-import { CategoriesGetListDocument } from '@/gql/graphql';
+import { notFound } from 'next/navigation';
+import {
+	CategoriesGetListDocument,
+	CategoryGetBySlugDocument,
+} from '@/gql/graphql';
 import { executeGraphQLQuery } from '@/lib/graphqlApi';
 
 export const getCategoriesList = async (
@@ -19,4 +23,18 @@ export const getCategoriesList = async (
 		};
 	});
 	return categories;
+};
+export const getCategoryBySlug = async (slug: string) => {
+	const graphqlResponse = await executeGraphQLQuery(
+		CategoryGetBySlugDocument,
+		{ slug },
+	);
+
+	const category = graphqlResponse.categoryBySlug;
+
+	if (!category) notFound();
+	return {
+		id: category.id,
+		name: category.name,
+	};
 };

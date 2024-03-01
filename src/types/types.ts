@@ -1,6 +1,7 @@
 type CategoryType = {
 	id: string;
 	name: string;
+	slug: string;
 };
 
 export type ProductItemType = {
@@ -8,7 +9,7 @@ export type ProductItemType = {
 	name: string;
 	price: number;
 	description: string;
-	category: CategoryType[];
+	// category: CategoryType[];
 	coverImage: {
 		src: string;
 		alt: string;

@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getProductsByCollectionSlug } from '@/api/products';
 import { ProductList } from '@/components/organism/ProductList';
+import { getCollectionBySlug } from '@/api/collections';
 
 export default async function CollectionPage({
 	params,
@@ -16,6 +17,8 @@ export default async function CollectionPage({
 	const nextNumberOfPproducts =
 		page <= 1 ? pageNumber : pageNumber * numOfProducts;
 
+	const { name } = await getCollectionBySlug(collection);
+
 	const productsInThisCollection = await getProductsByCollectionSlug(
 		collection,
 		numOfProducts,
@@ -27,7 +30,7 @@ export default async function CollectionPage({
 	return (
 		<main className="container mx-auto ">
 			<h1 className="py-4 text-center text-3xl" role="heading">
-				{collection}
+				{name}
 			</h1>
 			<ProductList products={productsInThisCollection} />
 		</main>

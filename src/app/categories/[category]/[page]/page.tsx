@@ -26,7 +26,6 @@ export default async function CategoryPage({
 	}
 	return (
 		<main className="container mx-auto">
-			<h1 className="py-4 text-center text-3xl">{category}</h1>
 			<ProductList products={productsInThisCategory} />
 		</main>
 	);

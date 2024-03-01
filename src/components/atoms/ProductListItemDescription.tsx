@@ -1,12 +1,14 @@
 import { formatMoney } from '@/utils/formater';
 
-import { type ProductItemType } from '@/types/types';
-
 export const ProductListItemDescription = ({
 	name,
 	price,
 	category,
-}: ProductItemType) => {
+}: {
+	name: string;
+	price: number;
+	category: { id: string; name: string }[];
+}) => {
 	return (
 		<article>
 			<div className="mt-2 flex justify-between">

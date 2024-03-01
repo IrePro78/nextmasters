@@ -24,6 +24,7 @@ export const Pagination = ({
 				<ul
 					aria-label="pagination"
 					className="mt-4 flex items-center justify-center gap-4"
+					role="link"
 				>
 					<Link
 						href={

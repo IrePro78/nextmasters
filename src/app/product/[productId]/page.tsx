@@ -8,7 +8,7 @@ import { SuggestedProducts } from '@/components/organism/SuggestedProducts';
 
 // export const generateStaticParams = async () => {
 // 	const products = await getProductsList();
-// 	return products.map((product) => ({
+// 	return products?.map((product) => ({
 // 		productId: product.id,
 // 	}));
 // };
@@ -39,9 +39,13 @@ export default async function ProductPage({
 	return (
 		<>
 			<article className=" mx-auto max-w-md text-center text-cyan-50">
-				<h1>{product.name}</h1>
+				<h1 className="text-center">{product.name}</h1>
 				<ProductCoverCoverImage {...product.coverImage} />
-				<ProductListItemDescription {...product} />
+				<ProductListItemDescription
+					name={product.name}
+					category={product.category}
+					price={product.price}
+				/>
 			</article>
 
 			<aside>

@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
 import { Pagination } from '@/components/molecules/Pagination';
 import { getProductsByCollectionSlug } from '@/api/products';
@@ -11,7 +12,7 @@ export async function generateMetadata({
 	const collection = await getCollectionBySlug(params.collection);
 
 	return {
-		title: collection.collectionBySlug.name,
+		title: collection.name,
 	};
 }
 
@@ -26,7 +27,7 @@ export default async function CollectionLayout({
 		params.collection,
 	);
 	if (!products) {
-		throw new Error('No products found');
+		throw notFound();
 	}
 
 	const numOfPages = Math.ceil(products.length / 4);

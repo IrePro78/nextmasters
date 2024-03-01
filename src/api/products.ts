@@ -1,5 +1,4 @@
 import {
-	type Product,
 	ProductGetByIdDocument,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetByCollectionSlugDocument,
