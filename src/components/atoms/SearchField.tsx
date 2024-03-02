@@ -17,13 +17,14 @@ export const SearchField = () => {
 
 	useEffect(() => {
 		if (searchTerm) router.push(`/search?query=${search}`);
-	}, [searchTerm, router]);
+	}, [searchTerm, router, search]);
 	return (
 		<input
 			className="placeholder-black-400 block w-full rounded-lg border border-gray-300 bg-zinc-500 p-2.5 ps-5 text-sm focus:border-gray-500"
 			type="search"
 			placeholder="search"
 			onChange={handleChange}
+			role="searchbox"
 		/>
 	);
 };

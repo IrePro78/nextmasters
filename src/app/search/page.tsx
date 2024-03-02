@@ -12,7 +12,7 @@ export default async function SearchedProductsPage({
 
 	return (
 		<main className=" mx-auto max-w-7xl text-center text-cyan-50">
-			<h1 role="heading">Search Result</h1>
+			<h1>Search Result</h1>
 			<ul>
 				<ProductList products={products} />
 			</ul>

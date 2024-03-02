@@ -28,7 +28,7 @@ export const Pagination = ({
 				>
 					<Link
 						href={
-							`/${baseUrl}/${Number(currentNumberPage) > 1 ? Number(currentNumberPage) - 1 : Number(currentNumberPage)}` as unknown as UrlObject
+							`/${baseUrl}/${Number(currentNumberPage) > 1 ? Number(currentNumberPage) - 1 : Number(currentNumberPage)}` as Route
 						}
 					>
 						{'<'}

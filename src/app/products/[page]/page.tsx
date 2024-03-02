@@ -37,7 +37,7 @@ export default async function ProductsPage({
 
 	return (
 		<main className="container mx-auto">
-			{/* <h1 className="py-4 text-center text-3xl">Product Page</h1> */}
+			<h1 className="py-4 text-center text-3xl">Products Page</h1>
 			{products && <ProductList products={products} />}
 		</main>
 	);
