@@ -21,8 +21,19 @@ const nextConfig = {
 				permanent: true,
 			},
 			{
+				source: '/categories',
+				destination: '/categories/accessories/1',
+				permanent: true,
+			},
+
+			{
 				source: '/categories/:slug',
 				destination: '/categories/:slug/1',
+				permanent: true,
+			},
+			{
+				source: '/collections',
+				destination: '/collections/elegant-extras/1',
 				permanent: true,
 			},
 			{

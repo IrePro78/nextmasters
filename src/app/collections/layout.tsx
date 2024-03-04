@@ -11,6 +11,7 @@ export default async function CollectionsLayout({
 	return (
 		<>
 			<ul
+				data-testid="collections-list"
 				className="flex items-center justify-center gap-4"
 				role="navigation"
 			>
