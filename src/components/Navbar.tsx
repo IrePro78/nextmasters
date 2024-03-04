@@ -6,7 +6,6 @@ import { getCollectionsList } from '@/api/collections';
 import { SearchField } from '@/components/atoms/SearchField';
 
 export const Navbar = async () => {
-	const categories = await getCategoriesList();
 	const collections = await getCollectionsList();
 
 	return (
@@ -34,31 +33,23 @@ export const Navbar = async () => {
 					All
 				</ActiveLink>
 
-				{categories &&
-					categories.map((category) => (
-						<ActiveLink
-							key={category.id}
-							href={`/categories/${category.slug}` as Route}
-							className="border-b-2 border-b-transparent text-lg"
-							activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
-							exact={false}
-						>
-							{category.name}
-						</ActiveLink>
-					))}
+				<ActiveLink
+					href={'/categories' as Route}
+					className="border-b-2 border-b-transparent text-lg"
+					activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+					exact={false}
+				>
+					Categories
+				</ActiveLink>
 
-				{collections &&
-					collections.map((collection) => (
-						<ActiveLink
-							key={collection.id}
-							href={`/collections/${collection.slug}` as Route}
-							className="border-b-2 border-b-transparent text-lg"
-							activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
-							exact={false}
-						>
-							{collection.name}
-						</ActiveLink>
-					))}
+				<ActiveLink
+					href={'/collections' as Route}
+					className="border-b-2 border-b-transparent text-lg"
+					activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+					exact={false}
+				>
+					Collections
+				</ActiveLink>
 			</ul>
 		</nav>
 	);
