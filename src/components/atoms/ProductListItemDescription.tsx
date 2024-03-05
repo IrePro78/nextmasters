@@ -13,15 +13,15 @@ export const ProductListItemDescription = ({
 		<article>
 			<div className="mt-2 flex justify-between">
 				<div>
-					<h3 className="text-sm font-semibold text-gray-950">
+					<h3 className="text-sm font-semibold text-zinc-200">
 						{name}
 					</h3>
-					<p className="text-sm text-gray-700">
+					<p className="text-sm text-zinc-200">
 						{category?.map((category) => category.name).join(', ')}
 					</p>
 					<span className="sr-only">Cena:</span>
 				</div>
-				<p className="text-sm text-gray-950">
+				<p className="text-sm text-zinc-200">
 					<span className="sr-only">Cena:</span> {formatMoney(price)}
 				</p>
 			</div>

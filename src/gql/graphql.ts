@@ -206,7 +206,7 @@ export type ProductsGetByCategorySlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetByCategorySlugQuery = { categoryBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number }> | null } | null };
+export type ProductsGetByCategorySlugQuery = { categoryBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string }> | null }> | null } | null };
 
 export type ProductsGetByCollectionSlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -215,7 +215,7 @@ export type ProductsGetByCollectionSlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetByCollectionSlugQuery = { collectionBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number }> | null } | null };
+export type ProductsGetByCollectionSlugQuery = { collectionBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string }> | null }> | null } | null };
 
 export type ProductsGetByNameQueryVariables = Exact<{
   name: Scalars['String']['input'];
@@ -317,6 +317,9 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
       product_image
       slug
       price
+      categories {
+        name
+      }
     }
   }
 }
@@ -331,6 +334,9 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
       product_image
       slug
       price
+      categories {
+        name
+      }
     }
   }
 }

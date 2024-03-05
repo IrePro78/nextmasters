@@ -11,8 +11,10 @@ export const Navbar = async () => {
 					My Shop
 				</span>
 			</Link>
-			<SearchField />
+
 			<ul className="flex items-center gap-4" role="navigation">
+				<SearchField />
+
 				<ActiveLink
 					href={'/'}
 					className="border-b-2 border-b-transparent text-lg"
@@ -30,7 +32,7 @@ export const Navbar = async () => {
 				</ActiveLink>
 
 				<ActiveLink
-					href={'/collections' as Route}
+					href={'/collections/elegant-extras' as Route}
 					className="border-b-2 border-b-transparent text-lg"
 					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline"
 					exact={false}
@@ -39,7 +41,7 @@ export const Navbar = async () => {
 				</ActiveLink>
 
 				<ActiveLink
-					href={'/categories' as Route}
+					href={'/categories/accessories' as Route}
 					className="border-b-2 border-b-transparent text-lg"
 					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline"
 					exact={false}

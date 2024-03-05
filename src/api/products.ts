@@ -89,6 +89,7 @@ export const getProductsByName = async (
 			name: product.name,
 			description: product.description,
 			price: product.price,
+			category: product.categories,
 			coverImage: {
 				alt: product.name,
 				src: product.product_image,
@@ -114,6 +115,7 @@ export const getProductsByCategorySlug = async (
 				name: product.name,
 				description: product.description,
 				price: product.price,
+				category: product.categories,
 				coverImage: {
 					alt: product.name,
 					src: product.product_image,
@@ -141,6 +143,7 @@ export const getProductsByCollectionSlug = async (
 				name: product.name,
 				description: product.description,
 				price: product.price,
+				category: product.categories,
 				coverImage: {
 					alt: product.name,
 					src: product.product_image,

@@ -11,6 +11,9 @@ query ProductsGetByCategorySlug(
 			product_image
 			slug
 			price
+			categories {
+				name
+			}
 		}
 	}
 }
