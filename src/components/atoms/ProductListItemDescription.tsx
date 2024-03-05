@@ -16,9 +16,9 @@ export const ProductListItemDescription = ({
 					<h3 className="text-sm font-semibold text-zinc-200">
 						{name}
 					</h3>
-					<p className="text-sm text-zinc-200">
+					<h3 className="text-sm text-zinc-200">
 						{category?.map((category) => category.name).join(', ')}
-					</p>
+					</h3>
 					<span className="sr-only">Cena:</span>
 				</div>
 				<p className="text-sm text-zinc-200">
