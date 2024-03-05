@@ -16,35 +16,35 @@ export const Navbar = async () => {
 				<ActiveLink
 					href={'/'}
 					className="border-b-2 border-b-transparent text-lg"
-					activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline "
+					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline "
 				>
 					Home
 				</ActiveLink>
 				<ActiveLink
 					href={'/products' as Route}
 					className="border-b-2 border-b-transparent text-lg"
-					activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline"
 					exact={false}
 				>
 					All
 				</ActiveLink>
 
 				<ActiveLink
-					href={'/categories' as Route}
-					className="border-b-2 border-b-transparent text-lg"
-					activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
-					exact={false}
-				>
-					Categories
-				</ActiveLink>
-
-				<ActiveLink
 					href={'/collections' as Route}
 					className="border-b-2 border-b-transparent text-lg"
-					activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline"
 					exact={false}
 				>
 					Collections
+				</ActiveLink>
+
+				<ActiveLink
+					href={'/categories' as Route}
+					className="border-b-2 border-b-transparent text-lg"
+					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline"
+					exact={false}
+				>
+					Categories
 				</ActiveLink>
 			</ul>
 		</nav>

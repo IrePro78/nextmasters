@@ -14,24 +14,19 @@ export default async function CollectionPage({
 
 	const pageNumber = page === 1 ? 0 : page - 1;
 
-	const nextNumberOfPproducts =
+	const nextNumberOfProducts =
 		page <= 1 ? pageNumber : pageNumber * numOfProducts;
-
-	const { name } = await getCollectionBySlug(collection);
 
 	const productsInThisCollection = await getProductsByCollectionSlug(
 		collection,
 		numOfProducts,
-		nextNumberOfPproducts,
+		nextNumberOfProducts,
 	);
 	if (!productsInThisCollection) {
 		throw notFound();
 	}
 	return (
 		<main className="container mx-auto ">
-			<h1 className="py-4 text-center text-3xl" role="heading">
-				{name}
-			</h1>
 			<ProductList products={productsInThisCollection} />
 		</main>
 	);

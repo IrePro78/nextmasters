@@ -12,8 +12,13 @@ export default async function SearchedProductsPage({
 
 	return (
 		<main className=" mx-auto max-w-7xl text-center text-cyan-50">
-			<h1>Search Result</h1>
-			<ul>
+			<h1
+				className="pb-20 text-4xl font-extrabold first-letter:uppercase"
+				role="heading"
+			>
+				Search Results
+			</h1>
+			<ul data-testid="products-list">
 				<ProductList products={products} />
 			</ul>
 		</main>

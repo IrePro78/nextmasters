@@ -13,13 +13,13 @@ export default async function CategoryPage({
 
 	const pageNumber = page === 1 ? 0 : page - 1;
 
-	const nextNumberOfPproducts =
+	const nextNumberOfProducts =
 		page <= 1 ? pageNumber : pageNumber * numOfProducts;
 
 	const productsInThisCategory = await getProductsByCategorySlug(
 		category,
 		numOfProducts,
-		nextNumberOfPproducts,
+		nextNumberOfProducts,
 	);
 	if (!productsInThisCategory) {
 		throw notFound();

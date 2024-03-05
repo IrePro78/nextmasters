@@ -11,6 +11,7 @@ export default async function CategoriesLayout({
 	return (
 		<>
 			<ul
+				data-testid="categories-list"
 				className="flex items-center justify-center gap-4"
 				role="navigation"
 			>

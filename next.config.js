@@ -33,7 +33,7 @@ const nextConfig = {
 			},
 			{
 				source: '/collections',
-				destination: '/collections/elegant-extras/1',
+				destination: '/collections/elegant-extras',
 				permanent: true,
 			},
 			{
