@@ -7,11 +7,17 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }) {
 	const products = await getProductsList();
-	const numOfPages = Math.ceil(products.length / 3);
+	if (!products) {
+		throw new Error('No products found');
+	}
+	const numOfPages = Math.ceil(products.length / 4);
 
 	return (
 		<>
-			<Pagination numOfPages={numOfPages} />
+			{numOfPages > 1 && (
+				<Pagination numOfPages={numOfPages} baseUrl={`products`} />
+			)}
+
 			<section>{children}</section>
 		</>
 	);

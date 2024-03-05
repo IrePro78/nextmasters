@@ -1,13 +1,22 @@
-import { getProductsList } from '@/api/products';
+import { type Metadata } from 'next';
 import { ProductList } from '@/components/organism/ProductList';
+import { getProductsList } from '@/api/products';
 
-export async function generateStaticParams() {
-	const products = await getProductsList();
+// export async function generateStaticParams() {
+// 	const products = await getProductsList();
+// 	if (!products) return [];
 
-	const numOfPages = Math.ceil(products.length / 4);
-	const pages = Array.from({ length: numOfPages }, (_, i) => i + 1);
-	return pages.map((page) => ({ params: { page: page.toString() } }));
-}
+// 	const numOfPages = Math.ceil(products.length / 4);
+// 	const pages = Array.from({ length: numOfPages }, (_, i) => i + 1);
+// 	return pages.map((page) => ({ params: { page: page.toString() } }));
+// }
+
+export const generateMetadata = async (): Promise<Metadata> => {
+	return {
+		title: 'Products',
+		description: 'All the products',
+	};
+};
 
 export default async function ProductsPage({
 	params,
@@ -28,9 +37,8 @@ export default async function ProductsPage({
 
 	return (
 		<main className="container mx-auto">
-			<h1 className="py-4 text-center text-3xl">Pdoduct Page</h1>
-			<div className="flex justify-end"></div>
-			<ProductList products={products} />
+			<h1 className="py-4 text-center text-3xl">Products Page</h1>
+			{products && <ProductList products={products} />}
 		</main>
 	);
 }

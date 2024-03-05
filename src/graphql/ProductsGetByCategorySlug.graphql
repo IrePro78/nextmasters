@@ -1,0 +1,19 @@
+query ProductsGetByCategorySlug(
+	$slug: String!
+	$take: Int
+	$skip: Int
+) {
+	categoryBySlug(slug: $slug) {
+		products(take: $take, skip: $skip) {
+			id
+			name
+			description
+			product_image
+			slug
+			price
+			categories {
+				name
+			}
+		}
+	}
+}

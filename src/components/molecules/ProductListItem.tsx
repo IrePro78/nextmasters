@@ -6,7 +6,11 @@ import { type ProductItemType } from '@/types/types';
 export const ProductListItem = (product: ProductItemType) => {
 	return (
 		<>
-			<li>
+			<li
+				key={product.id}
+				className="group"
+				// data-testid="products-list"
+			>
 				<Link href={`/product/${product.id}`}>
 					<article>
 						<ProductCoverCoverImage {...product.coverImage} />

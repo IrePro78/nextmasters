@@ -1,15 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-
-import { usePathname } from 'next/navigation';
 import { type Route } from 'next';
+import { usePathname } from 'next/navigation';
 import { ActiveLink } from '@/components/ActiveLink';
 
 export const Pagination = ({
 	numOfPages,
+	baseUrl,
 }: {
 	numOfPages: number;
+	baseUrl: string;
 }) => {
 	const currentpathname = usePathname();
 	const currentNumberPage = currentpathname?.includes('/')
@@ -22,18 +23,21 @@ export const Pagination = ({
 				<ul
 					aria-label="pagination"
 					className="mt-4 flex items-center justify-center gap-4"
+					role="link"
 				>
 					<Link
-						href={`/products/${Number(currentNumberPage) > 1 ? Number(currentNumberPage) - 1 : Number(currentNumberPage)}`}
+						href={
+							`/${baseUrl}/${Number(currentNumberPage) > 1 ? Number(currentNumberPage) - 1 : Number(currentNumberPage)}` as Route
+						}
 					>
 						{'<'}
 					</Link>
 					{numOfPages === 1 ? (
 						<li>
 							<ActiveLink
-								href={`/products/${1}` as Route}
-								className="border-b-2 border-b-transparent text-lg"
-								activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
+								href={`/${baseUrl}/${1}` as Route}
+								className=" border-b-transparent text-lg"
+								activeClassName=" border-b-2 border-zinc-900 text-lg font-semibold underline"
 							>
 								1
 							</ActiveLink>
@@ -44,8 +48,8 @@ export const Pagination = ({
 								return (
 									<li key={page}>
 										<ActiveLink
-											href={`/products/${page}` as Route}
-											className="border-b-2 border-b-transparent text-lg"
+											href={`/${baseUrl}/${page}` as Route}
+											className="border-b-transparent text-lg"
 											activeClassName="border-b-2 border-zinc-900 text-lg font-semibold underline"
 										>
 											{page}
@@ -56,7 +60,9 @@ export const Pagination = ({
 						)
 					)}
 					<Link
-						href={`/products/${numOfPages > Number(currentNumberPage) ? Number(currentNumberPage) + 1 : Number(currentNumberPage)}`}
+						href={
+							`/${baseUrl}/${numOfPages > Number(currentNumberPage) ? Number(currentNumberPage) + 1 : Number(currentNumberPage)}` as Route
+						}
 					>
 						{'>'}
 					</Link>

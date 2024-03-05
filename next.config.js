@@ -1,3 +1,4 @@
+//@ts-check
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
@@ -7,10 +8,29 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'naszsklep-api.vercel.app',
+				hostname: 'static-ourstore.hyperfunctor.com',
 				pathname: '**',
 			},
 		],
+	},
+	redirects: async () => {
+		return [
+			{
+				source: '/products',
+				destination: '/products/1',
+				permanent: true,
+			},
+			{
+				source: '/categories/:slug',
+				destination: '/categories/:slug/1',
+				permanent: true,
+			},
+			{
+				source: '/collections/:slug',
+				destination: '/collections/:slug/1',
+				permanent: true,
+			},
+		];
 	},
 };
 

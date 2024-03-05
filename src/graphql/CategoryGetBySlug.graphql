@@ -1,0 +1,6 @@
+query CategoryGetBySlug($slug: String!) {
+	categoryBySlug(slug: $slug) {
+		id
+		name
+	}
+}

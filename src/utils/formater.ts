@@ -1,6 +1,6 @@
-export const formatMoney = (value: number) => {
-	return value.toLocaleString('pl-PL', {
+export function formatMoney(amount: number, currency = 'PLN') {
+	return new Intl.NumberFormat('pl-PL', {
 		style: 'currency',
-		currency: 'PLN',
-	});
-};
+		currency,
+	}).format(amount);
+}

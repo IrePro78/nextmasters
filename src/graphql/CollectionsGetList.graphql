@@ -1,0 +1,7 @@
+query CollectionsGetList($take: Int, $skip: Int) {
+	collections(take: $take, skip: $skip) {
+		id
+		name
+		slug
+	}
+}
