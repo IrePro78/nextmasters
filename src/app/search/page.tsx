@@ -15,11 +15,10 @@ export default async function SearchedProductsPage({
 			<h1
 				className="pb-20 text-4xl font-extrabold first-letter:uppercase"
 				role="heading"
-				data-testid="products-list"
 			>
 				Search Results
 			</h1>
-			<ul data-testid="products-list">
+			<ul>
 				{products.length !== 0 && <ProductList products={products} />}
 			</ul>
 		</main>

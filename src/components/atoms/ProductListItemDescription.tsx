@@ -13,12 +13,15 @@ export const ProductListItemDescription = ({
 		<article>
 			<div className="mt-2 flex justify-between">
 				<div>
-					<h3 className="text-sm font-semibold text-zinc-200">
+					<h1
+						className="text-sm font-semibold text-zinc-200"
+						role="heading"
+					>
 						{name}
-					</h3>
-					<h3 className="text-sm text-zinc-200">
+					</h1>
+					<p className="text-sm text-zinc-200">
 						{category?.map((category) => category.name).join(', ')}
-					</h3>
+					</p>
 					<span className="sr-only">Cena:</span>
 				</div>
 				<p className="text-sm text-zinc-200">
