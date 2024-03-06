@@ -3,7 +3,13 @@ import { ProductCoverCoverImage } from '@/components/atoms/ProductCoverCoverImag
 import { ProductListItemDescription } from '@/components/atoms/ProductListItemDescription';
 import { type ProductListItemFragment } from '@/gql/graphql';
 
-export const ProductListItem = (product: ProductListItemFragment) => {
+type ProductListItemProps = {
+	product: ProductListItemFragment;
+};
+
+export const ProductListItem = ({
+	product,
+}: ProductListItemProps) => {
 	return (
 		<>
 			<li key={product.id} className="group">
@@ -13,11 +19,7 @@ export const ProductListItem = (product: ProductListItemFragment) => {
 							src={product.product_image}
 							alt={product.name}
 						/>
-						<ProductListItemDescription
-							name={product.name}
-							price={product.price}
-							categories={product.categories}
-						/>
+						<ProductListItemDescription product={product} />
 					</article>
 				</Link>
 			</li>

@@ -57,6 +57,9 @@ export const getProductsByCategorySlug = async (
 		{ slug, take, skip },
 	);
 
+	if (!graphqlResponse.categoryBySlug) {
+		throw new Error('Category not found');
+	}
 	return graphqlResponse.categoryBySlug?.products;
 };
 
@@ -69,6 +72,10 @@ export const getProductsByCollectionSlug = async (
 		ProductsGetByCollectionSlugDocument,
 		{ slug, take, skip },
 	);
+
+	if (!graphqlResponse.collectionBySlug) {
+		throw new Error('Collection not found');
+	}
 
 	return graphqlResponse.collectionBySlug?.products;
 };

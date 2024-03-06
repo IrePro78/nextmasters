@@ -12,7 +12,7 @@ export const ProductList = ({
 			data-testid="products-list"
 		>
 			{products.map((product) => (
-				<ProductListItem key={product.id} {...product} />
+				<ProductListItem key={product.id} product={product} />
 			))}
 		</ul>
 	);
