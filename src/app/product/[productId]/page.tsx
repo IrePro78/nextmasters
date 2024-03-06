@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { type Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { getProductById } from '@/api/products';
 import { ProductCoverCoverImage } from '@/components/atoms/ProductCoverCoverImage';
 import { ProductListItemDescription } from '@/components/atoms/ProductListItemDescription';
@@ -32,26 +31,25 @@ export default async function ProductPage({
 	params: { productId: string };
 }) {
 	const product = await getProductById(params.productId);
-	if (!product.category) {
-		return notFound();
+	if (!product) {
+		throw new Error('Product not found');
 	}
 
 	return (
 		<>
 			<article className=" mx-auto max-w-md text-center text-cyan-50">
 				<h1 className="text-center">{product.name}</h1>
-				<ProductCoverCoverImage {...product.coverImage} />
-				<ProductListItemDescription
-					name={product.name}
-					category={product.category}
-					price={product.price}
+				<ProductCoverCoverImage
+					src={product.product_image}
+					alt={product.name}
 				/>
+				<ProductListItemDescription product={product} />
 			</article>
 
 			<aside>
-				{product.category[0] && (
+				{product.categories && (
 					<Suspense>
-						<SuggestedProducts category={product.category[0]} />
+						<SuggestedProducts categories={product.categories} />
 					</Suspense>
 				)}
 			</aside>

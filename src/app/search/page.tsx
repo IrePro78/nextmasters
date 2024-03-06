@@ -18,7 +18,9 @@ export default async function SearchedProductsPage({
 			>
 				Search Results
 			</h1>
-			{products.length !== 0 && <ProductList products={products} />}
+			<ul>
+				{products.length !== 0 && <ProductList products={products} />}
+			</ul>
 		</main>
 	);
 }

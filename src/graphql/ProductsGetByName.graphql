@@ -1,14 +1,5 @@
 query ProductsGetByName($name: String!, $take: Int, $skip: Int) {
 	productsByName(name: $name, take: $take, skip: $skip) {
-		id
-		name
-		description
-		product_image
-		slug
-		price
-		categories {
-			id
-			name
-		}
+		...ProductListItem
 	}
 }

@@ -1,15 +1,19 @@
-import { notFound } from 'next/navigation';
 import { getProductsByCategorySlug } from '@/api/products';
 import { ProductList } from '@/components/organism/ProductList';
 
 export const SuggestedProducts = async ({
-	category,
+	categories,
 }: {
-	category: { slug: string };
+	categories: { slug: string }[];
 }) => {
-	const products = await getProductsByCategorySlug(category.slug);
+	if (!categories)
+		throw new Error('No categories provided for suggested products');
+
+	const products = await getProductsByCategorySlug(
+		String(categories[0]?.slug),
+	);
 	if (!products) {
-		throw notFound();
+		throw new Error("Can't find related products");
 	}
 
 	const relatedProducts = products.sort(() => 0.5 - Math.random());

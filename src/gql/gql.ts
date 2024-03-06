@@ -18,12 +18,13 @@ const documents = {
     "query CategoryGetBySlug($slug: String!) {\n  categoryBySlug(slug: $slug) {\n    id\n    name\n  }\n}": types.CategoryGetBySlugDocument,
     "query CollectionGetBySlug($slug: String!) {\n  collectionBySlug(slug: $slug) {\n    id\n    name\n  }\n}": types.CollectionGetBySlugDocument,
     "query CollectionsGetList($take: Int, $skip: Int) {\n  collections(take: $take, skip: $skip) {\n    id\n    name\n    slug\n  }\n}": types.CollectionsGetListDocument,
-    "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    id\n    name\n    description\n    product_image\n    slug\n    price\n    categories {\n      id\n      name\n      slug\n    }\n  }\n}": types.ProductGetByIdDocument,
-    "query ProductsGetByCategorySlug($slug: String!, $take: Int, $skip: Int) {\n  categoryBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      id\n      name\n      description\n      product_image\n      slug\n      price\n      categories {\n        name\n      }\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
-    "query ProductsGetByCollectionSlug($slug: String!, $take: Int, $skip: Int) {\n  collectionBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      id\n      name\n      description\n      product_image\n      slug\n      price\n      categories {\n        name\n      }\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
-    "query ProductsGetByName($name: String!, $take: Int, $skip: Int) {\n  productsByName(name: $name, take: $take, skip: $skip) {\n    id\n    name\n    description\n    product_image\n    slug\n    price\n    categories {\n      id\n      name\n    }\n  }\n}": types.ProductsGetByNameDocument,
-    "query ProductsGetList($take: Int, $skip: Int) {\n  products(take: $take, skip: $skip) {\n    id\n    name\n    description\n    product_image\n    slug\n    price\n    categories {\n      id\n      name\n    }\n  }\n}": types.ProductsGetListDocument,
-    "query ProductsGetByCategoryId($categoryId: ID!) {\n  categoryById(id: $categoryId) {\n    products {\n      id\n      name\n      description\n      product_image\n      slug\n      price\n    }\n  }\n}": types.ProductsGetByCategoryIdDocument,
+    "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    ...ProductListItem\n  }\n}": types.ProductGetByIdDocument,
+    "fragment ProductListItem on Product {\n  id\n  name\n  description\n  product_image\n  slug\n  price\n  categories {\n    name\n    slug\n  }\n}": types.ProductListItemFragmentDoc,
+    "query ProductsGetByCategorySlug($slug: String!, $take: Int, $skip: Int) {\n  categoryBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
+    "query ProductsGetByCollectionSlug($slug: String!, $take: Int, $skip: Int) {\n  collectionBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
+    "query ProductsGetByName($name: String!, $take: Int, $skip: Int) {\n  productsByName(name: $name, take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}": types.ProductsGetByNameDocument,
+    "query ProductsGetList($take: Int, $skip: Int) {\n  products(take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetByCategoryId($categoryId: ID!) {\n  categoryById(id: $categoryId) {\n    products {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategoryIdDocument,
 };
 
 /**
@@ -45,27 +46,31 @@ export function graphql(source: "query CollectionsGetList($take: Int, $skip: Int
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    id\n    name\n    description\n    product_image\n    slug\n    price\n    categories {\n      id\n      name\n      slug\n    }\n  }\n}"): typeof import('./graphql').ProductGetByIdDocument;
+export function graphql(source: "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductGetByIdDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetByCategorySlug($slug: String!, $take: Int, $skip: Int) {\n  categoryBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      id\n      name\n      description\n      product_image\n      slug\n      price\n      categories {\n        name\n      }\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByCategorySlugDocument;
+export function graphql(source: "fragment ProductListItem on Product {\n  id\n  name\n  description\n  product_image\n  slug\n  price\n  categories {\n    name\n    slug\n  }\n}"): typeof import('./graphql').ProductListItemFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetByCollectionSlug($slug: String!, $take: Int, $skip: Int) {\n  collectionBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      id\n      name\n      description\n      product_image\n      slug\n      price\n      categories {\n        name\n      }\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByCollectionSlugDocument;
+export function graphql(source: "query ProductsGetByCategorySlug($slug: String!, $take: Int, $skip: Int) {\n  categoryBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByCategorySlugDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetByName($name: String!, $take: Int, $skip: Int) {\n  productsByName(name: $name, take: $take, skip: $skip) {\n    id\n    name\n    description\n    product_image\n    slug\n    price\n    categories {\n      id\n      name\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByNameDocument;
+export function graphql(source: "query ProductsGetByCollectionSlug($slug: String!, $take: Int, $skip: Int) {\n  collectionBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByCollectionSlugDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($take: Int, $skip: Int) {\n  products(take: $take, skip: $skip) {\n    id\n    name\n    description\n    product_image\n    slug\n    price\n    categories {\n      id\n      name\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetByName($name: String!, $take: Int, $skip: Int) {\n  productsByName(name: $name, take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetByNameDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetByCategoryId($categoryId: ID!) {\n  categoryById(id: $categoryId) {\n    products {\n      id\n      name\n      description\n      product_image\n      slug\n      price\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByCategoryIdDocument;
+export function graphql(source: "query ProductsGetList($take: Int, $skip: Int) {\n  products(take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query ProductsGetByCategoryId($categoryId: ID!) {\n  categoryById(id: $categoryId) {\n    products {\n      ...ProductListItem\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByCategoryIdDocument;
 
 
 export function graphql(source: string) {

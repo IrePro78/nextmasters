@@ -1,15 +1,8 @@
 import { type Metadata } from 'next';
 import { getProductsByCategorySlug } from '@/api/products';
 import { Pagination } from '@/components/molecules/Pagination';
-import { getCategoryBySlug } from '@/api/categories';
 
-export async function generateMetadata({
-	params,
-}: {
-	params: { category: string };
-}): Promise<Metadata> {
-	const category = await getCategoryBySlug(params.category);
-
+export async function generateMetadata(): Promise<Metadata> {
 	return {
 		title: 'Categories',
 	};

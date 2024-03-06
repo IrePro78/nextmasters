@@ -7,9 +7,6 @@ import {
 } from '@/gql/graphql';
 import { executeGraphQLQuery } from '@/lib/graphqlApi';
 
-// export const BASE_URL = 'https://graphql.hyperfunctor.com/graphql';
-// 'https://naszsklep-api.vercel.app/api/products';
-
 export const getProductsList = async (
 	take?: number,
 	skip?: number,
@@ -20,24 +17,7 @@ export const getProductsList = async (
 		ProductsGetListDocument,
 		variables,
 	);
-	const products = graphqlResponse.products?.map((product) => {
-		return {
-			id: product.id,
-			name: product.name,
-			description: product.description,
-			price: product.price,
-			category: product.categories?.map((category) => ({
-				id: category.id,
-				name: category.name,
-			})),
-			coverImage: {
-				alt: product.name,
-				src: product.product_image,
-			},
-		};
-	});
-
-	return products;
+	return graphqlResponse.products;
 };
 export const getProductById = async (id: string) => {
 	const graphqlResponse = await executeGraphQLQuery(
@@ -47,24 +27,7 @@ export const getProductById = async (id: string) => {
 	if (!graphqlResponse.product) {
 		throw new Error('Product not found');
 	}
-	const { name, description, price, categories, product_image } =
-		graphqlResponse.product;
-
-	return {
-		id: graphqlResponse.product.id,
-		name,
-		description,
-		price,
-		category: categories?.map((category) => ({
-			id: category.id,
-			name: category.name,
-			slug: category.slug,
-		})),
-		coverImage: {
-			alt: name,
-			src: product_image,
-		},
-	};
+	return graphqlResponse.product;
 };
 
 export const getProductsByName = async (
@@ -74,8 +37,6 @@ export const getProductsByName = async (
 ) => {
 	name = name === typeof 'string' ? name : name.toString();
 
-	console.log(name);
-
 	const graphqlResponse = await executeGraphQLQuery(
 		ProductsGetByNameDocument,
 		{ name, take, skip },
@@ -83,19 +44,7 @@ export const getProductsByName = async (
 	if (!graphqlResponse.productsByName) {
 		throw new Error('Product not found');
 	}
-	return graphqlResponse.productsByName.map((product) => {
-		return {
-			id: product.id,
-			name: product.name,
-			description: product.description,
-			price: product.price,
-			category: product.categories,
-			coverImage: {
-				alt: product.name,
-				src: product.product_image,
-			},
-		};
-	});
+	return graphqlResponse.productsByName;
 };
 
 export const getProductsByCategorySlug = async (
@@ -108,22 +57,10 @@ export const getProductsByCategorySlug = async (
 		{ slug, take, skip },
 	);
 
-	const products = graphqlResponse.categoryBySlug?.products?.map(
-		(product) => {
-			return {
-				id: product.id,
-				name: product.name,
-				description: product.description,
-				price: product.price,
-				category: product.categories,
-				coverImage: {
-					alt: product.name,
-					src: product.product_image,
-				},
-			};
-		},
-	);
-	return products;
+	if (!graphqlResponse.categoryBySlug) {
+		throw new Error('Category not found');
+	}
+	return graphqlResponse.categoryBySlug?.products;
 };
 
 export const getProductsByCollectionSlug = async (
@@ -136,22 +73,11 @@ export const getProductsByCollectionSlug = async (
 		{ slug, take, skip },
 	);
 
-	const products = graphqlResponse.collectionBySlug?.products?.map(
-		(product) => {
-			return {
-				id: product.id,
-				name: product.name,
-				description: product.description,
-				price: product.price,
-				category: product.categories,
-				coverImage: {
-					alt: product.name,
-					src: product.product_image,
-				},
-			};
-		},
-	);
-	return products;
+	if (!graphqlResponse.collectionBySlug) {
+		throw new Error('Collection not found');
+	}
+
+	return graphqlResponse.collectionBySlug?.products;
 };
 
 // export const getProductsByCategoryId = async (categoryId: string) => {

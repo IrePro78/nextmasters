@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getProductsByCollectionSlug } from '@/api/products';
 import { ProductList } from '@/components/organism/ProductList';
-import { getCollectionBySlug } from '@/api/collections';
 
 export default async function CollectionPage({
 	params,

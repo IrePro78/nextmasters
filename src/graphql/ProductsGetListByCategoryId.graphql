@@ -1,12 +1,7 @@
 query ProductsGetByCategoryId($categoryId: ID!) {
 	categoryById(id: $categoryId) {
 		products {
-			id
-			name
-			description
-			product_image
-			slug
-			price
+			...ProductListItem
 		}
 	}
 }
