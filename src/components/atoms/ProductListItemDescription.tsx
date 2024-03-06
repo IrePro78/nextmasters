@@ -1,14 +1,13 @@
+import { type ProductListItemFragment } from '@/gql/graphql';
 import { formatMoney } from '@/utils/formater';
 
+type ProductListItemDescriptionProps = {
+	product: ProductListItemFragment;
+};
+
 export const ProductListItemDescription = ({
-	name,
-	price,
-	category,
-}: {
-	name: string;
-	price: number;
-	category: { id: string; name: string }[];
-}) => {
+	product,
+}: ProductListItemDescriptionProps) => {
 	return (
 		<article>
 			<div className="mt-2 flex justify-between">
@@ -17,15 +16,18 @@ export const ProductListItemDescription = ({
 						className="text-sm font-semibold text-zinc-200"
 						role="heading"
 					>
-						{name}
+						{product.name}
 					</h1>
 					<p className="text-sm text-zinc-200">
-						{category?.map((category) => category.name).join(', ')}
+						{product.categories
+							?.map((category) => category.name)
+							.join(', ')}
 					</p>
 					<span className="sr-only">Cena:</span>
 				</div>
 				<p className="text-sm text-zinc-200">
-					<span className="sr-only">Cena:</span> {formatMoney(price)}
+					<span className="sr-only">Cena:</span>{' '}
+					{formatMoney(product.price)}
 				</p>
 			</div>
 		</article>

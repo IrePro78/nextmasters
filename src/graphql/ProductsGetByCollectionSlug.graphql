@@ -5,15 +5,7 @@ query ProductsGetByCollectionSlug(
 ) {
 	collectionBySlug(slug: $slug) {
 		products(take: $take, skip: $skip) {
-			id
-			name
-			description
-			product_image
-			slug
-			price
-			categories {
-				name
-			}
+			...ProductListItem
 		}
 	}
 }

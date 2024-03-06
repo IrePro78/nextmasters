@@ -32,7 +32,7 @@ export default async function ProductPage({
 	params: { productId: string };
 }) {
 	const product = await getProductById(params.productId);
-	if (!product.category) {
+	if (!product.categories?.length) {
 		return notFound();
 	}
 
@@ -40,18 +40,21 @@ export default async function ProductPage({
 		<>
 			<article className=" mx-auto max-w-md text-center text-cyan-50">
 				<h1 className="text-center">{product.name}</h1>
-				<ProductCoverCoverImage {...product.coverImage} />
+				<ProductCoverCoverImage
+					src={product.product_image}
+					alt={product.name}
+				/>
 				<ProductListItemDescription
 					name={product.name}
-					category={product.category}
+					category={product.categories}
 					price={product.price}
 				/>
 			</article>
 
 			<aside>
-				{product.category[0] && (
+				{product.categories[0] && (
 					<Suspense>
-						<SuggestedProducts category={product.category[0]} />
+						<SuggestedProducts category={product.categories[0]} />
 					</Suspense>
 				)}
 			</aside>
