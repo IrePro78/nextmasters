@@ -1,14 +1,14 @@
 import Image from 'next/image';
 
-export const ProductCoverCoverImage = ({
+export function ProductCoverImage({
 	src,
 	alt,
 }: {
 	src: string;
 	alt: string;
-}) => {
+}) {
 	return (
-		<div className="aspect-square overflow-hidden rounded-md border border-zinc-800 bg-zinc-400 hover:bg-zinc-500">
+		<div className="aspect-square overflow-hidden rounded-md border border-zinc-800  hover:bg-slate-500 dark:bg-slate-100">
 			<Image
 				width={320}
 				height={320}
@@ -18,4 +18,4 @@ export const ProductCoverCoverImage = ({
 			/>
 		</div>
 	);
-};
+}

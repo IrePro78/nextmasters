@@ -11,7 +11,7 @@ export default async function SearchedProductsPage({
 	const products = await getProductsByName(query);
 
 	return (
-		<main className=" mx-auto max-w-7xl text-center text-cyan-50">
+		<main className=" container mx-auto text-center text-cyan-50">
 			<h1
 				className="pb-20 text-4xl font-extrabold first-letter:uppercase"
 				role="heading"
