@@ -21,7 +21,6 @@ export const PromotionalProducts = async () => {
 					<ProductList products={promotionalProducts.slice(0, 8)} />
 				)}
 			</ul>
-			,
 		</>
 	);
 };

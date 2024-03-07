@@ -9,7 +9,7 @@ export default async function ProductsPage() {
 	if (!products) throw new Error("Can't find products");
 
 	return (
-		<section className="mx-auto max-w-md bg-zinc-400 p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
+		<section className="container mx-auto">
 			<ProductList products={products} />
 		</section>
 	);

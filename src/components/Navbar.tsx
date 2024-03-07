@@ -5,16 +5,17 @@ import { SearchField } from '@/components/atoms/SearchField';
 
 export const Navbar = async () => {
 	return (
-		<nav className=" mx-auto flex max-w-7xl items-center justify-between gap-4 bg-zinc-500 p-6 py-6">
+		<nav className=" mx-auto flex justify-between gap-4 p-6 py-6 dark:bg-slate-800">
 			<Link href={'/'}>
 				<span className=" flex-grow-0 p-2 text-3xl font-semibold text-zinc-950">
 					My Shop
 				</span>
 			</Link>
+			<div className="mx-auto">
+				<SearchField />
+			</div>
 
 			<ul className="flex items-center gap-4" role="navigation">
-				<SearchField />
-
 				<ActiveLink
 					href={'/'}
 					className="border-b-2 border-b-transparent text-lg"

@@ -26,7 +26,6 @@ export const SuggestedProducts = async ({
 					<ProductList products={relatedProducts.slice(0, 4)} />
 				)}
 			</ul>
-			,
 		</>
 	);
 };
