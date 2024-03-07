@@ -1,7 +1,7 @@
 import { getProductsList } from '@/api/products';
 import { ProductList } from '@/components/organism/ProductList';
 
-export const PromotionalProducts = async () => {
+export const BestSellingProducts = async () => {
 	const products = await getProductsList();
 	if (!products) {
 		throw new Error('No products found');
@@ -15,7 +15,7 @@ export const PromotionalProducts = async () => {
 		<>
 			<ul className="text-center" data-testid="products-list">
 				<h2 className="py-4 text-center text-2xl" role="heading">
-					Promotional Products
+					Best Selling Products
 				</h2>
 				{promotionalProducts && (
 					<ProductList products={promotionalProducts.slice(0, 8)} />

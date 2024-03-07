@@ -7,7 +7,7 @@ export const Navbar = async () => {
 	return (
 		<nav className=" mx-auto flex justify-between gap-4 p-6 py-6 dark:bg-slate-800">
 			<Link href={'/'}>
-				<span className=" flex-grow-0 p-2 text-3xl font-semibold text-zinc-950">
+				<span className=" flex-grow-0 p-2 text-3xl font-semibold text-slate-200">
 					My Shop
 				</span>
 			</Link>
@@ -19,14 +19,14 @@ export const Navbar = async () => {
 				<ActiveLink
 					href={'/'}
 					className="border-b-2 border-b-transparent text-lg"
-					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline "
+					activeClassName="border-b-fuchsia-100  bg-zinc-800 text-lg font-semibold underline "
 				>
 					Home
 				</ActiveLink>
 				<ActiveLink
 					href={'/products' as Route}
 					className="border-b-2 border-b-transparent text-lg"
-					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline"
+					activeClassName="border-b-fuchsia-100  bg-zinc-800 text-lg font-semibold underline"
 					exact={false}
 				>
 					All
@@ -35,7 +35,7 @@ export const Navbar = async () => {
 				<ActiveLink
 					href={'/collections/elegant-extras' as Route}
 					className="border-b-2 border-b-transparent text-lg"
-					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline"
+					activeClassName="border-b-fuchsia-100  bg-zinc-800 text-lg font-semibold underline"
 					exact={false}
 				>
 					Collections
@@ -44,7 +44,7 @@ export const Navbar = async () => {
 				<ActiveLink
 					href={'/categories/accessories' as Route}
 					className="border-b-2 border-b-transparent text-lg"
-					activeClassName="border-b-fuchsia-100  bg-zinc-400 text-lg font-semibold underline"
+					activeClassName="border-b-fuchsia-100  bg-zinc-800 text-lg font-semibold underline"
 					exact={false}
 				>
 					Categories
