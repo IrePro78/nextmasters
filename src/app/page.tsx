@@ -1,6 +1,6 @@
 import { type Metadata } from 'next';
 import React from 'react';
-import { PromotionalProducts } from '@/components/organism/PromotionalProducts';
+import { BestSellingProducts } from '@/components/organism/BestSellingProducts';
 
 export async function generateMetadata(): Promise<Metadata> {
 	return {
@@ -13,7 +13,7 @@ export default function HomePage() {
 		<div className="container mx-auto">
 			<h1 className="py-4 text-center text-3xl">Home Page</h1>
 			<section>
-				<PromotionalProducts />
+				<BestSellingProducts />
 			</section>
 		</div>
 	);
