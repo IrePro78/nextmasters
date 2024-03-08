@@ -1,3 +1,5 @@
+import { addToCartAction } from '@/app/cart/actions';
+import { AddToCartButton } from '@/components/atoms/AddToCartButton';
 import { ProductCoverImage } from '@/components/atoms/ProductCoverImage';
 import { type ProductListItemFragment } from '@/gql/graphql';
 import { formatMoney } from '@/utils/formater';
@@ -6,7 +8,9 @@ type ProductListItemProps = {
 	product: ProductListItemFragment;
 };
 
-export const ProductCard = ({ product }: ProductListItemProps) => {
+export const ProductCard = async ({
+	product,
+}: ProductListItemProps) => {
 	return (
 		<>
 			<div className="w-full max-w-xl rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
@@ -17,9 +21,9 @@ export const ProductCard = ({ product }: ProductListItemProps) => {
 
 				<div className="px-4 pb-3 pt-3">
 					<div>
-						{/* <h1 className="text-md text-start font-semibold tracking-tight text-gray-900 dark:text-white">
+						<h2 className="text-md text-start font-semibold tracking-tight text-gray-900 dark:text-white">
 							{product.name}
-						</h1> */}
+						</h2>
 						<p className="text-start text-sm">
 							{product.description}
 						</p>
@@ -80,9 +84,15 @@ export const ProductCard = ({ product }: ProductListItemProps) => {
 						<span className="text-xl font-semibold text-gray-900 dark:text-white">
 							{formatMoney(product?.price)}
 						</span>
-						<button className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-							Add to cart
-						</button>
+
+						<form action={addToCartAction}>
+							<input
+								type="hidden"
+								value={product.id}
+								name="productId"
+							/>
+							<AddToCartButton />
+						</form>
 					</div>
 				</div>
 			</div>

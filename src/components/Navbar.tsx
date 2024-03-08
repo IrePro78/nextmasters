@@ -1,16 +1,17 @@
 import Link from 'next/link';
 import { type Route } from 'next';
+import { ShoppingCart } from 'lucide-react';
 import { ActiveLink } from '@/components/ActiveLink';
 import { SearchField } from '@/components/atoms/SearchField';
 
 export const Navbar = async () => {
 	return (
-		<nav className=" mx-auto flex justify-between gap-4 p-6 py-6 dark:bg-slate-800">
-			<Link href={'/'}>
+		<nav className=" mx-auto flex justify-center gap-4 p-6 py-6 dark:bg-slate-800">
+			{/* <Link href={'/'}>
 				<span className=" flex-grow-0 p-2 text-3xl font-semibold text-slate-200">
 					My Shop
 				</span>
-			</Link>
+			</Link> */}
 			<div className="mx-auto">
 				<SearchField />
 			</div>
@@ -49,6 +50,12 @@ export const Navbar = async () => {
 				>
 					Categories
 				</ActiveLink>
+
+				<Link href={'/'}>
+					<div className="flex grid-cols-1 gap-1">
+						<ShoppingCart />0
+					</div>
+				</Link>
 			</ul>
 		</nav>
 	);
