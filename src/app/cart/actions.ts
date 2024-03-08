@@ -1,11 +1,7 @@
-export async function addToCartAction({
-	productId,
-	userId,
-}: {
-	productId: string;
-	userId: string;
-}) {
-	console.log(productId);
+'use server';
+export async function addToCartAction(formData: FormData) {
+	console.log(formData);
+
 	// const cart = await getOrCreateCart(userId);
 
 	// if (!cart) {
