@@ -1,0 +1,7 @@
+mutation CartCreate {
+	createOrder(
+		createOrderData: { total: 0, status: "pending", orderItems: [] }
+	) {
+		...Cart
+	}
+}

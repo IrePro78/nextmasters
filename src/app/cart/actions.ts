@@ -1,23 +1,12 @@
 'use server';
+
+import { cookies } from 'next/headers';
+import { addToCart, getOrCreateCart } from '@/api/carts';
+
 export async function addToCartAction(formData: FormData) {
 	console.log(formData);
-
-	// const cart = await getOrCreateCart(userId);
-
-	// if (!cart) {
-	// 	throw new Error(
-	// 		'Something went wrong with cart creation/check process.',
-	// 	);
-	// }
-
-	// await addItemToCart(cart.id, selectedVariant.id).finally(() => {
-	// 	revalidatePath('/cart');
-	// 	redirect('/cart');
-	// });
+	const cart = await getOrCreateCart();
+	cookies().set('cartId', cart.id);
+	await addToCart(cart.id, formData);
+	console.log('cart', cart);
 }
-
-export const getOrCreateCart = async () => {
-	console.log();
-
-	return {};
-};
