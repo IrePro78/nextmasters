@@ -3,7 +3,6 @@ import { getCartByFromCookies } from '@/api/carts';
 
 export default async function CartPage() {
 	const cart = await getCartByFromCookies();
-	console.log('cart', cart);
 
 	if (!cart) {
 		redirect('/');

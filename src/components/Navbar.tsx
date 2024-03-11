@@ -3,8 +3,10 @@ import { type Route } from 'next';
 import { ShoppingCart } from 'lucide-react';
 import { ActiveLink } from '@/components/ActiveLink';
 import { SearchField } from '@/components/atoms/SearchField';
+import { getCartByFromCookies } from '@/api/carts';
 
 export const Navbar = async () => {
+	const cart = await getCartByFromCookies();
 	return (
 		<nav className=" mx-auto flex justify-center gap-4 p-6 py-6 dark:bg-slate-800">
 			{/* <Link href={'/'}>
@@ -53,7 +55,8 @@ export const Navbar = async () => {
 
 				<Link href={'/'}>
 					<div className="flex grid-cols-1 gap-1">
-						<ShoppingCart />0
+						<ShoppingCart />
+						{cart?.orderItems?.length}
 					</div>
 				</Link>
 			</ul>

@@ -1,5 +1,5 @@
 mutation CartCreate {
-	createOrder(createOrderData: { total: 0 }) {
+	createOrder(createOrderData: { totalAmount: 0 }) {
 		...Cart
 	}
 }
