@@ -1,7 +1,7 @@
 fragment Cart on Order {
 	id
 	status
-	total
+	totalAmount
 	orderItems {
 		id
 		quantity
@@ -9,7 +9,6 @@ fragment Cart on Order {
 			id
 			name
 			price
-			image
 		}
 	}
 }

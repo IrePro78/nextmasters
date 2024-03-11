@@ -5,12 +5,17 @@ mutation CartAddProduct(
 ) {
 	createOrderItem(
 		createOrderItemData: {
-			productId: $productId
 			orderId: $orderId
+			productId: $productId
 			quantity: $quantity
 		}
 	) {
 		id
 		quantity
+		product {
+			id
+			name
+			price
+		}
 	}
 }

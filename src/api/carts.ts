@@ -51,6 +51,8 @@ export const getCartByFromCookies = async () => {
 		const cart = await executeGraphQLQuery(CartGetByIdDocument, {
 			id: cartId,
 		});
+		console.log('cart', cart);
+
 		return cart.order;
 	}
 };
