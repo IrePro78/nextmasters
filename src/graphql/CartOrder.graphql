@@ -5,5 +5,11 @@ fragment Cart on Order {
 	orderItems {
 		id
 		quantity
+		product {
+			id
+			name
+			price
+			image
+		}
 	}
 }

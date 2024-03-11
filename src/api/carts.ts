@@ -1,10 +1,11 @@
+import { cookies } from 'next/headers';
 import {
 	CartCreateDocument,
-	CartFragment,
+	type CartFragment,
 	CartGetByIdDocument,
+	CartAddProductDocument,
 } from '@/gql/graphql';
 import { executeGraphQLQuery } from '@/lib/graphqlApi';
-import { cookies } from 'next/headers';
 
 export const getCartById = async (cartId: string) => {
 	return executeGraphQLQuery(CartGetByIdDocument, {
@@ -12,31 +13,44 @@ export const getCartById = async (cartId: string) => {
 	});
 };
 
-export const createCart = async (createOrderData: ) => {
-	return executeGraphQLQuery(CartCreateDocument, {
-		
+export const createCart = async () => {
+	return executeGraphQLQuery(CartCreateDocument, {});
+};
+
+export const addToCart = async (
+	orderId: string,
+	productId: string,
+	quantity: number,
+) => {
+	return executeGraphQLQuery(CartAddProductDocument, {
+		orderId,
+		productId,
+		quantity,
 	});
 };
 
-export const addToCart = async (cartId: string, formData: FormData) => {}
-
 export const getOrCreateCart = async (): Promise<CartFragment> => {
+	const existingCart = await getCartByFromCookies();
+	if (existingCart) {
+		return existingCart;
+	}
+	cookies().delete('cartId');
+	const cart = await createCart();
+	if (!cart.createOrder) throw new Error('Could not create cart');
+	cookies().set('cartId', cart.createOrder.id, {
+		httpOnly: true,
+		sameSite: 'lax',
+		secure: false,
+	});
+	return cart.createOrder;
+};
+
+export const getCartByFromCookies = async () => {
 	const cartId = cookies().get('cartId')?.value;
 	if (cartId) {
-		const cart = await getCartById(cartId);
-		if (!cart.order) {
-			cookies().delete('cartId');
-			const cart = await createCart({});
-			if (!cart.createOrder) throw new Error('Could not create cart');
-			cookies().set('cartId', cart.createOrder.id);
-			return cart.createOrder;
-		} else {
-			return cart.order;
-		}
-	} else {
-		const cart = await createCart({});
-		if (!cart.createOrder) throw new Error('Could not create cart');
-		cookies().set('cartId', cart.createOrder.id);
-		return cart.createOrder;
+		const cart = await executeGraphQLQuery(CartGetByIdDocument, {
+			id: cartId,
+		});
+		return cart.order;
 	}
-}
+};

@@ -1,3 +1,16 @@
-mutation CartAddProduct() {
-    createOrderItem()
+mutation CartAddProduct(
+	$productId: ID!
+	$orderId: ID!
+	$quantity: Int!
+) {
+	createOrderItem(
+		createOrderItemData: {
+			productId: $productId
+			orderId: $orderId
+			quantity: $quantity
+		}
+	) {
+		id
+		quantity
+	}
 }
