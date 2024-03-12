@@ -64,6 +64,7 @@ export type CreateOrderItemInput = {
   orderId: Scalars['ID']['input'];
   productId: Scalars['ID']['input'];
   quantity: Scalars['Int']['input'];
+  total: Scalars['Float']['input'];
 };
 
 /** Create product input object type. */
@@ -118,10 +119,12 @@ export type Order = {
 export type OrderItems = {
   /** Unique identifier of the order item */
   id: Scalars['ID']['output'];
-  /** Get Order Items By Order */
+  /** Get Product By Order Items ID */
   product?: Maybe<Array<Product>>;
   /** Quantity of the product */
-  quantity: Scalars['Float']['output'];
+  quantity: Scalars['Int']['output'];
+  /** Total amount of the order item */
+  total: Scalars['Float']['output'];
 };
 
 export type Product = {
@@ -227,6 +230,7 @@ export type CartAddProductMutationVariables = Exact<{
   productId: Scalars['ID']['input'];
   orderId: Scalars['ID']['input'];
   quantity: Scalars['Int']['input'];
+  total: Scalars['Float']['input'];
 }>;
 
 
@@ -235,16 +239,16 @@ export type CartAddProductMutation = { createOrderItem?: { id: string, quantity:
 export type CartCreateMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CartCreateMutation = { createOrder?: { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null } | null };
+export type CartCreateMutation = { createOrder?: { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null } | null };
 
 export type CartGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type CartGetByIdQuery = { order?: { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null } | null };
+export type CartGetByIdQuery = { order?: { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null } | null };
 
-export type CartFragment = { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null };
+export type CartFragment = { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null };
 
 export type CategoriesGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -349,6 +353,7 @@ export const CartFragmentDoc = new TypedDocumentString(`
   orderItems {
     id
     quantity
+    total
     product {
       id
       name
@@ -372,9 +377,9 @@ export const ProductListItemFragmentDoc = new TypedDocumentString(`
 }
     `, {"fragmentName":"ProductListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
 export const CartAddProductDocument = new TypedDocumentString(`
-    mutation CartAddProduct($productId: ID!, $orderId: ID!, $quantity: Int!) {
+    mutation CartAddProduct($productId: ID!, $orderId: ID!, $quantity: Int!, $total: Float!) {
   createOrderItem(
-    createOrderItemData: {orderId: $orderId, productId: $productId, quantity: $quantity}
+    createOrderItemData: {orderId: $orderId, productId: $productId, quantity: $quantity, total: $total}
   ) {
     id
     quantity
@@ -399,6 +404,7 @@ export const CartCreateDocument = new TypedDocumentString(`
   orderItems {
     id
     quantity
+    total
     product {
       id
       name
@@ -419,6 +425,7 @@ export const CartGetByIdDocument = new TypedDocumentString(`
   orderItems {
     id
     quantity
+    total
     product {
       id
       name

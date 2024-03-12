@@ -9,7 +9,7 @@ export const AddToCartButton = () => {
 			disabled={formStatus.pending}
 			type="submit"
 			data-testid="add-to-cart-button"
-			className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-wait dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+			className="rounded-lg bg-slate-800 px-5 py-2.5 text-center text-sm font-medium text-white hover:border-slate-600 focus:outline-none focus:ring-2 disabled:cursor-wait dark:bg-slate-900 dark:hover:bg-slate-600 dark:focus:bg-slate-800"
 		>
 			Add to cart
 		</button>

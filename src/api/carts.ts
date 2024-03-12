@@ -21,11 +21,13 @@ export const addToCart = async (
 	orderId: string,
 	productId: string,
 	quantity: number,
+	total: number,
 ) => {
 	return executeGraphQLQuery(CartAddProductDocument, {
 		orderId,
 		productId,
 		quantity,
+		total,
 	});
 };
 

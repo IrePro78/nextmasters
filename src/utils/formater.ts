@@ -1,6 +1,3 @@
-export function formatMoney(amount: number, currency = 'PLN') {
-	return new Intl.NumberFormat('pl-PL', {
-		style: 'currency',
-		currency,
-	}).format(amount);
+export function formatMoney(amount: number) {
+	return `$${new Intl.NumberFormat('us-US').format(amount).replace(',', '.').replace(/\.\d$/, '$&0')}`;
 }
