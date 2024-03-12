@@ -2,12 +2,14 @@ mutation CartAddProduct(
 	$productId: ID!
 	$orderId: ID!
 	$quantity: Int!
+	$total: Float!
 ) {
 	createOrderItem(
 		createOrderItemData: {
 			orderId: $orderId
 			productId: $productId
 			quantity: $quantity
+			total: $total
 		}
 	) {
 		id

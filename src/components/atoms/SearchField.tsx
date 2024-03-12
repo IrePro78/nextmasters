@@ -20,7 +20,7 @@ export const SearchField = () => {
 	}, [searchTerm, router, search]);
 	return (
 		<input
-			className="placeholder-black-400 block w-full rounded-lg border border-gray-300 bg-zinc-500 p-2.5 ps-5 text-sm dark:bg-slate-800"
+			className="placeholder-black-400  block w-full rounded-lg border border-slate-600 bg-slate-800 bg-opacity-40 p-2.5 ps-5 text-sm "
 			type="search"
 			placeholder="search"
 			onChange={handleChange}
