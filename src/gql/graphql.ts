@@ -139,7 +139,7 @@ export type Product = {
   /** Name of the product */
   name: Scalars['String']['output'];
   /** Price of the product */
-  price: Scalars['Float']['output'];
+  price?: Maybe<Scalars['Float']['output']>;
   /** Image of the product */
   product_image: Scalars['String']['output'];
   /** Slug of the product */
@@ -234,21 +234,21 @@ export type CartAddProductMutationVariables = Exact<{
 }>;
 
 
-export type CartAddProductMutation = { createOrderItem?: { id: string, quantity: number, product?: Array<{ id: string, name: string, price: number }> | null } | null };
+export type CartAddProductMutation = { createOrderItem?: { id: string, quantity: number, product?: Array<{ id: string, name: string, price?: number | null }> | null } | null };
 
 export type CartCreateMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CartCreateMutation = { createOrder?: { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null } | null };
+export type CartCreateMutation = { createOrder?: { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price?: number | null }> | null }> | null } | null };
 
 export type CartGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type CartGetByIdQuery = { order?: { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null } | null };
+export type CartGetByIdQuery = { order?: { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price?: number | null }> | null }> | null } | null };
 
-export type CartFragment = { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null };
+export type CartFragment = { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price?: number | null }> | null }> | null };
 
 export type CategoriesGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -285,9 +285,9 @@ export type ProductGetByIdQueryVariables = Exact<{
 }>;
 
 
-export type ProductGetByIdQuery = { product?: { id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string, slug: string }> | null } | null };
+export type ProductGetByIdQuery = { product?: { id: string, name: string, description?: string | null, product_image: string, slug: string, price?: number | null, categories?: Array<{ name: string, slug: string }> | null } | null };
 
-export type ProductListItemFragment = { id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string, slug: string }> | null };
+export type ProductListItemFragment = { id: string, name: string, description?: string | null, product_image: string, slug: string, price?: number | null, categories?: Array<{ name: string, slug: string }> | null };
 
 export type ProductsGetByCategorySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -296,7 +296,7 @@ export type ProductsGetByCategorySlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetByCategorySlugQuery = { categoryBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string, slug: string }> | null }> | null } | null };
+export type ProductsGetByCategorySlugQuery = { categoryBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price?: number | null, categories?: Array<{ name: string, slug: string }> | null }> | null } | null };
 
 export type ProductsGetByCollectionSlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -305,7 +305,7 @@ export type ProductsGetByCollectionSlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetByCollectionSlugQuery = { collectionBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string, slug: string }> | null }> | null } | null };
+export type ProductsGetByCollectionSlugQuery = { collectionBySlug?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price?: number | null, categories?: Array<{ name: string, slug: string }> | null }> | null } | null };
 
 export type ProductsGetByNameQueryVariables = Exact<{
   name: Scalars['String']['input'];
@@ -314,7 +314,7 @@ export type ProductsGetByNameQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetByNameQuery = { productsByName?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string, slug: string }> | null }> | null };
+export type ProductsGetByNameQuery = { productsByName?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price?: number | null, categories?: Array<{ name: string, slug: string }> | null }> | null };
 
 export type ProductsGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -322,14 +322,14 @@ export type ProductsGetListQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListQuery = { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string, slug: string }> | null }> | null };
+export type ProductsGetListQuery = { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price?: number | null, categories?: Array<{ name: string, slug: string }> | null }> | null };
 
 export type ProductsGetByCategoryIdQueryVariables = Exact<{
   categoryId: Scalars['ID']['input'];
 }>;
 
 
-export type ProductsGetByCategoryIdQuery = { categoryById?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string, slug: string }> | null }> | null } | null };
+export type ProductsGetByCategoryIdQuery = { categoryById?: { products?: Array<{ id: string, name: string, description?: string | null, product_image: string, slug: string, price?: number | null, categories?: Array<{ name: string, slug: string }> | null }> | null } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String

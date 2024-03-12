@@ -83,7 +83,7 @@ export const ProductCard = async ({
 					</div>
 					<div className="flex items-center justify-between">
 						<span className="text-xl font-semibold text-gray-900 dark:text-white">
-							{formatMoney(product?.price)}
+							{product.price && formatMoney(product.price)}
 						</span>
 
 						<form action={addToCartAction}>
@@ -92,10 +92,13 @@ export const ProductCard = async ({
 								value={product.id}
 								name="productId"
 							/>
-							<div className="ml-5 flex justify-between gap-4">
-								<ProductQuantitySelector />
-								<AddToCartButton />
-							</div>
+							{/* <div
+								className="ml-5 flex justify-between gap-4"
+								
+							> */}
+							{/* <ProductQuantitySelector /> */}
+							<AddToCartButton />
+							{/* </div> */}
 						</form>
 					</div>
 				</div>
