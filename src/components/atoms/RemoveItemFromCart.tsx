@@ -1,10 +1,24 @@
-'use client';
 import { X } from 'lucide-react';
 
-export const RemoveItemFromCart = () => {
+import { removeItemFromCartAction } from '@/app/cart/actions';
+
+export const RemoveItemFromCart = async ({
+	itemId,
+}: {
+	itemId: string;
+}) => {
 	return (
-		<button type="button" className="text-slate-400" formAction={}>
-			<X />
-		</button>
+		<form action={removeItemFromCartAction}>
+			<button
+				// formAction={async () => removeItemFromCartAction}
+				value={itemId}
+				className="text-slate-400"
+				data-testid="remove"
+				name="itemId"
+				type="submit"
+			>
+				<X />
+			</button>
+		</form>
 	);
 };

@@ -84,6 +84,8 @@ export type Mutation = {
   createOrderItem?: Maybe<OrderItems>;
   /** Create Product */
   createProduct?: Maybe<Product>;
+  /** Remove Order Item By ID */
+  removeOrderItem?: Maybe<OrderItems>;
   /** Update Order Item By Order ID */
   updateOrderItem?: Maybe<OrderItems>;
 };
@@ -101,6 +103,11 @@ export type MutationCreateOrderItemArgs = {
 
 export type MutationCreateProductArgs = {
   createProductData: CreateProductInput;
+};
+
+
+export type MutationRemoveOrderItemArgs = {
+  itemId: Scalars['ID']['input'];
 };
 
 
@@ -166,6 +173,8 @@ export type Query = {
   collectionBySlug?: Maybe<Collection>;
   /** Get All Collections */
   collections?: Maybe<Array<Collection>>;
+  /** Get Order Item By ID */
+  getOrderItem?: Maybe<Array<OrderItems>>;
   /** Get Order By ID */
   order?: Maybe<Order>;
   /** Get All Orders */
@@ -208,6 +217,11 @@ export type QueryCollectionBySlugArgs = {
 export type QueryCollectionsArgs = {
   skip?: Scalars['Int']['input'];
   take?: Scalars['Int']['input'];
+};
+
+
+export type QueryGetOrderItemArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -263,6 +277,13 @@ export type CartGetByIdQuery = { order?: { id: string, status: string, totalAmou
 
 export type CartFragment = { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null };
 
+export type CartRemoveItemMutationVariables = Exact<{
+  itemId: Scalars['ID']['input'];
+}>;
+
+
+export type CartRemoveItemMutation = { removeOrderItem?: { id: string } | null };
+
 export type CartSetProductQuantityMutationVariables = Exact<{
   itemId: Scalars['ID']['input'];
   quantity: Scalars['Int']['input'];
@@ -300,6 +321,13 @@ export type CollectionsGetListQueryVariables = Exact<{
 
 
 export type CollectionsGetListQuery = { collections?: Array<{ id: string, name: string, slug: string }> | null };
+
+export type ItemGetByIdQueryVariables = Exact<{
+  itemId: Scalars['ID']['input'];
+}>;
+
+
+export type ItemGetByIdQuery = { getOrderItem?: Array<{ id: string }> | null };
 
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -454,6 +482,13 @@ export const CartGetByIdDocument = new TypedDocumentString(`
     }
   }
 }`) as unknown as TypedDocumentString<CartGetByIdQuery, CartGetByIdQueryVariables>;
+export const CartRemoveItemDocument = new TypedDocumentString(`
+    mutation CartRemoveItem($itemId: ID!) {
+  removeOrderItem(itemId: $itemId) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartRemoveItemMutation, CartRemoveItemMutationVariables>;
 export const CartSetProductQuantityDocument = new TypedDocumentString(`
     mutation CartSetProductQuantity($itemId: ID!, $quantity: Int!) {
   updateOrderItem(updateOrderItemData: {itemId: $itemId, quantity: $quantity}) {
@@ -502,6 +537,13 @@ export const CollectionsGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
+export const ItemGetByIdDocument = new TypedDocumentString(`
+    query ItemGetById($itemId: ID!) {
+  getOrderItem(id: $itemId) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ItemGetByIdQuery, ItemGetByIdQueryVariables>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(id: $id) {

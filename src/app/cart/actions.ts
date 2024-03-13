@@ -1,11 +1,12 @@
 'use server';
-
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import {
 	addToCart,
 	getOrCreateCart,
+	getOrderItemById,
+	removeItemFromCart,
 	updateItemQuantity,
 } from '@/api/carts';
 import { getProductById } from '@/api/products';
@@ -35,19 +36,22 @@ export const changeItemQuantity = async (
 	quantity: number,
 ) => {
 	await updateItemQuantity(itemId, quantity);
-	console.log('changeItemQuantity', itemId, quantity);
 	revalidatePath('/cart');
-	// next: {
-	// 	tags: ['cart'];
-	// }
-
-	return '';
+	next: {
+		tags: ['cart'];
+	}
 };
-export const removeItemFromCart = async (itemId: string) => {
-	await updateItemQuantity(itemId, 0);
+export const removeItemFromCartAction = async (
+	formData: FormData,
+) => {
+	const itemId = formData.get('itemId') as string;
+
+	if (!itemId) {
+		throw new Error('Item not found');
+	}
+	await removeItemFromCart(itemId);
 	revalidatePath('/cart');
-	// next: {
-	// 	tags: ['cart'];
-	// }
-	return '';
+	next: {
+		tags: ['cart'];
+	}
 };
