@@ -10,18 +10,23 @@ export const DecrementProductQuantity = ({
 	quantity: number;
 	itemId: string;
 }) => {
-	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(
-		quantity,
-		(state: number) => state - 1,
-	);
+	const [
+		optimisticDecrementQuantity,
+		setOptimisticDecrementQuantity,
+	] = useOptimistic(quantity, (state: number) => state - 1);
 	return (
 		<div className="mr-2">
 			<button
 				id="decrement-button"
 				type="submit"
 				formAction={async () => {
-					setOptimisticQuantity(optimisticQuantity - 1);
-					await changeItemQuantity(itemId, optimisticQuantity - 1);
+					setOptimisticDecrementQuantity(
+						optimisticDecrementQuantity - 1,
+					);
+					await changeItemQuantity(
+						itemId,
+						optimisticDecrementQuantity - 1,
+					);
 				}}
 				data-testid="decrement"
 				className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-600 dark:focus:ring-gray-700"

@@ -1,7 +1,6 @@
 import { addToCartAction } from '@/app/cart/actions';
 import { AddToCartButton } from '@/components/atoms/AddToCartButton';
 import { ProductCoverImage } from '@/components/atoms/ProductCoverImage';
-import { ProductQuantitySelector } from '@/components/atoms/ProductQuantitySelector';
 import { type ProductListItemFragment } from '@/gql/graphql';
 import { formatMoney } from '@/utils/formater';
 

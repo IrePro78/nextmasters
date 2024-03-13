@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 import {
 	CartCreateDocument,
 	type CartFragment,
@@ -54,8 +55,10 @@ export const getCartByFromCookies = async () => {
 		const cart = await executeGraphQLQuery(CartGetByIdDocument, {
 			id: cartId,
 		});
-
-		// console.log('cart', cart);
+		revalidatePath('/cart');
+		next: {
+			tags: ['cart'];
+		}
 
 		return cart.order;
 	}
