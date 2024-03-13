@@ -9,7 +9,7 @@ mutation CartAddProduct(
 			orderId: $orderId
 			productId: $productId
 			quantity: $quantity
-			total: 99.99
+			total: $total
 		}
 	) {
 		id

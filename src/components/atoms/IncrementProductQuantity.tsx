@@ -27,7 +27,7 @@ export const IncrementProductQuantity = ({
 						setOptimisticQuantity(optimisticQuantity + 1);
 						await changeItemQuantity(itemId, optimisticQuantity + 1);
 					}}
-					data-input-counter-increment="counter-input"
+					data-testid="increment"
 					className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
 				>
 					<svg
