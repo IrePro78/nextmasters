@@ -9,12 +9,10 @@ export const getCategoriesList = async (
 	take?: number,
 	skip?: number,
 ) => {
-	const variables = { take, skip };
-
-	const graphqlResponse = await executeGraphQLQuery(
-		CategoriesGetListDocument,
-		variables,
-	);
+	const graphqlResponse = await executeGraphQLQuery({
+		query: CategoriesGetListDocument,
+		variables: { take, skip },
+	});
 	const categories = graphqlResponse.categories?.map((category) => {
 		return {
 			id: category.id,
@@ -25,10 +23,10 @@ export const getCategoriesList = async (
 	return categories;
 };
 export const getCategoryBySlug = async (slug: string) => {
-	const graphqlResponse = await executeGraphQLQuery(
-		CategoryGetBySlugDocument,
-		{ slug },
-	);
+	const graphqlResponse = await executeGraphQLQuery({
+		query: CategoryGetBySlugDocument,
+		variables: { slug },
+	});
 
 	const category = graphqlResponse.categoryBySlug;
 

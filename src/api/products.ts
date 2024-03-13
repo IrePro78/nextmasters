@@ -11,19 +11,17 @@ export const getProductsList = async (
 	take?: number,
 	skip?: number,
 ) => {
-	const variables = { take, skip };
-
-	const graphqlResponse = await executeGraphQLQuery(
-		ProductsGetListDocument,
-		variables,
-	);
+	const graphqlResponse = await executeGraphQLQuery({
+		query: ProductsGetListDocument,
+		variables: { take, skip },
+	});
 	return graphqlResponse.products;
 };
 export const getProductById = async (id: string) => {
-	const graphqlResponse = await executeGraphQLQuery(
-		ProductGetByIdDocument,
-		{ id },
-	);
+	const graphqlResponse = await executeGraphQLQuery({
+		query: ProductGetByIdDocument,
+		variables: { id },
+	});
 	if (!graphqlResponse.product) {
 		throw new Error('Product not found');
 	}
@@ -37,10 +35,10 @@ export const getProductsByName = async (
 ) => {
 	name = name === typeof 'string' ? name : name.toString();
 
-	const graphqlResponse = await executeGraphQLQuery(
-		ProductsGetByNameDocument,
-		{ name, take, skip },
-	);
+	const graphqlResponse = await executeGraphQLQuery({
+		query: ProductsGetByNameDocument,
+		variables: { name, take, skip },
+	});
 	if (!graphqlResponse.productsByName) {
 		throw new Error('Product not found');
 	}
@@ -52,10 +50,10 @@ export const getProductsByCategorySlug = async (
 	take?: number,
 	skip?: number,
 ) => {
-	const graphqlResponse = await executeGraphQLQuery(
-		ProductsGetByCategorySlugDocument,
-		{ slug, take, skip },
-	);
+	const graphqlResponse = await executeGraphQLQuery({
+		query: ProductsGetByCategorySlugDocument,
+		variables: { slug, take, skip },
+	});
 
 	if (!graphqlResponse.categoryBySlug) {
 		throw new Error('Category not found');
@@ -68,10 +66,10 @@ export const getProductsByCollectionSlug = async (
 	take?: number,
 	skip?: number,
 ) => {
-	const graphqlResponse = await executeGraphQLQuery(
-		ProductsGetByCollectionSlugDocument,
-		{ slug, take, skip },
-	);
+	const graphqlResponse = await executeGraphQLQuery({
+		query: ProductsGetByCollectionSlugDocument,
+		variables: { slug, take, skip },
+	});
 
 	if (!graphqlResponse.collectionBySlug) {
 		throw new Error('Collection not found');

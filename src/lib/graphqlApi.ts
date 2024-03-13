@@ -1,9 +1,16 @@
 import { type TypedDocumentString } from '@/gql/graphql';
 
-export const executeGraphQLQuery = async <TResult, TVariables>(
-	query: TypedDocumentString<TResult, TVariables>,
-	variables: TVariables,
-): Promise<TResult> => {
+export const executeGraphQLQuery = async <TResult, TVariables>({
+	query,
+	variables,
+	next,
+	cache,
+}: {
+	query: TypedDocumentString<TResult, TVariables>;
+	variables: TVariables;
+	next?: NextFetchRequestConfig;
+	cache?: RequestCache;
+}): Promise<TResult> => {
 	if (!process.env.GRAPHQL_API_URL)
 		throw new Error('GRAPHQL_API_URL is not defined');
 	const res = await fetch(process.env.GRAPHQL_API_URL, {
@@ -15,6 +22,8 @@ export const executeGraphQLQuery = async <TResult, TVariables>(
 			query,
 			variables,
 		}),
+		next,
+		cache,
 	});
 
 	type GraphQLResponse<T> =
