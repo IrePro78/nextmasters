@@ -1,17 +1,26 @@
-import { cookies } from 'next/headers';
+'use server';
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
 import {
 	CartCreateDocument,
 	type CartFragment,
 	CartGetByIdDocument,
 	CartAddProductDocument,
 	CartSetProductQuantityDocument,
+	CartRemoveItemDocument,
+	ItemGetByIdDocument,
 } from '@/gql/graphql';
 import { executeGraphQLQuery } from '@/lib/graphqlApi';
 
 export const getCartById = async (cartId: string) => {
 	return executeGraphQLQuery(CartGetByIdDocument, {
 		id: cartId,
+	});
+};
+
+export const getOrderItemById = async (itemId: string) => {
+	return executeGraphQLQuery(ItemGetByIdDocument, {
+		id: itemId,
 	});
 };
 
@@ -71,5 +80,11 @@ export const updateItemQuantity = async (
 	return executeGraphQLQuery(CartSetProductQuantityDocument, {
 		itemId,
 		quantity,
+	});
+};
+
+export const removeItemFromCart = async (itemId: string) => {
+	return executeGraphQLQuery(CartRemoveItemDocument, {
+		itemId,
 	});
 };
