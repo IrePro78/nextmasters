@@ -3,7 +3,11 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import { addToCart, getOrCreateCart } from '@/api/carts';
+import {
+	addToCart,
+	getOrCreateCart,
+	updateItemQuantity,
+} from '@/api/carts';
 import { getProductById } from '@/api/products';
 
 export const addToCartAction = async (formData: FormData) => {
@@ -30,6 +34,7 @@ export const changeItemQuantity = async (
 	itemId: string,
 	quantity: number,
 ) => {
+	await updateItemQuantity(itemId, quantity);
 	console.log('changeItemQuantity', itemId, quantity);
 	revalidatePath('/cart');
 	next: {

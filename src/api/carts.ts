@@ -4,6 +4,7 @@ import {
 	type CartFragment,
 	CartGetByIdDocument,
 	CartAddProductDocument,
+	CartSetProductQuantityDocument,
 } from '@/gql/graphql';
 import { executeGraphQLQuery } from '@/lib/graphqlApi';
 
@@ -54,6 +55,18 @@ export const getCartByFromCookies = async () => {
 			id: cartId,
 		});
 
+		// console.log('cart', cart);
+
 		return cart.order;
 	}
+};
+
+export const updateItemQuantity = async (
+	itemId: string,
+	quantity: number,
+) => {
+	return executeGraphQLQuery(CartSetProductQuantityDocument, {
+		itemId,
+		quantity,
+	});
 };
