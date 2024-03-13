@@ -60,7 +60,10 @@ export const Navbar = async () => {
 					<div className="flex grid-cols-1 gap-1">
 						<ShoppingCart />
 
-						{cart?.orderItems?.length ? cart?.orderItems?.length : 0}
+						{cart?.orderItems?.reduce(
+							(acc, curr) => acc + curr.quantity,
+							0,
+						) ?? 0}
 					</div>
 				</Link>
 			</ul>

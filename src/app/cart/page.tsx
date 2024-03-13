@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getCartByFromCookies } from '@/api/carts';
 import { ProductQuantitySelector } from '@/components/atoms/ProductQuantitySelector';
+import { RemoveItemFromCart } from '@/components/atoms/RemoveItemFromCart';
 
 export default async function CartPage() {
 	const cart = await getCartByFromCookies();
@@ -28,6 +29,7 @@ export default async function CartPage() {
 						<th scope="col" className="px-6 py-3">
 							Total
 						</th>
+						<th>Remove</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,7 +47,7 @@ export default async function CartPage() {
 										>
 											{item.product[0]?.name}
 										</th>
-										<td className="px-6 py-4">{''}</td>
+										<td className="px-6 py-4">{'*'}</td>
 										<td className=" w-2 px-6 py-4">
 											{
 												<ProductQuantitySelector
@@ -59,6 +61,9 @@ export default async function CartPage() {
 										</td>
 										<td className="px-6 py-4">
 											{`$${item.total.toFixed(2)}`}
+										</td>
+										<td>
+											<RemoveItemFromCart />
 										</td>
 									</tr>
 								),

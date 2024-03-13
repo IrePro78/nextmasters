@@ -26,9 +26,9 @@ export const addToCartAction = async (formData: FormData) => {
 		throw new Error('Could not create cart');
 	}
 	redirect('/cart');
-	// await addToCart(cart.id, product.id, 3);
 
 	cookies().set('cartId', cart.id);
+	revalidatePath('/cart');
 };
 export const changeItemQuantity = async (
 	itemId: string,
@@ -37,9 +37,17 @@ export const changeItemQuantity = async (
 	await updateItemQuantity(itemId, quantity);
 	console.log('changeItemQuantity', itemId, quantity);
 	revalidatePath('/cart');
-	next: {
-		tags: ['cart'];
-	}
+	// next: {
+	// 	tags: ['cart'];
+	// }
 
+	return '';
+};
+export const removeItemFromCart = async (itemId: string) => {
+	await updateItemQuantity(itemId, 0);
+	revalidatePath('/cart');
+	// next: {
+	// 	tags: ['cart'];
+	// }
 	return '';
 };
