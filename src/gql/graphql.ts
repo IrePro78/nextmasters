@@ -173,8 +173,6 @@ export type Query = {
   collectionBySlug?: Maybe<Collection>;
   /** Get All Collections */
   collections?: Maybe<Array<Collection>>;
-  /** Get Order Item By ID */
-  getOrderItem?: Maybe<Array<OrderItems>>;
   /** Get Order By ID */
   order?: Maybe<Order>;
   /** Get All Orders */
@@ -217,11 +215,6 @@ export type QueryCollectionBySlugArgs = {
 export type QueryCollectionsArgs = {
   skip?: Scalars['Int']['input'];
   take?: Scalars['Int']['input'];
-};
-
-
-export type QueryGetOrderItemArgs = {
-  id: Scalars['ID']['input'];
 };
 
 
@@ -321,13 +314,6 @@ export type CollectionsGetListQueryVariables = Exact<{
 
 
 export type CollectionsGetListQuery = { collections?: Array<{ id: string, name: string, slug: string }> | null };
-
-export type ItemGetByIdQueryVariables = Exact<{
-  itemId: Scalars['ID']['input'];
-}>;
-
-
-export type ItemGetByIdQuery = { getOrderItem?: Array<{ id: string }> | null };
 
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -537,13 +523,6 @@ export const CollectionsGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
-export const ItemGetByIdDocument = new TypedDocumentString(`
-    query ItemGetById($itemId: ID!) {
-  getOrderItem(id: $itemId) {
-    id
-  }
-}
-    `) as unknown as TypedDocumentString<ItemGetByIdQuery, ItemGetByIdQueryVariables>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(id: $id) {

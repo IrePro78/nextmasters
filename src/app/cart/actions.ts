@@ -1,11 +1,10 @@
 'use server';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import {
 	addToCart,
 	getOrCreateCart,
-	getOrderItemById,
 	removeItemFromCart,
 	updateItemQuantity,
 } from '@/api/carts';
@@ -23,23 +22,21 @@ export const addToCartAction = async (formData: FormData) => {
 	const cart = await getOrCreateCart();
 	await addToCart(cart.id, product.id, 1, 1 * product.price);
 
+	revalidateTag('cart');
+
 	if (!cart) {
 		throw new Error('Could not create cart');
 	}
 	redirect('/cart');
 
 	cookies().set('cartId', cart.id);
-	revalidatePath('/cart');
 };
 export const changeItemQuantity = async (
 	itemId: string,
 	quantity: number,
 ) => {
 	await updateItemQuantity(itemId, quantity);
-	revalidatePath('/cart');
-	next: {
-		tags: ['cart'];
-	}
+	revalidateTag('cart');
 };
 export const removeItemFromCartAction = async (
 	formData: FormData,

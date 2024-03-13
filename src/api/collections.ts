@@ -9,12 +9,10 @@ export const getCollectionsList = async (
 	take?: number,
 	skip?: number,
 ) => {
-	const variables = { take, skip };
-
-	const graphqlResponse = await executeGraphQLQuery(
-		CollectionsGetListDocument,
-		variables,
-	);
+	const graphqlResponse = await executeGraphQLQuery({
+		query: CollectionsGetListDocument,
+		variables: { take, skip },
+	});
 	const collections = graphqlResponse.collections?.map(
 		(collection) => {
 			return {
@@ -28,10 +26,10 @@ export const getCollectionsList = async (
 };
 
 export const getCollectionBySlug = async (slug: string) => {
-	const graphqlResponse = await executeGraphQLQuery(
-		CollectionGetBySlugDocument,
-		{ slug },
-	);
+	const graphqlResponse = await executeGraphQLQuery({
+		query: CollectionGetBySlugDocument,
+		variables: { slug },
+	});
 
 	const collection = graphqlResponse.collectionBySlug;
 	if (!collection) notFound();

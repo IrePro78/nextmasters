@@ -1,5 +1,0 @@
-query ItemGetById($itemId: ID!) {
-	getOrderItem(id: $itemId) {
-		id
-	}
-}

@@ -1,5 +1,5 @@
 'use server';
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import {
 	CartCreateDocument,
@@ -8,24 +8,23 @@ import {
 	CartAddProductDocument,
 	CartSetProductQuantityDocument,
 	CartRemoveItemDocument,
-	ItemGetByIdDocument,
 } from '@/gql/graphql';
 import { executeGraphQLQuery } from '@/lib/graphqlApi';
 
 export const getCartById = async (cartId: string) => {
-	return executeGraphQLQuery(CartGetByIdDocument, {
-		id: cartId,
-	});
-};
-
-export const getOrderItemById = async (itemId: string) => {
-	return executeGraphQLQuery(ItemGetByIdDocument, {
-		id: itemId,
+	return executeGraphQLQuery({
+		query: CartGetByIdDocument,
+		variables: {
+			id: cartId,
+		},
 	});
 };
 
 export const createCart = async () => {
-	return executeGraphQLQuery(CartCreateDocument, {});
+	return executeGraphQLQuery({
+		query: CartCreateDocument,
+		variables: {},
+	});
 };
 
 export const addToCart = async (
@@ -34,11 +33,14 @@ export const addToCart = async (
 	quantity: number,
 	total: number,
 ) => {
-	return executeGraphQLQuery(CartAddProductDocument, {
-		orderId,
-		productId,
-		quantity,
-		total,
+	return executeGraphQLQuery({
+		query: CartAddProductDocument,
+		variables: {
+			orderId,
+			productId,
+			quantity,
+			total,
+		},
 	});
 };
 
@@ -61,13 +63,16 @@ export const getOrCreateCart = async (): Promise<CartFragment> => {
 export const getCartByFromCookies = async () => {
 	const cartId = cookies().get('cartId')?.value;
 	if (cartId) {
-		const cart = await executeGraphQLQuery(CartGetByIdDocument, {
-			id: cartId,
+		const cart = await executeGraphQLQuery({
+			query: CartGetByIdDocument,
+			variables: {
+				id: cartId,
+			},
+			next: {
+				tags: ['cart'],
+			},
 		});
-		revalidatePath('/cart');
-		next: {
-			tags: ['cart'];
-		}
+		revalidateTag('cart');
 
 		return cart.order;
 	}
@@ -77,14 +82,26 @@ export const updateItemQuantity = async (
 	itemId: string,
 	quantity: number,
 ) => {
-	return executeGraphQLQuery(CartSetProductQuantityDocument, {
-		itemId,
-		quantity,
+	return executeGraphQLQuery({
+		query: CartSetProductQuantityDocument,
+		variables: {
+			itemId,
+			quantity,
+		},
+		next: {
+			tags: ['cart'],
+		},
 	});
 };
 
 export const removeItemFromCart = async (itemId: string) => {
-	return executeGraphQLQuery(CartRemoveItemDocument, {
-		itemId,
+	return executeGraphQLQuery({
+		query: CartRemoveItemDocument,
+		variables: {
+			itemId,
+		},
+		next: {
+			tags: ['cart'],
+		},
 	});
 };
