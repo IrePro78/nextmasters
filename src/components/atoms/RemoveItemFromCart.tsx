@@ -10,14 +10,13 @@ export const RemoveItemFromCart = async ({
 	return (
 		<form action={removeItemFromCartAction}>
 			<button
-				// formAction={async () => removeItemFromCartAction}
 				value={itemId}
-				className="text-slate-400"
+				className=" text-red-400"
 				data-testid="remove"
 				name="itemId"
 				type="submit"
 			>
-				<X />
+				<X size={18} />
 			</button>
 		</form>
 	);

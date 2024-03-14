@@ -1,7 +1,7 @@
 'use server';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import {
 	addToCart,
 	getOrCreateCart,
@@ -47,8 +47,5 @@ export const removeItemFromCartAction = async (
 		throw new Error('Item not found');
 	}
 	await removeItemFromCart(itemId);
-	revalidatePath('/cart');
-	next: {
-		tags: ['cart'];
-	}
+	revalidateTag('cart');
 };

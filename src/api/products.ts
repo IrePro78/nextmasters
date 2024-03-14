@@ -14,6 +14,9 @@ export const getProductsList = async (
 	const graphqlResponse = await executeGraphQLQuery({
 		query: ProductsGetListDocument,
 		variables: { take, skip },
+		next: {
+			tags: ['products'],
+		},
 	});
 	return graphqlResponse.products;
 };
