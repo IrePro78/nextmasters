@@ -1,4 +1,5 @@
 import { ShoppingBasket } from 'lucide-react';
+import Link from 'next/link';
 import { getCartByFromCookies } from '@/api/carts';
 import { ProductQuantitySelector } from '@/components/atoms/ProductQuantitySelector';
 import { RemoveItemFromCart } from '@/components/atoms/RemoveItemFromCart';
@@ -54,7 +55,11 @@ export default async function CartPage() {
 												scope="row"
 												className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
 											>
-												{item.product[0]?.name}
+												<Link
+													href={`/product/${item.product[0]?.id}`}
+												>
+													{item.product[0]?.name}
+												</Link>
 											</th>
 											<td className="px-10 py-4">{'*'}</td>
 											<td className=" w-2 px-5 py-4">
