@@ -19,6 +19,7 @@ export const DecrementProductQuantity = ({
 			<button
 				id="decrement-button"
 				type="submit"
+				disabled={optimisticDecrementQuantity === 1}
 				formAction={async () => {
 					setOptimisticDecrementQuantity(
 						optimisticDecrementQuantity - 1,

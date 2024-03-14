@@ -1,8 +1,9 @@
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest): Promise<Response> {
 	const body: unknown = await request.json();
+	console.log(body);
 
 	if (
 		typeof body === 'object' &&
@@ -15,8 +16,8 @@ export async function POST(request: NextRequest): Promise<Response> {
 		);
 
 		revalidatePath(`/product/${body.productId}`);
-		// revalidatePath(`/products`);
-		return NextResponse.json(null, { status: 204 });
+		revalidateTag(`products`);
+		return NextResponse.json(null, { status: 200 });
 	} else {
 		return NextResponse.json(null, { status: 400 });
 	}

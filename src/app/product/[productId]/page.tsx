@@ -22,6 +22,16 @@ export const generateMetadata = async ({
 	return {
 		title: product.name,
 		description: product.description,
+		openGraph: {
+			title: product?.name,
+			description: product?.description || '',
+			images: {
+				url: product?.product_image || '',
+				width: 800,
+				height: 600,
+				alt: product.name,
+			},
+		},
 	};
 };
 
