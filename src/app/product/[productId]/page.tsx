@@ -4,6 +4,7 @@ import { getProductById } from '@/api/products';
 
 import { SuggestedProducts } from '@/components/organism/SuggestedProducts';
 import { ProductCard } from '@/components/molecules/ProductCard';
+import { ProductReviews } from '@/components/organism/ProductReviews';
 
 // export const generateStaticParams = async () => {
 // 	const products = await getProductsList();
@@ -53,6 +54,12 @@ export default async function ProductPage({
 					<ProductCard product={product} />
 				</div>
 			</article>
+			<aside>
+				<Suspense>
+					<ProductReviews />
+				</Suspense>
+			</aside>
+
 			<aside>
 				{product.categories && (
 					<Suspense>
