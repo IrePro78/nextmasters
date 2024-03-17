@@ -1,5 +1,4 @@
 import { addToCartAction } from '@/app/cart/actions';
-import { AddReviewButton } from '@/components/atoms/AddReviewButton';
 import { AddToCartButton } from '@/components/atoms/AddToCartButton';
 import { ProductCoverImage } from '@/components/atoms/ProductCoverImage';
 import { type ProductListItemFragment } from '@/gql/graphql';
@@ -93,8 +92,6 @@ export const ProductCard = async ({
 						<span className="text-xl font-semibold text-gray-900 dark:text-white">
 							{product.price && formatMoney(product.price)}
 						</span>
-
-						<AddReviewButton />
 
 						<form action={addToCartAction}>
 							<input

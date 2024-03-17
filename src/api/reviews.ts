@@ -1,15 +1,40 @@
+import {
+	ProductAddReviewDocument,
+	ProductGetReviewsByIdDocument,
+} from '@/gql/graphql';
+import { executeGraphQLQuery } from '@/lib/graphqlApi';
+
 export const getReviewsByPoductId = async (productId: string) => {
 	return executeGraphQLQuery({
-		query: CartGetByIdDocument,
+		query: ProductGetReviewsByIdDocument,
 		variables: {
 			productId,
 		},
 	});
 };
 
-export const createReview = async () => {
+type FormDataProp = {
+	productId: string;
+	headline: string;
+	content: string;
+	name: string;
+	email: string;
+	rating: number;
+};
+
+export const createReview = async ({
+	productId,
+	headline,
+	content,
+	name,
+	email,
+	rating,
+}: FormDataProp) => {
 	return executeGraphQLQuery({
-		query: CartCreateDocument,
-		variables: {},
+		query: ProductAddReviewDocument,
+		variables: { productId, headline, content, name, email, rating },
+		next: {
+			tags: ['cart'],
+		},
 	});
 };

@@ -77,6 +77,16 @@ export type CreateProductInput = {
   slug: Scalars['String']['input'];
 };
 
+/** Create Review Input */
+export type CreateReviewInput = {
+  content: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  headline: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  productId: Scalars['ID']['input'];
+  rating: Scalars['Int']['input'];
+};
+
 export type Mutation = {
   /** Create Order */
   createOrder?: Maybe<Order>;
@@ -84,6 +94,8 @@ export type Mutation = {
   createOrderItem?: Maybe<OrderItems>;
   /** Create Product */
   createProduct?: Maybe<Product>;
+  /** Create Review */
+  createProductReview?: Maybe<Review>;
   /** Remove Order Item By ID */
   removeOrderItem?: Maybe<OrderItems>;
   /** Update Order Item By Order ID */
@@ -103,6 +115,11 @@ export type MutationCreateOrderItemArgs = {
 
 export type MutationCreateProductArgs = {
   createProductData: CreateProductInput;
+};
+
+
+export type MutationCreateProductReviewArgs = {
+  createReviewData: CreateReviewInput;
 };
 
 
@@ -173,6 +190,8 @@ export type Query = {
   collectionBySlug?: Maybe<Collection>;
   /** Get All Collections */
   collections?: Maybe<Array<Collection>>;
+  /** Get All Reviews */
+  getProductReviews?: Maybe<Array<Review>>;
   /** Get Order By ID */
   order?: Maybe<Order>;
   /** Get All Orders */
@@ -218,6 +237,11 @@ export type QueryCollectionsArgs = {
 };
 
 
+export type QueryGetProductReviewsArgs = {
+  productId: Scalars['ID']['input'];
+};
+
+
 export type QueryOrderArgs = {
   id: Scalars['ID']['input'];
 };
@@ -238,6 +262,23 @@ export type QueryProductsByNameArgs = {
   name: Scalars['String']['input'];
   skip?: Scalars['Int']['input'];
   take?: Scalars['Int']['input'];
+};
+
+export type Review = {
+  /** Description of the review */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Date of the review */
+  createAt: Scalars['DateTime']['output'];
+  /** Email of the review user */
+  email: Scalars['String']['output'];
+  /** Name of the review */
+  headline: Scalars['String']['output'];
+  /** Unique identifier of the review */
+  id: Scalars['ID']['output'];
+  /** User name of the review */
+  name: Scalars['String']['output'];
+  /** Rating of the review */
+  rating: Scalars['Int']['output'];
 };
 
 /** Update order item input object type. */
@@ -315,12 +356,31 @@ export type CollectionsGetListQueryVariables = Exact<{
 
 export type CollectionsGetListQuery = { collections?: Array<{ id: string, name: string, slug: string }> | null };
 
+export type ProductAddReviewMutationVariables = Exact<{
+  productId: Scalars['ID']['input'];
+  headline: Scalars['String']['input'];
+  content: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  rating: Scalars['Int']['input'];
+}>;
+
+
+export type ProductAddReviewMutation = { createProductReview?: { id: string, headline: string, content?: string | null, rating: number, name: string, email: string, createAt: unknown } | null };
+
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
 export type ProductGetByIdQuery = { product?: { id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string, slug: string }> | null } | null };
+
+export type ProductGetReviewsByIdQueryVariables = Exact<{
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type ProductGetReviewsByIdQuery = { getProductReviews?: Array<{ id: string, headline: string, content?: string | null, rating: number, name: string, email: string, createAt: unknown }> | null };
 
 export type ProductListItemFragment = { id: string, name: string, description?: string | null, product_image: string, slug: string, price: number, categories?: Array<{ name: string, slug: string }> | null };
 
@@ -523,6 +583,21 @@ export const CollectionsGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
+export const ProductAddReviewDocument = new TypedDocumentString(`
+    mutation ProductAddReview($productId: ID!, $headline: String!, $content: String!, $name: String!, $email: String!, $rating: Int!) {
+  createProductReview(
+    createReviewData: {productId: $productId, headline: $headline, content: $content, name: $name, email: $email, rating: $rating}
+  ) {
+    id
+    headline
+    content
+    rating
+    name
+    email
+    createAt
+  }
+}
+    `) as unknown as TypedDocumentString<ProductAddReviewMutation, ProductAddReviewMutationVariables>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(id: $id) {
@@ -541,6 +616,19 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
     slug
   }
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
+export const ProductGetReviewsByIdDocument = new TypedDocumentString(`
+    query ProductGetReviewsById($productId: ID!) {
+  getProductReviews(productId: $productId) {
+    id
+    headline
+    content
+    rating
+    name
+    email
+    createAt
+  }
+}
+    `) as unknown as TypedDocumentString<ProductGetReviewsByIdQuery, ProductGetReviewsByIdQueryVariables>;
 export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     query ProductsGetByCategorySlug($slug: String!, $take: Int, $skip: Int) {
   categoryBySlug(slug: $slug) {

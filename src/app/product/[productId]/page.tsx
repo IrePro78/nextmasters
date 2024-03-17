@@ -56,7 +56,7 @@ export default async function ProductPage({
 			</article>
 			<aside>
 				<Suspense>
-					<ProductReviews />
+					<ProductReviews productId={params.productId} />
 				</Suspense>
 			</aside>
 
