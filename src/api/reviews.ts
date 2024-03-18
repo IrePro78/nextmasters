@@ -34,7 +34,7 @@ export const createReview = async ({
 		query: ProductAddReviewDocument,
 		variables: { productId, headline, content, name, email, rating },
 		next: {
-			tags: ['cart'],
+			tags: ['product'],
 		},
 	});
 };

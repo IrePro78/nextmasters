@@ -9,4 +9,12 @@ fragment ProductListItem on Product {
 		name
 		slug
 	}
+	reviews {
+		id
+		headline
+		content
+		name
+		email
+		rating
+	}
 }
