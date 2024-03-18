@@ -1,3 +1,4 @@
+import { getReviewsByPoductId } from '@/api/reviews';
 import { addToCartAction } from '@/app/cart/actions';
 import { AddToCartButton } from '@/components/atoms/AddToCartButton';
 import { ProductCoverImage } from '@/components/atoms/ProductCoverImage';
@@ -11,6 +12,8 @@ type ProductListItemProps = {
 export const ProductCard = async ({
 	product,
 }: ProductListItemProps) => {
+	const reviews = await getReviewsByPoductId(product.id);
+	reviews.getProductReviews?.length;
 	return (
 		<>
 			<div className="w-full max-w-xl rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800 ">
@@ -31,7 +34,7 @@ export const ProductCard = async ({
 
 					<div className="mb-5 mt-2.5 flex items-center">
 						<span className="text-md pr-2 font-semibold text-slate-200 ">
-							5.0
+							{product.rating && product.rating.toFixed(1)}
 						</span>
 						<div className="flex items-center space-x-1 rtl:space-x-reverse">
 							<svg
@@ -85,7 +88,7 @@ export const ProductCard = async ({
 							href="#"
 							className="pl-4 text-sm font-normal text-gray-900 underline hover:no-underline dark:text-white"
 						>
-							73 reviews
+							{reviews.getProductReviews?.length} reviews
 						</a>
 					</div>
 					<div className="flex items-center justify-between">

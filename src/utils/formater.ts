@@ -4,3 +4,14 @@ export function formatMoney(amount: number) {
 		.replace(',', '.')
 		.replace(/\.\d$/, '$&0')}`;
 }
+
+export function formatDate(date: string) {
+	return new Intl.DateTimeFormat('us-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		hour: 'numeric',
+		minute: 'numeric',
+		second: 'numeric',
+	}).format(new Date(date));
+}
