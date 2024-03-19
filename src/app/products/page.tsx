@@ -9,8 +9,10 @@ export default async function ProductsPage() {
 	if (!products) throw new Error("Can't find products");
 
 	return (
-		<section className="container mx-auto">
-			<ProductList products={products} />
-		</section>
+		<>
+			<section className="container mx-auto">
+				<ProductList products={products} />
+			</section>
+		</>
 	);
 }

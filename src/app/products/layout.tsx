@@ -15,11 +15,14 @@ export default async function RootLayout({
 
 	return (
 		<>
-			<ProductSortingSelect />
-			<div>
+			<div className="mx-auto">
 				{numOfPages > 1 && (
 					<Pagination numOfPages={numOfPages} baseUrl={`products`} />
 				)}
+				<section className=" container mx-auto flex flex-row-reverse items-center">
+					<ProductSortingSelect />
+					<label className="  pr-2 text-gray-400">Sort by:</label>
+				</section>
 			</div>
 
 			<section>{children}</section>
