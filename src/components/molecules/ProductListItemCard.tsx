@@ -1,5 +1,5 @@
-import { getReviewsByPoductId } from '@/api/reviews';
 import { ProductCoverImage } from '@/components/atoms/ProductCoverImage';
+
 import { type ProductListItemFragment } from '@/gql/graphql';
 import { formatMoney } from '@/utils/formater';
 
@@ -29,7 +29,7 @@ export const ProductListItemCard = async ({
 								.join(', ')}
 						</p>
 					</div>
-					<div className="mb-5 mt-2.5 flex items-center text-xs">
+					<div className="mb-5 mt-2.5 flex items-center">
 						<span className="pr-2 text-xs font-normal text-slate-200 ">
 							{`${product.reviews
 								?.reduce((acc, review, _, reviews) => {
@@ -61,12 +61,9 @@ export const ProductListItemCard = async ({
 								</svg>
 							))}
 
-						<a
-							href="#reviews"
-							className="pl-2 text-xs font-normal text-gray-900 underline hover:no-underline dark:text-white"
-						>
+						<span className="pl-2 text-xs font-normal text-gray-900 underline dark:text-white">
 							{product.reviews?.length} reviews
-						</a>
+						</span>
 					</div>
 					<div className="flex items-center justify-between">
 						<span className="text-xl font-semibold text-gray-900 dark:text-white">

@@ -1,4 +1,5 @@
 import { getProductsList } from '@/api/products';
+import { ProductSortingSelect } from '@/components/atoms/ProductSortingSelect';
 import { Pagination } from '@/components/molecules/Pagination';
 
 export default async function RootLayout({
@@ -14,9 +15,12 @@ export default async function RootLayout({
 
 	return (
 		<>
-			{numOfPages > 1 && (
-				<Pagination numOfPages={numOfPages} baseUrl={`products`} />
-			)}
+			<ProductSortingSelect />
+			<div>
+				{numOfPages > 1 && (
+					<Pagination numOfPages={numOfPages} baseUrl={`products`} />
+				)}
+			</div>
 
 			<section>{children}</section>
 		</>

@@ -36,9 +36,11 @@ export default async function ProductsPage({
 	);
 
 	return (
-		<main className="container mx-auto">
-			<h1 className="py-4 text-center text-3xl">Products Page</h1>
-			{products && <ProductList products={products} />}
-		</main>
+		<>
+			<main className="container mx-auto">
+				<h1 className="py-4 text-center text-3xl">Products Page</h1>
+				{products && <ProductList products={products} />}
+			</main>
+		</>
 	);
 }

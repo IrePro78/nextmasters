@@ -23,7 +23,7 @@ export default async function CategoryLayout({
 	return (
 		<>
 			<h1
-				className="mx-auto max-w-7xl pb-20 text-center text-4xl first-letter:uppercase"
+				className="mx-auto max-w-7xl pb-10 text-center text-4xl first-letter:uppercase"
 				role="heading"
 			>
 				{'Categories'}
@@ -34,7 +34,7 @@ export default async function CategoryLayout({
 					baseUrl={`categories/${params.category}`}
 				/>
 			)}
-			<main className="mx-auto max-w-7xl first-letter:uppercase">
+			<main className="mx-auto max-w-7xl pt-3 first-letter:uppercase">
 				{children}
 			</main>
 		</>

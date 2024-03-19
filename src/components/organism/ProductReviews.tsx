@@ -31,10 +31,10 @@ export const ProductReviews = async ({
 										reviews.getProductReviews?.map((review) => (
 											<div
 												key={review.id}
-												className="max-sm:mx-automax-sm:hidden group rounded-md border border-solid border-gray-300 bg-white p-6 transition-all duration-500 hover:border-slate-800 max-sm:max-w-sm"
+												className=" max-sm:mx-automax-sm:hidden group mb-2 rounded-md border border-solid border-gray-300 bg-white p-6 transition-all duration-500 hover:border-slate-800 max-sm:max-w-sm"
 											>
-												<div className="mb-2">
-													<div className="flex justify-between">
+												<div>
+													<div className="mb-1 flex justify-between">
 														<div>
 															<h5 className="font-medium text-gray-900 transition-all duration-500">
 																{review.name}
