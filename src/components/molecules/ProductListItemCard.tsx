@@ -66,7 +66,10 @@ export const ProductListItemCard = async ({
 						</span>
 					</div>
 					<div className="flex items-center justify-between">
-						<span className="text-xl font-semibold text-gray-900 dark:text-white">
+						<span
+							className="text-xl font-semibold text-gray-900 dark:text-white"
+							data-testid="product-price"
+						>
 							{product.price && formatMoney(product?.price)}
 						</span>
 					</div>

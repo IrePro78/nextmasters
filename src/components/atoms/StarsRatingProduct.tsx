@@ -8,8 +8,14 @@ export function StarsRatingProduct({
 	productReviews: ProductListItemFragment['reviews'];
 }) {
 	return (
-		<div className="mb-5 mt-2.5 flex items-center">
-			<span className="pr-2 pt-1 text-sm font-normal text-slate-200 ">
+		<div
+			className="mb-5 mt-2.5 flex items-center"
+			data-testid="product-rating"
+		>
+			<span
+				className="pr-2 pt-1 text-sm font-normal text-slate-200 "
+				data-testid="product-rating"
+			>
 				{`${productReviews
 					?.reduce((acc, review, _, reviews) => {
 						return acc + review.rating / Number(reviews.length);

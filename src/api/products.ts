@@ -18,7 +18,7 @@ export const getProductsList = async (
 		next: {
 			tags: ['products'],
 		},
-		cache: 'no-cache',
+		cache: 'no-store',
 	});
 	return graphqlResponse.products;
 };

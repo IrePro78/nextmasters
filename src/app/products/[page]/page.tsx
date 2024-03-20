@@ -1,6 +1,7 @@
 import { type Metadata } from 'next';
 import { ProductList } from '@/components/organism/ProductList';
 import { getProductsList } from '@/api/products';
+import { ProductSortingSelect } from '@/components/atoms/ProductSortingSelect';
 
 // export async function generateStaticParams() {
 // 	const products = await getProductsList();
@@ -25,6 +26,8 @@ export default async function ProductsPage({
 	params: { page: number };
 	searchParams: { sort: string };
 }) {
+	console.log(params, searchParams);
+
 	const { page } = params;
 	const { sort } = searchParams;
 	const numOfProducts = 8;
@@ -38,37 +41,13 @@ export default async function ProductsPage({
 		nextNumberOfProducts,
 		sort,
 	);
-
-	// let sortedProducts;
-
-	// switch (sort) {
-	// 	case 'price':
-	// 		sortedProducts = products?.sort((a, b) => a.price - b.price);
-	// 		break;
-	// 	case 'name':
-	// 		sortedProducts = products?.sort((a, b) =>
-	// 			a.name.toUpperCase().localeCompare(b.name.toUpperCase()),
-	// 		);
-	// 		break;
-	// 	case 'rating':
-	// 		sortedProducts = products?.sort((a, b) => {
-	// 			if (!a.reviews || !b.reviews) return 0;
-	// 			const aAverageRating =
-	// 				a.reviews?.reduce((acc, review) => acc + review.rating, 0) /
-	// 					a.reviews?.length || 0;
-	// 			const bAverageRating =
-	// 				b.reviews?.reduce((acc, review) => acc + review.rating, 0) /
-	// 					b.reviews?.length || 0;
-	// 			return bAverageRating - aAverageRating;
-	// 		});
-	// 		break;
-	// 	default:
-	// 		sortedProducts = products?.sort(() => 0.5 - Math.random());
-	// 		break;
-	// }
 	return (
 		<>
 			<main className="container mx-auto">
+				<section className=" container mx-auto flex flex-row-reverse items-center">
+					<ProductSortingSelect />
+					<label className="  pr-2 text-gray-400">Sort by:</label>
+				</section>
 				<h1 className="py-4 text-center text-3xl">Products Page</h1>
 				{products && <ProductList products={products} />}
 			</main>
