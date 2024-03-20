@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { createReview } from '@/api/reviews';
 
 export const addReviewAction = async (formData: FormData) => {
@@ -17,4 +17,5 @@ export const addReviewAction = async (formData: FormData) => {
 
 	await createReview(review);
 	revalidatePath(`/product/${formReview.productId as string}`);
+	revalidateTag(`products`);
 };

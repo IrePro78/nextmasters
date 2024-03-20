@@ -256,6 +256,7 @@ export type QueryProductArgs = {
 
 export type QueryProductsArgs = {
   skip?: Scalars['Int']['input'];
+  sort?: Scalars['String']['input'];
   take?: Scalars['Int']['input'];
 };
 
@@ -416,6 +417,7 @@ export type ProductsGetByNameQuery = { productsByName?: Array<{ id: string, name
 export type ProductsGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -730,8 +732,8 @@ export const ProductsGetByNameDocument = new TypedDocumentString(`
   }
 }`) as unknown as TypedDocumentString<ProductsGetByNameQuery, ProductsGetByNameQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList($take: Int, $skip: Int) {
-  products(take: $take, skip: $skip) {
+    query ProductsGetList($take: Int, $skip: Int, $sort: String) {
+  products(take: $take, skip: $skip, sort: $sort) {
     ...ProductListItem
   }
 }

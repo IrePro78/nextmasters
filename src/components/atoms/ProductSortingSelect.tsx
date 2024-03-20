@@ -1,9 +1,12 @@
 'use client';
 import { type ChangeEvent, useState, useEffect } from 'react';
-import { selectSortingAction } from '@/app/products/action';
+import { usePathname, useRouter } from 'next/navigation';
+import { type Route } from 'next';
 
 export const ProductSortingSelect = () => {
 	const [sortType, setSortType] = useState('');
+	const router = useRouter();
+	const pathname = usePathname();
 
 	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		setSortType(e.target.value);
@@ -11,20 +14,21 @@ export const ProductSortingSelect = () => {
 
 	useEffect(() => {
 		if (sortType !== '') {
-			selectSortingAction(sortType);
+			router.push(`${pathname}?sort=${sortType}` as Route);
 		}
-	}, [sortType]);
+	}, [pathname, router, sortType]);
 
 	return (
 		<div className="flex ">
 			<select
-				id="underline_select"
+				id="sorting_select"
 				onChange={handleChange}
 				name="sorting"
 				defaultValue={sortType}
 				className="peer block w-auto rounded-md border  border-gray-200  bg-slate-700 px-2 py-2 text-sm  focus:border-gray-200  focus:ring-1 dark:border-gray-500 dark:text-gray-300"
 			>
-				<option value="null">...</option>
+				<option value="default">...</option>
+				<option value="name">Name</option>
 				<option value="price">Price</option>
 				<option value="rating">Top Rated</option>
 			</select>

@@ -1,7 +1,6 @@
 import { type Metadata } from 'next';
 import { ProductList } from '@/components/organism/ProductList';
 import { getProductsList } from '@/api/products';
-import { ProductSortingSelect } from '@/components/atoms/ProductSortingSelect';
 
 // export async function generateStaticParams() {
 // 	const products = await getProductsList();
@@ -21,21 +20,52 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 export default async function ProductsPage({
 	params,
+	searchParams,
 }: {
 	params: { page: number };
+	searchParams: { sort: string };
 }) {
 	const { page } = params;
-	const numOfProducts = 4;
+	const { sort } = searchParams;
+	const numOfProducts = 8;
 
 	const pageNumber = page === 1 ? 0 : page - 1;
-	const nextNumberOfPproducts =
+	const nextNumberOfProducts =
 		page <= 1 ? pageNumber : pageNumber * numOfProducts;
 
 	const products = await getProductsList(
 		numOfProducts,
-		nextNumberOfPproducts,
+		nextNumberOfProducts,
+		sort,
 	);
 
+	// let sortedProducts;
+
+	// switch (sort) {
+	// 	case 'price':
+	// 		sortedProducts = products?.sort((a, b) => a.price - b.price);
+	// 		break;
+	// 	case 'name':
+	// 		sortedProducts = products?.sort((a, b) =>
+	// 			a.name.toUpperCase().localeCompare(b.name.toUpperCase()),
+	// 		);
+	// 		break;
+	// 	case 'rating':
+	// 		sortedProducts = products?.sort((a, b) => {
+	// 			if (!a.reviews || !b.reviews) return 0;
+	// 			const aAverageRating =
+	// 				a.reviews?.reduce((acc, review) => acc + review.rating, 0) /
+	// 					a.reviews?.length || 0;
+	// 			const bAverageRating =
+	// 				b.reviews?.reduce((acc, review) => acc + review.rating, 0) /
+	// 					b.reviews?.length || 0;
+	// 			return bAverageRating - aAverageRating;
+	// 		});
+	// 		break;
+	// 	default:
+	// 		sortedProducts = products?.sort(() => 0.5 - Math.random());
+	// 		break;
+	// }
 	return (
 		<>
 			<main className="container mx-auto">

@@ -31,7 +31,7 @@ const documents = {
     "query ProductsGetByCategorySlug($slug: String!, $take: Int, $skip: Int) {\n  categoryBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
     "query ProductsGetByCollectionSlug($slug: String!, $take: Int, $skip: Int) {\n  collectionBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
     "query ProductsGetByName($name: String!, $take: Int, $skip: Int) {\n  productsByName(name: $name, take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}": types.ProductsGetByNameDocument,
-    "query ProductsGetList($take: Int, $skip: Int) {\n  products(take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetList($take: Int, $skip: Int, $sort: String) {\n  products(take: $take, skip: $skip, sort: $sort) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
     "query ProductsGetByCategoryId($categoryId: ID!) {\n  categoryById(id: $categoryId) {\n    products {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategoryIdDocument,
 };
 
@@ -106,7 +106,7 @@ export function graphql(source: "query ProductsGetByName($name: String!, $take: 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($take: Int, $skip: Int) {\n  products(take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetList($take: Int, $skip: Int, $sort: String) {\n  products(take: $take, skip: $skip, sort: $sort) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

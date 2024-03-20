@@ -1,5 +1,5 @@
-query ProductsGetList($take: Int, $skip: Int) {
-	products(take: $take, skip: $skip) {
+query ProductsGetList($take: Int, $skip: Int, $sort: String) {
+	products(take: $take, skip: $skip, sort: $sort) {
 		...ProductListItem
 	}
 }
