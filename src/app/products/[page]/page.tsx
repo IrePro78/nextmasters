@@ -26,8 +26,6 @@ export default async function ProductsPage({
 	params: { page: number };
 	searchParams: { sort: string };
 }) {
-	console.log(params, searchParams);
-
 	const { page } = params;
 	const { sort } = searchParams;
 	const numOfProducts = 8;
@@ -44,10 +42,6 @@ export default async function ProductsPage({
 	return (
 		<>
 			<main className="container mx-auto">
-				<section className=" container mx-auto flex flex-row-reverse items-center">
-					<ProductSortingSelect />
-					<label className="  pr-2 text-gray-400">Sort by:</label>
-				</section>
 				<h1 className="py-4 text-center text-3xl">Products Page</h1>
 				{products && <ProductList products={products} />}
 			</main>

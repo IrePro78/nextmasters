@@ -30,7 +30,10 @@ export const ProductListItemCard = async ({
 						</p>
 					</div>
 					<div className="mb-5 mt-2.5 flex items-center">
-						<span className="pr-2 text-xs font-normal text-slate-200 ">
+						<span
+							className="pr-2 text-xs font-normal text-slate-200 "
+							data-testid="product-rating"
+						>
 							{`${product.reviews
 								?.reduce((acc, review, _, reviews) => {
 									return acc + review.rating / Number(reviews.length);

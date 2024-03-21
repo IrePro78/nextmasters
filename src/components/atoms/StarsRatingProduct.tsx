@@ -8,11 +8,8 @@ export function StarsRatingProduct({
 	productReviews: ProductListItemFragment['reviews'];
 }) {
 	return (
-		<div
-			className="mb-5 mt-2.5 flex items-center"
-			data-testid="product-rating"
-		>
-			<span
+		<div className="mb-5 mt-2.5 flex items-center">
+			<div
 				className="pr-2 pt-1 text-sm font-normal text-slate-200 "
 				data-testid="product-rating"
 			>
@@ -21,7 +18,7 @@ export function StarsRatingProduct({
 						return acc + review.rating / Number(reviews.length);
 					}, 0)
 					.toFixed(1)}/5`}
-			</span>
+			</div>
 
 			{productReviews &&
 				Array.from({ length: 5 }).map((_, i) => (
