@@ -15,6 +15,11 @@ const nextConfig = {
 				hostname: 'static-ourstore.hyperfunctor.com',
 				pathname: '**',
 			},
+			{
+				protocol: 'http',
+				hostname: 'localhost',
+				pathname: '**',
+			},
 		],
 	},
 	redirects: async () => {
