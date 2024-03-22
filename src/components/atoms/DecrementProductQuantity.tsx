@@ -1,34 +1,17 @@
-'use client';
-
-import { useOptimistic } from 'react';
-import { changeItemQuantity } from '@/app/cart/actions';
-
 export const DecrementProductQuantity = ({
-	quantity,
-	itemId,
+	quantityOpt,
+	optimisticQuantity,
 }: {
-	quantity: number;
-	itemId: string;
+	quantityOpt: () => void;
+	optimisticQuantity: number;
 }) => {
-	const [
-		optimisticDecrementQuantity,
-		setOptimisticDecrementQuantity,
-	] = useOptimistic(quantity, (state: number) => state - 1);
 	return (
-		<div className="mr-2">
+		<div>
 			<button
 				id="decrement-button"
 				type="submit"
-				disabled={optimisticDecrementQuantity === 1}
-				formAction={async () => {
-					setOptimisticDecrementQuantity(
-						optimisticDecrementQuantity - 1,
-					);
-					await changeItemQuantity(
-						itemId,
-						optimisticDecrementQuantity - 1,
-					);
-				}}
+				disabled={optimisticQuantity === 1}
+				formAction={quantityOpt}
 				data-testid="decrement"
 				className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
 			>

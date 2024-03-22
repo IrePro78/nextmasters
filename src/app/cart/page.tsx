@@ -61,7 +61,7 @@ export default async function CartPage() {
 													{item.product[0]?.name}
 												</Link>
 											</th>
-											<td className="px-10 py-4">{'*'}</td>
+											<td className="px-6 py-4">{'Regular'}</td>
 											<td className=" w-2 px-5 py-4">
 												{
 													<ProductQuantitySelector

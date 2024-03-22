@@ -10,7 +10,10 @@ export default async function ProductsPage() {
 
 	return (
 		<>
-			<section className="container mx-auto">
+			<section
+				className="container mx-auto"
+				data-testid="products-list"
+			>
 				<ProductList products={products} />
 			</section>
 		</>

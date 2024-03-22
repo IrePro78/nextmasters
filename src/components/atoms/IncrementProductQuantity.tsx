@@ -1,21 +1,11 @@
-// 'use client';
-
 export const IncrementProductQuantity = ({
 	quantityOpt,
 }: {
 	quantityOpt: () => void;
-	// itemId: string;
 }) => {
-	// const [
-	// 	optimisticIncrementQuantity,
-	// 	setOptimisticIncrementQuantity,
-	// ] = useOptimistic(quantity, (state: number) => state + 1);
-
 	return (
 		<>
-			<div className="flex gap-2">
-				{/* {optimisticIncrementQuantity} */}
-
+			<div className="flex">
 				<button
 					id="increment-button"
 					type="submit"

@@ -13,37 +13,29 @@ export const ProductQuantitySelector = ({
 }) => {
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(
 		quantity,
-		(state: number, amount: number) => state + Number(amount),
+		(state: number, amount: number) => state + amount,
 	);
 
-	const incrementQuantity = () => {
-		console.log('incrementQuantity');
-
+	const incrementQuantity = async () => {
 		setOptimisticQuantity(1);
-	};
-	const decrementQuantity = () => {
-		setOptimisticQuantity(optimisticQuantity - 1);
+		await changeItemQuantity(itemId, optimisticQuantity + 1);
 	};
 
-	// const IncrementProductQuantity = async () => {
-	// 	await changeItemQuantity(itemId, incrementQuantity());
-	// };
-
+	const decrementQuantity = async () => {
+		setOptimisticQuantity(-1);
+		await changeItemQuantity(itemId, optimisticQuantity - 1);
+	};
 	return (
 		<form
-			className="relative flex items-center rounded-lg border border-slate-600 px-2 py-1"
+			className="relative flex items-center justify-between gap-2 rounded-lg border border-slate-600 px-2 py-1"
 			data-testid="quantity"
 		>
+			<DecrementProductQuantity
+				quantityOpt={decrementQuantity}
+				optimisticQuantity={optimisticQuantity}
+			/>
 			{optimisticQuantity}
-
-			<button
-				formAction={async () => {
-					incrementQuantity();
-					await changeItemQuantity(itemId, optimisticQuantity);
-				}}
-			>
-				+
-			</button>
+			<IncrementProductQuantity quantityOpt={incrementQuantity} />
 		</form>
 	);
 };

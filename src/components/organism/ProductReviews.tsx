@@ -42,11 +42,11 @@ export const ProductReviews = async ({
 														</div>
 
 														<div>
-															<h1 className="font-sans text-gray-900 transition-all duration-500 ">
+															<h3 className="font-sans text-gray-900 transition-all duration-500 ">
 																{formatDate(
 																	review?.createAt as string,
 																)}
-															</h1>
+															</h3>
 														</div>
 													</div>
 												</div>

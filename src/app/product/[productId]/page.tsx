@@ -49,7 +49,7 @@ export default async function ProductPage({
 	return (
 		<>
 			<article className="container mx-auto">
-				<h1 className="text-center">{product.name}</h1>
+				<h1 className="hidden text-center">{product.name}</h1>
 				<div>
 					<ProductCard product={product} />
 				</div>

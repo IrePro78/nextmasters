@@ -1,7 +1,6 @@
 import { type Metadata } from 'next';
 import { ProductList } from '@/components/organism/ProductList';
 import { getProductsList } from '@/api/products';
-import { ProductSortingSelect } from '@/components/atoms/ProductSortingSelect';
 
 // export async function generateStaticParams() {
 // 	const products = await getProductsList();
