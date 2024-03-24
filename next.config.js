@@ -7,9 +7,16 @@ const nextConfig = {
 		mdxRs: true,
 		serverActions: true,
 	},
+	output: 'standalone',
 
 	images: {
-		domains: ['localhost'],
+		remotePatterns: [
+			{
+				protocol: 'http',
+				hostname: '**',
+			},
+		],
+		// domains: ['localhost', 'api_graphql'],
 	},
 	redirects: async () => {
 		return [
