@@ -18,7 +18,7 @@ export const getProductsList = async (
 		next: {
 			tags: ['products'],
 		},
-		// cache: 'no-cache',
+		cache: 'no-store',
 	});
 	return graphqlResponse.products;
 };
@@ -26,6 +26,7 @@ export const getProductById = async (id: string) => {
 	const graphqlResponse = await executeGraphQLQuery({
 		query: ProductGetByIdDocument,
 		variables: { id },
+		cache: 'no-store',
 	});
 	if (!graphqlResponse.product) {
 		throw new Error('Product not found');
@@ -43,6 +44,7 @@ export const getProductsByName = async (
 	const graphqlResponse = await executeGraphQLQuery({
 		query: ProductsGetByNameDocument,
 		variables: { name, take, skip },
+		cache: 'no-store',
 	});
 	if (!graphqlResponse.productsByName) {
 		throw new Error('Product not found');
@@ -58,6 +60,7 @@ export const getProductsByCategorySlug = async (
 	const graphqlResponse = await executeGraphQLQuery({
 		query: ProductsGetByCategorySlugDocument,
 		variables: { slug, take, skip },
+		cache: 'no-store',
 	});
 
 	if (!graphqlResponse.categoryBySlug) {
@@ -74,6 +77,7 @@ export const getProductsByCollectionSlug = async (
 	const graphqlResponse = await executeGraphQLQuery({
 		query: ProductsGetByCollectionSlugDocument,
 		variables: { slug, take, skip },
+		cache: 'no-store',
 	});
 
 	if (!graphqlResponse.collectionBySlug) {

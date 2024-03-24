@@ -9,18 +9,7 @@ const nextConfig = {
 	},
 
 	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'static-ourstore.hyperfunctor.com',
-				pathname: '**',
-			},
-			{
-				protocol: 'http',
-				hostname: 'localhost',
-				pathname: '**',
-			},
-		],
+		domains: ['localhost'],
 	},
 	redirects: async () => {
 		return [

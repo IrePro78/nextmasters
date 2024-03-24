@@ -10,6 +10,7 @@ export const AddReviewForm = ({
 		<form action={addReviewAction} data-testid="add-review-form">
 			<input type="hidden" name="productId" value={productId}></input>
 			<input
+				required
 				type="text"
 				name="headline"
 				placeholder="Headline"
@@ -23,13 +24,15 @@ export const AddReviewForm = ({
 				className="mb-2 w-full rounded border border-gray-300 px-4 py-2  text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
 			></textarea>
 			<input
+				required
 				type="text"
 				name="name"
 				placeholder="Username"
 				className="mb-3 w-full rounded border border-gray-300 px-4 py-2 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
 			></input>
 			<input
-				type="text"
+				required
+				type="email"
 				name="email"
 				placeholder="Email"
 				className="w-full rounded border border-gray-300 px-4 py-2 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -50,12 +53,17 @@ export const AddReviewForm = ({
 						</svg>
 					))}
 				</label>
-				<div className="ml-14 flex items-center space-x-1.5">
+				<div
+					className="ml-14 flex items-center space-x-1.5"
+					aria-required="true"
+				>
 					<input
 						type="radio"
 						name="rating"
 						id="rating1"
 						value="1"
+						defaultChecked
+						required
 						className="focus:outline-none focus:ring-2 focus:ring-blue-500"
 					></input>
 					<label htmlFor="rating1">1</label>

@@ -281,7 +281,7 @@ export type Review = {
   /** User name of the review */
   name: Scalars['String']['output'];
   /** Rating of the review */
-  rating: Scalars['Int']['output'];
+  rating: Scalars['Float']['output'];
 };
 
 /** Update order item input object type. */

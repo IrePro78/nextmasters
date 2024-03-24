@@ -8,7 +8,7 @@ export function ProductCoverImage({
 	alt: string;
 }) {
 	return (
-		<div className="aspect-square overflow-hidden rounded-md border border-zinc-800  hover:bg-slate-500 dark:bg-slate-100">
+		<div className="aspect-square overflow-hidden rounded-md border border-zinc-800  hover:bg-slate-500 dark:bg-slate-600">
 			<Image
 				width={320}
 				height={320}

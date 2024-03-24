@@ -12,6 +12,7 @@ export const getCollectionsList = async (
 	const graphqlResponse = await executeGraphQLQuery({
 		query: CollectionsGetListDocument,
 		variables: { take, skip },
+		cache: 'no-store',
 	});
 	const collections = graphqlResponse.collections?.map(
 		(collection) => {
@@ -29,6 +30,7 @@ export const getCollectionBySlug = async (slug: string) => {
 	const graphqlResponse = await executeGraphQLQuery({
 		query: CollectionGetBySlugDocument,
 		variables: { slug },
+		cache: 'no-store',
 	});
 
 	const collection = graphqlResponse.collectionBySlug;
