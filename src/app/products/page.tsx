@@ -1,7 +1,7 @@
 import { getProductsList } from '@/api/products';
 import { ProductList } from '@/components/organism/ProductList';
 
-const take = 20;
+const take = 30;
 const skip = 0;
 
 export default async function ProductsPage() {
