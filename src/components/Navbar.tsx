@@ -5,8 +5,13 @@ import { ActiveLink } from '@/components/ActiveLink';
 import { SearchField } from '@/components/atoms/SearchField';
 import { getCartByFromCookies } from '@/api/carts';
 
+import { getCollectionsList } from '@/api/collections';
+import { getCategoriesList } from '@/api/categories';
+
 export const Navbar = async () => {
 	const cart = await getCartByFromCookies();
+	const categories = await getCategoriesList();
+	const collections = await getCollectionsList();
 	return (
 		<nav
 			role="navigation"
@@ -39,7 +44,9 @@ export const Navbar = async () => {
 				</ActiveLink>
 
 				<ActiveLink
-					href={'/collections/elegant-extras' as Route}
+					href={
+						`/collections/${collections && collections[0]?.slug}` as Route
+					}
 					className="border-b-2 border-b-transparent text-lg"
 					activeClassName="border-b-fuchsia-100  bg-slate-800 text-lg font-semibold underline"
 					exact={false}
@@ -48,7 +55,9 @@ export const Navbar = async () => {
 				</ActiveLink>
 
 				<ActiveLink
-					href={'/categories/accessories' as Route}
+					href={
+						`/categories/${categories && categories[0]?.slug}` as Route
+					}
 					className="border-b-2 border-b-transparent text-lg"
 					activeClassName="border-b-fuchsia-100  bg-slate-800 text-lg font-semibold underline"
 					exact={false}

@@ -1,7 +1,7 @@
 'use server';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import {
 	addToCart,
 	getOrCreateCart,
@@ -15,13 +15,18 @@ export const addToCartAction = async (formData: FormData) => {
 
 	const product = await getProductById(productId as string);
 
-	if (!product.price) {
-		throw new Error('Product not found');
-	}
-
 	const cart = await getOrCreateCart();
-	await addToCart(cart.id, product.id, 1, 1 * product.price);
 
+	const item = cart.orderItems?.find(
+		(item) => item.product?.shift()?.id === productId,
+	);
+
+	if (item) {
+		await updateItemQuantity(item.id, item.quantity + 1);
+		revalidateTag('cart');
+		redirect('/cart');
+	}
+	await addToCart(cart.id, product.id, 1, 1 * product.price);
 	revalidateTag('cart');
 
 	if (!cart) {
@@ -31,13 +36,15 @@ export const addToCartAction = async (formData: FormData) => {
 
 	cookies().set('cartId', cart.id);
 };
+
 export const changeItemQuantity = async (
 	itemId: string,
 	quantity: number,
 ) => {
 	await updateItemQuantity(itemId, quantity);
-	revalidateTag('cart');
+	revalidatePath('/cart');
 };
+
 export const removeItemFromCartAction = async (
 	formData: FormData,
 ) => {

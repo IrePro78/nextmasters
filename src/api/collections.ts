@@ -29,6 +29,7 @@ export const getCollectionBySlug = async (slug: string) => {
 	const graphqlResponse = await executeGraphQLQuery({
 		query: CollectionGetBySlugDocument,
 		variables: { slug },
+
 	});
 
 	const collection = graphqlResponse.collectionBySlug;

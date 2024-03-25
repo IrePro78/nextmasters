@@ -20,25 +20,30 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 export default async function ProductsPage({
 	params,
+	searchParams,
 }: {
 	params: { page: number };
+	searchParams: { sort: string };
 }) {
 	const { page } = params;
-	const numOfProducts = 4;
+	const { sort } = searchParams;
+	const numOfProducts = 8;
 
 	const pageNumber = page === 1 ? 0 : page - 1;
-	const nextNumberOfPproducts =
+	const nextNumberOfProducts =
 		page <= 1 ? pageNumber : pageNumber * numOfProducts;
 
 	const products = await getProductsList(
 		numOfProducts,
-		nextNumberOfPproducts,
+		nextNumberOfProducts,
+		sort,
 	);
-
 	return (
-		<main className="container mx-auto">
-			<h1 className="py-4 text-center text-3xl">Products Page</h1>
-			{products && <ProductList products={products} />}
-		</main>
+		<>
+			<main className="container mx-auto">
+				<h1 className="py-4 text-center text-3xl">Products Page</h1>
+				{products && <ProductList products={products} />}
+			</main>
+		</>
 	);
 }

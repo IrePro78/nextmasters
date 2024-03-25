@@ -10,10 +10,11 @@ import { executeGraphQLQuery } from '@/lib/graphqlApi';
 export const getProductsList = async (
 	take?: number,
 	skip?: number,
+	sort?: string,
 ) => {
 	const graphqlResponse = await executeGraphQLQuery({
 		query: ProductsGetListDocument,
-		variables: { take, skip },
+		variables: { take, skip, sort },
 		next: {
 			tags: ['products'],
 		},

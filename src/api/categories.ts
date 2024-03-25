@@ -12,6 +12,7 @@ export const getCategoriesList = async (
 	const graphqlResponse = await executeGraphQLQuery({
 		query: CategoriesGetListDocument,
 		variables: { take, skip },
+
 	});
 	const categories = graphqlResponse.categories?.map((category) => {
 		return {
@@ -26,6 +27,7 @@ export const getCategoryBySlug = async (slug: string) => {
 	const graphqlResponse = await executeGraphQLQuery({
 		query: CategoryGetBySlugDocument,
 		variables: { slug },
+
 	});
 
 	const category = graphqlResponse.categoryBySlug;

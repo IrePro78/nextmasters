@@ -7,15 +7,16 @@ const nextConfig = {
 		mdxRs: true,
 		serverActions: true,
 	},
+	output: 'standalone',
 
 	images: {
 		remotePatterns: [
 			{
-				protocol: 'https',
-				hostname: 'static-ourstore.hyperfunctor.com',
-				pathname: '**',
+				protocol: 'http',
+				hostname: '**',
 			},
 		],
+		// domains: ['localhost', 'api_graphql'],
 	},
 	redirects: async () => {
 		return [

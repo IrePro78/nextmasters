@@ -1,9 +1,10 @@
-import { Suspense } from 'react';
 import { type Metadata } from 'next';
+import { Suspense } from 'react';
 import { getProductById } from '@/api/products';
 
 import { SuggestedProducts } from '@/components/organism/SuggestedProducts';
 import { ProductCard } from '@/components/molecules/ProductCard';
+import { ProductReviews } from '@/components/organism/ProductReviews';
 
 // export const generateStaticParams = async () => {
 // 	const products = await getProductsList();
@@ -48,11 +49,17 @@ export default async function ProductPage({
 	return (
 		<>
 			<article className="container mx-auto">
-				<h1 className="text-center">{product.name}</h1>
+				<h1 className="hidden text-center">{product.name}</h1>
 				<div>
 					<ProductCard product={product} />
 				</div>
 			</article>
+			<aside>
+				<Suspense>
+					<ProductReviews productId={params.productId} />
+				</Suspense>
+			</aside>
+
 			<aside>
 				{product.categories && (
 					<Suspense>

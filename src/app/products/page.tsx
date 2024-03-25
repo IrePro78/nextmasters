@@ -1,7 +1,7 @@
 import { getProductsList } from '@/api/products';
 import { ProductList } from '@/components/organism/ProductList';
 
-const take = 20;
+const take = 30;
 const skip = 0;
 
 export default async function ProductsPage() {
@@ -9,8 +9,13 @@ export default async function ProductsPage() {
 	if (!products) throw new Error("Can't find products");
 
 	return (
-		<section className="container mx-auto">
-			<ProductList products={products} />
-		</section>
+		<>
+			<section
+				className="container mx-auto"
+				data-testid="products-list"
+			>
+				<ProductList products={products} />
+			</section>
+		</>
 	);
 }

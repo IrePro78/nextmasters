@@ -24,12 +24,14 @@ const documents = {
     "query CategoryGetBySlug($slug: String!) {\n  categoryBySlug(slug: $slug) {\n    id\n    name\n  }\n}": types.CategoryGetBySlugDocument,
     "query CollectionGetBySlug($slug: String!) {\n  collectionBySlug(slug: $slug) {\n    id\n    name\n  }\n}": types.CollectionGetBySlugDocument,
     "query CollectionsGetList($take: Int, $skip: Int) {\n  collections(take: $take, skip: $skip) {\n    id\n    name\n    slug\n  }\n}": types.CollectionsGetListDocument,
+    "mutation ProductAddReview($productId: ID!, $headline: String!, $content: String!, $name: String!, $email: String!, $rating: Int!) {\n  createProductReview(\n    createReviewData: {productId: $productId, headline: $headline, content: $content, name: $name, email: $email, rating: $rating}\n  ) {\n    id\n    headline\n    content\n    rating\n    name\n    email\n    createAt\n  }\n}": types.ProductAddReviewDocument,
     "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    ...ProductListItem\n  }\n}": types.ProductGetByIdDocument,
-    "fragment ProductListItem on Product {\n  id\n  name\n  description\n  product_image\n  slug\n  price\n  categories {\n    name\n    slug\n  }\n}": types.ProductListItemFragmentDoc,
+    "query ProductGetReviewsById($productId: ID!) {\n  getProductReviews(productId: $productId) {\n    id\n    headline\n    content\n    rating\n    name\n    email\n    createAt\n  }\n}": types.ProductGetReviewsByIdDocument,
+    "fragment ProductListItem on Product {\n  id\n  name\n  description\n  product_image\n  slug\n  price\n  categories {\n    name\n    slug\n  }\n  reviews {\n    id\n    headline\n    content\n    name\n    email\n    rating\n  }\n}": types.ProductListItemFragmentDoc,
     "query ProductsGetByCategorySlug($slug: String!, $take: Int, $skip: Int) {\n  categoryBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
     "query ProductsGetByCollectionSlug($slug: String!, $take: Int, $skip: Int) {\n  collectionBySlug(slug: $slug) {\n    products(take: $take, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
     "query ProductsGetByName($name: String!, $take: Int, $skip: Int) {\n  productsByName(name: $name, take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}": types.ProductsGetByNameDocument,
-    "query ProductsGetList($take: Int, $skip: Int) {\n  products(take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetList($take: Int, $skip: Int, $sort: String) {\n  products(take: $take, skip: $skip, sort: $sort) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
     "query ProductsGetByCategoryId($categoryId: ID!) {\n  categoryById(id: $categoryId) {\n    products {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategoryIdDocument,
 };
 
@@ -76,11 +78,19 @@ export function graphql(source: "query CollectionsGetList($take: Int, $skip: Int
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "mutation ProductAddReview($productId: ID!, $headline: String!, $content: String!, $name: String!, $email: String!, $rating: Int!) {\n  createProductReview(\n    createReviewData: {productId: $productId, headline: $headline, content: $content, name: $name, email: $email, rating: $rating}\n  ) {\n    id\n    headline\n    content\n    rating\n    name\n    email\n    createAt\n  }\n}"): typeof import('./graphql').ProductAddReviewDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductGetByIdDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment ProductListItem on Product {\n  id\n  name\n  description\n  product_image\n  slug\n  price\n  categories {\n    name\n    slug\n  }\n}"): typeof import('./graphql').ProductListItemFragmentDoc;
+export function graphql(source: "query ProductGetReviewsById($productId: ID!) {\n  getProductReviews(productId: $productId) {\n    id\n    headline\n    content\n    rating\n    name\n    email\n    createAt\n  }\n}"): typeof import('./graphql').ProductGetReviewsByIdDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment ProductListItem on Product {\n  id\n  name\n  description\n  product_image\n  slug\n  price\n  categories {\n    name\n    slug\n  }\n  reviews {\n    id\n    headline\n    content\n    name\n    email\n    rating\n  }\n}"): typeof import('./graphql').ProductListItemFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -96,7 +106,7 @@ export function graphql(source: "query ProductsGetByName($name: String!, $take: 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($take: Int, $skip: Int) {\n  products(take: $take, skip: $skip) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetList($take: Int, $skip: Int, $sort: String) {\n  products(take: $take, skip: $skip, sort: $sort) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
