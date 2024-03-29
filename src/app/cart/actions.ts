@@ -1,6 +1,5 @@
 'use server';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import {
 	addToCart,
@@ -24,7 +23,7 @@ export const addToCartAction = async (formData: FormData) => {
 	if (item) {
 		await updateItemQuantity(item.id, item.quantity + 1);
 		revalidateTag('cart');
-		redirect('/cart');
+		return;
 	}
 	await addToCart(cart.id, product.id, 1, 1 * product.price);
 	revalidateTag('cart');
@@ -32,7 +31,6 @@ export const addToCartAction = async (formData: FormData) => {
 	if (!cart) {
 		throw new Error('Could not create cart');
 	}
-	redirect('/cart');
 
 	cookies().set('cartId', cart.id);
 };
@@ -55,4 +53,14 @@ export const removeItemFromCartAction = async (
 	}
 	await removeItemFromCart(itemId);
 	revalidateTag('cart');
+};
+
+export const handlePaymentAction = async (formData: FormData) => {
+	console.log(formData);
+
+	// const cart = await getOrCreateCart();
+	// if (!cart) {
+	// 	throw new Error('Cart not found');
+	// }
+	// handle payment
 };

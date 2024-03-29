@@ -18,6 +18,20 @@
 
 body {
 	color: rgb(var(--foreground-rgb));
+	min-height: 100vh;
+	background: linear-gradient(
+			to bottom,
+			transparent,
+			rgb(var(--background-end-rgb))
+		)
+		rgb(var(--background-start-rgb));
+}
+footer {
+	position: absolute;
+	bottom: 0;
+	height: 2rem;
+	width: 100%;
+	color: rgb(var(--foreground-rgb));
 	background: linear-gradient(
 			to bottom,
 			transparent,
