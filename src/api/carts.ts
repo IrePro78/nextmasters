@@ -23,7 +23,7 @@ export const getCartById = async (cartId: string) => {
 export const createCart = async () => {
 	return executeGraphQLQuery({
 		query: CartCreateDocument,
-		variables: {},
+		variables: { totalAmount: 0 },
 	});
 };
 

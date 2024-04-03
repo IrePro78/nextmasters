@@ -300,7 +300,9 @@ export type CartAddProductMutationVariables = Exact<{
 
 export type CartAddProductMutation = { createOrderItem?: { id: string, quantity: number, product?: Array<{ id: string, name: string, price: number }> | null } | null };
 
-export type CartCreateMutationVariables = Exact<{ [key: string]: never; }>;
+export type CartCreateMutationVariables = Exact<{
+  totalAmount: Scalars['Float']['input'];
+}>;
 
 
 export type CartCreateMutation = { createOrder?: { id: string, status: string, totalAmount: number, orderItems?: Array<{ id: string, quantity: number, total: number, product?: Array<{ id: string, name: string, price: number }> | null }> | null } | null };
@@ -499,8 +501,8 @@ export const CartAddProductDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<CartAddProductMutation, CartAddProductMutationVariables>;
 export const CartCreateDocument = new TypedDocumentString(`
-    mutation CartCreate {
-  createOrder(createOrderData: {totalAmount: 0}) {
+    mutation CartCreate($totalAmount: Float!) {
+  createOrder(createOrderData: {totalAmount: $totalAmount}) {
     ...Cart
   }
 }

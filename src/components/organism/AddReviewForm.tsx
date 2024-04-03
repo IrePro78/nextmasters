@@ -1,4 +1,4 @@
-import { addReviewAction } from '@/app/product/[productId]/action';
+import { addReviewAction } from '@/app/product/[productId]/actions';
 import { AddReviewButton } from '@/components/atoms/AddReviewButton';
 
 export const AddReviewForm = ({

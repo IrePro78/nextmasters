@@ -1,10 +1,10 @@
 import { ShoppingBasket } from 'lucide-react';
 import Link from 'next/link';
+import { type Route } from 'next';
 import { getCartByFromCookies } from '@/api/carts';
 import { ProductQuantitySelector } from '@/components/atoms/ProductQuantitySelector';
 import { RemoveItemFromCart } from '@/components/atoms/RemoveItemFromCart';
 import { AddToPayButton } from '@/components/atoms/AddPayButton';
-import { handlePaymentAction } from '@/app/cart/actions';
 
 export default async function CartPage() {
 	const cart = await getCartByFromCookies();
@@ -87,21 +87,21 @@ export default async function CartPage() {
 					</table>
 				)}
 				<div className="m-4 mx-auto text-end font-light">
-					{`Total amount: $${cart?.orderItems
-						?.reduce((acc, item) => acc + item.total, 0)
-						.toFixed(2)}`}
-					<div className="flex justify-end">
-						<form action={handlePaymentAction}>
-							<input
-								type="hidden"
-								value={cart?.id}
-								name="productId"
-							/>
-							<AddToPayButton
-								statusButton={cart?.orderItems?.length ? false : true}
-							/>
-						</form>
-					</div>
+					{`Total amount: $${
+						cart?.orderItems?.length
+							? cart?.orderItems
+									?.reduce((acc, item) => acc + item.total, 0)
+									.toFixed(2)
+							: 0
+					}`}
+					<Link
+						href={`/cart/${cart?.id}/payment` as Route}
+						className="flex justify-end"
+					>
+						<AddToPayButton
+							statusButton={cart?.orderItems?.length ? false : true}
+						/>
+					</Link>
 				</div>
 			</div>
 		</>

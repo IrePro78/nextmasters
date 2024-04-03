@@ -17,6 +17,7 @@
 }
 
 body {
+	margin-bottom: 3rem;
 	color: rgb(var(--foreground-rgb));
 	min-height: 100vh;
 	background: linear-gradient(
@@ -27,7 +28,7 @@ body {
 		rgb(var(--background-start-rgb));
 }
 footer {
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	height: 2rem;
 	width: 100%;

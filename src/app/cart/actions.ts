@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import {
 	addToCart,
+	getCartByFromCookies,
 	getOrCreateCart,
 	removeItemFromCart,
 	updateItemQuantity,
@@ -58,9 +59,14 @@ export const removeItemFromCartAction = async (
 export const handlePaymentAction = async (formData: FormData) => {
 	console.log(formData);
 
-	// const cart = await getOrCreateCart();
-	// if (!cart) {
-	// 	throw new Error('Cart not found');
-	// }
+	if (!process.env.STRIPE_SECRET_KEY) {
+		throw new Error('Missing Stripe secret key');
+	}
+	const cart = await getCartByFromCookies();
+	if (!cart) {
+		throw new Error('Cart not found');
+	}
+	console.log(cart);
+
 	// handle payment
 };
