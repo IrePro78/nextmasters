@@ -1,4 +1,3 @@
-'use client';
 import { PaymentStripeForm } from '@/components/organism/PaymentStripeForm';
 import { handlePaymentAction } from '@/app/cart/actions';
 
@@ -25,7 +24,7 @@ export default async function PaymentPage() {
 	// if (!paymentIntent.client_secret) {
 	// 	throw new Error('Could not create payment intent');
 	// }
-	const ggg = handlePaymentAction();
+	// const ggg = handlePaymentAction();
 
-	return <PaymentStripeForm clientSecret={ggg} />;
+	return <PaymentStripeForm clientSecret={handlePaymentAction()} />;
 }
