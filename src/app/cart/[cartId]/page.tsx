@@ -88,11 +88,7 @@ export default async function CartPage() {
 				)}
 				<div className="m-4 mx-auto text-end font-light">
 					{`Total amount: $${
-						cart?.orderItems?.length
-							? cart?.orderItems
-									?.reduce((acc, item) => acc + item.total, 0)
-									.toFixed(2)
-							: 0
+						cart?.orderItems?.length ? cart.totalAmount : 0
 					}`}
 					<Link
 						href={`/cart/${cart?.id}/payment` as Route}

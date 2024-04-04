@@ -1,6 +1,7 @@
 'use server';
 import { cookies } from 'next/headers';
 import { revalidatePath, revalidateTag } from 'next/cache';
+import Stripe from 'stripe';
 import {
 	addToCart,
 	getCartByFromCookies,
@@ -56,9 +57,7 @@ export const removeItemFromCartAction = async (
 	revalidateTag('cart');
 };
 
-export const handlePaymentAction = async (formData: FormData) => {
-	console.log(formData);
-
+export const handlePaymentAction = async () => {
 	if (!process.env.STRIPE_SECRET_KEY) {
 		throw new Error('Missing Stripe secret key');
 	}
@@ -66,7 +65,23 @@ export const handlePaymentAction = async (formData: FormData) => {
 	if (!cart) {
 		throw new Error('Cart not found');
 	}
-	console.log(cart);
 
-	// handle payment
+	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+		apiVersion: '2023-10-16',
+		typescript: true,
+	});
+
+	const paymentIntent = await stripe.paymentIntents.create({
+		amount: cart.totalAmount,
+		currency: 'usd',
+		automatic_payment_methods: {
+			enabled: true,
+		},
+		metadata: { orderId: cart.id },
+	});
+
+	if (!paymentIntent.client_secret) {
+		throw new Error('Could not create payment intent');
+	}
+	return { clientSecret: paymentIntent.client_secret };
 };
