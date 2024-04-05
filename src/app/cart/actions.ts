@@ -72,7 +72,7 @@ export const handlePaymentAction = async () => {
 	});
 
 	const paymentIntent = await stripe.paymentIntents.create({
-		amount: cart.totalAmount,
+		amount: cart.totalAmount * 100,
 		currency: 'usd',
 		automatic_payment_methods: {
 			enabled: true,
@@ -83,5 +83,5 @@ export const handlePaymentAction = async () => {
 	if (!paymentIntent.client_secret) {
 		throw new Error('Could not create payment intent');
 	}
-	return { clientSecret: paymentIntent.client_secret };
+	return paymentIntent.client_secret;
 };
