@@ -1,16 +1,18 @@
-import React, { type FormEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	PaymentElement,
 	useStripe,
 	useElements,
 } from '@stripe/react-stripe-js';
+import { AddToPaymentButton } from '@/components/atoms/AddToPaymentButton';
+import '../../styles/stripe.css';
+import { type CartFragment } from '@/gql/graphql';
 
-export function CheckoutForm() {
+export function CheckoutForm({ cart }: { cart: CartFragment }) {
 	const stripe = useStripe();
 	const elements = useElements();
 
 	const [message, setMessage] = useState<string | null>(null);
-	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		if (!stripe) {
@@ -48,30 +50,19 @@ export function CheckoutForm() {
 			.catch(console.error);
 	}, [stripe]);
 
-	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
+	const handleSubmit = async () => {
 		if (!stripe || !elements) {
-			// Stripe.js hasn't yet loaded.
-			// Make sure to disable form submission until Stripe.js has loaded.
 			return;
 		}
-
-		setIsLoading(true);
 
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
 				// Make sure to change this to your payment completion page
-				return_url: 'http://localhost:3000',
+				return_url: 'http://localhost:3000/',
 			},
 		});
 
-		// This point will only be reached if there is an immediate error when
-		// confirming the payment. Otherwise, your customer will be redirected to
-		// your `return_url`. For some payment methods like iDEAL, your customer will
-		// be redirected to an intermediate site first to authorize the payment, then
-		// redirected to the `return_url`.
 		if (
 			error.type === 'card_error' ||
 			error.type === 'validation_error'
@@ -80,8 +71,6 @@ export function CheckoutForm() {
 		} else {
 			setMessage('An unexpected error occurred.');
 		}
-
-		setIsLoading(false);
 	};
 
 	const paymentElementOptions = {
@@ -89,25 +78,17 @@ export function CheckoutForm() {
 	} as const;
 
 	return (
-		<form id="payment-form" onSubmit={handleSubmit}>
-			<PaymentElement
-				id="payment-element"
-				options={paymentElementOptions}
-			/>
-			<button
-				disabled={isLoading || !stripe || !elements}
-				id="submit"
-			>
-				<span id="button-text">
-					{isLoading ? (
-						<div className="spinner" id="spinner"></div>
-					) : (
-						'Pay now'
-					)}
-				</span>
-			</button>
-			{/* Show any error or success messages */}
-			{message && <div id="payment-message">{message}</div>}
-		</form>
+		<div className="mx-auto">
+			<form id="payment-form" action={handleSubmit}>
+				<PaymentElement
+					id="payment-element"
+					options={paymentElementOptions}
+					className="w-full max-w-xl rounded-md bg-gray-800 p-4"
+				/>
+				<AddToPaymentButton />
+				{/* Show any error or success messages */}
+				{message && <div id="payment-message">{message}</div>}
+			</form>
+		</div>
 	);
 }

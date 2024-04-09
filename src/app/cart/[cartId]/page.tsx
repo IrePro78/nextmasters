@@ -4,7 +4,7 @@ import { type Route } from 'next';
 import { getCartByFromCookies } from '@/api/carts';
 import { ProductQuantitySelector } from '@/components/atoms/ProductQuantitySelector';
 import { RemoveItemFromCart } from '@/components/atoms/RemoveItemFromCart';
-import { AddToPayButton } from '@/components/atoms/AddPayButton';
+import { AddToCheckoutButton } from '@/components/atoms/AddCheckoutButton';
 
 export default async function CartPage() {
 	const cart = await getCartByFromCookies();
@@ -94,7 +94,7 @@ export default async function CartPage() {
 						href={`/cart/${cart?.id}/payment` as Route}
 						className="flex justify-end"
 					>
-						<AddToPayButton
+						<AddToCheckoutButton
 							statusButton={cart?.orderItems?.length ? false : true}
 						/>
 					</Link>

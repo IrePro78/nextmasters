@@ -2,7 +2,7 @@
 import { CreditCard } from 'lucide-react';
 import { useFormStatus } from 'react-dom';
 
-export const AddToPayButton = ({
+export const AddToCheckoutButton = ({
 	statusButton,
 }: {
 	statusButton: boolean;

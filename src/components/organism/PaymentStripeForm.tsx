@@ -5,6 +5,8 @@ import { Elements } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
 import { handlePaymentAction } from '@/app/cart/actions';
 import { CheckoutForm } from '@/components/organism/CheckoutForm';
+import { OrderSummary } from '@/components/organism/OrderSummary';
+import { type CartFragment } from '@/gql/graphql';
 
 if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
 	throw new Error(
@@ -15,8 +17,13 @@ const stripePromise = loadStripe(
 	process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 );
 
-export const PaymentStripeForm = () => {
+export const PaymentStripeForm = ({
+	cart,
+}: {
+	cart: CartFragment;
+}) => {
 	const [clientSecret, setClientSecret] = useState<string>('');
+
 	useEffect(() => {
 		const fetchClientSecret = async () => {
 			const secret = await handlePaymentAction();
@@ -27,11 +34,26 @@ export const PaymentStripeForm = () => {
 	}, []);
 
 	return (
-		<Elements
-			options={{ appearance: { theme: 'stripe' }, clientSecret }}
-			stripe={stripePromise}
-		>
-			<CheckoutForm />
-		</Elements>
+		<div className="container mx-auto mt-4 flex flex-row ">
+			<div className="basis-1/2 rounded-l-md border border-slate-500 bg-slate-800 p-10">
+				<OrderSummary />
+			</div>
+			<div className="basis-1/2 rounded-r-md border border-slate-500 bg-slate-800 p-10">
+				{clientSecret && (
+					<Elements
+						options={{
+							locale: 'en',
+							appearance: {
+								theme: 'night',
+							},
+							clientSecret,
+						}}
+						stripe={stripePromise}
+					>
+						<CheckoutForm cart={cart} />
+					</Elements>
+				)}
+			</div>
+		</div>
 	);
 };
