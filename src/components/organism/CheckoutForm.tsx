@@ -6,9 +6,8 @@ import {
 } from '@stripe/react-stripe-js';
 import { AddToPaymentButton } from '@/components/atoms/AddToPaymentButton';
 import '../../styles/stripe.css';
-import { type CartFragment } from '@/gql/graphql';
 
-export function CheckoutForm({ cart }: { cart: CartFragment }) {
+export function CheckoutForm() {
 	const stripe = useStripe();
 	const elements = useElements();
 

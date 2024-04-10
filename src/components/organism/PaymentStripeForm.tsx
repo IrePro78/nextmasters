@@ -36,11 +36,12 @@ export const PaymentStripeForm = ({
 	return (
 		<div className="container mx-auto mt-4 flex flex-row ">
 			<div className="basis-1/2 rounded-l-md border border-slate-500 bg-slate-800 p-10">
-				<OrderSummary />
+				<OrderSummary cart={cart} />
 			</div>
 			<div className="basis-1/2 rounded-r-md border border-slate-500 bg-slate-800 p-10">
 				{clientSecret && (
 					<Elements
+						key={clientSecret}
 						options={{
 							locale: 'en',
 							appearance: {
@@ -50,7 +51,7 @@ export const PaymentStripeForm = ({
 						}}
 						stripe={stripePromise}
 					>
-						<CheckoutForm cart={cart} />
+						<CheckoutForm />
 					</Elements>
 				)}
 			</div>

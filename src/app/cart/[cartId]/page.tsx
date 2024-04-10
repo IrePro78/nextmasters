@@ -52,7 +52,7 @@ export default async function CartPage() {
 												key={item.id}
 												className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
 											>
-												<th
+												<td
 													scope="row"
 													className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
 												>
@@ -61,7 +61,7 @@ export default async function CartPage() {
 													>
 														{item.product[0]?.name}
 													</Link>
-												</th>
+												</td>
 												<td className="px-6 py-4">{'Regular'}</td>
 												<td className=" w-2 px-5 py-4">
 													{
