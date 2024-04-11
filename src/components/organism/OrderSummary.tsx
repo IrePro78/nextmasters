@@ -5,7 +5,7 @@ import { formatMoney } from '@/utils/formater';
 export function OrderSummary({ cart }: { cart: CartFragment }) {
 	return (
 		<>
-			<table className="w-full text-left text-sm rtl:text-right ">
+			<table className="mt-4 w-full text-left text-sm rtl:text-right">
 				<thead className=" h-6 border-b border-slate-500 bg-slate-800 text-xs uppercase text-gray-500 ">
 					<tr>
 						<th scope="col" className="px-6"></th>
@@ -20,7 +20,7 @@ export function OrderSummary({ cart }: { cart: CartFragment }) {
 						</th>
 					</tr>
 				</thead>
-				<tbody className="text-xs">
+				<tbody>
 					{cart.orderItems?.map(
 						(item) =>
 							item.product && (
@@ -28,7 +28,7 @@ export function OrderSummary({ cart }: { cart: CartFragment }) {
 									className=" border-b border-slate-600 bg-slate-800  dark:text-gray-300"
 									key={item.id}
 								>
-									<td className="py-2">
+									<td className="max-w-12 py-2">
 										<ProductThumbnailImage
 											src={
 												item.product.map((p) => p.product_image)[0] ||

@@ -1,4 +1,5 @@
 'use server';
+import { timeStamp } from 'console';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import {
@@ -46,6 +47,7 @@ export const addToCart = async (
 
 export const getOrCreateCart = async (): Promise<CartFragment> => {
 	const existingCart = await getCartByFromCookies();
+
 	if (existingCart) {
 		return existingCart;
 	}
@@ -54,8 +56,9 @@ export const getOrCreateCart = async (): Promise<CartFragment> => {
 	if (!cart.createOrder) throw new Error('Could not create cart');
 	cookies().set('cartId', cart.createOrder.id, {
 		httpOnly: true,
-		sameSite: 'lax',
-		secure: false,
+		sameSite: 'strict',
+		secure: true,
+		maxAge: 60 * 60 * 24 * 7,
 	});
 	return cart.createOrder;
 };
@@ -76,6 +79,7 @@ export const getCartByFromCookies = async () => {
 
 		return cart.order;
 	}
+	return null;
 };
 
 export const updateItemQuantity = async (

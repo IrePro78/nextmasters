@@ -10,12 +10,12 @@ export function ProductThumbnailImage({
 	return (
 		<div className="aspect-square overflow-hidden rounded border border-zinc-800 hover:bg-slate-500 dark:bg-slate-600">
 			<Image
-				width={34}
-				height={34}
+				width={320}
+				height={320}
 				src={src}
 				alt={alt}
 				quality={100}
-				className="h-full w-full object-cover object-center transition-transform hover:scale-105"
+				className=" h-full w-full object-cover object-center transition-transform hover:scale-105"
 			/>
 		</div>
 	);
