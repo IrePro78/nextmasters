@@ -35,7 +35,7 @@ export const PaymentStripeForm = ({
 
 	return (
 		<>
-			<div className="container mx-auto mt-4 h-20 rounded-l-md rounded-r-md border-l border-r border-t border-slate-500 bg-slate-800 text-center">
+			<div className="container mx-auto mt-4 h-16 rounded-l-md rounded-r-md border-l border-r border-t border-slate-500 bg-slate-800 p-4 text-center text-xl">
 				Order Summary
 			</div>
 			<div className="container mx-auto flex flex-row ">

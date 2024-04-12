@@ -67,13 +67,13 @@ export const handlePaymentAction = async () => {
 	}
 
 	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-		apiVersion: '2023-10-16',
+		apiVersion: '2024-04-10',
 		typescript: true,
 	});
 
 	const paymentIntent = await stripe.paymentIntents.create({
 		amount: cart.totalAmount * 100,
-		currency: 'usd',
+		currency: 'pln',
 		automatic_payment_methods: {
 			enabled: true,
 		},

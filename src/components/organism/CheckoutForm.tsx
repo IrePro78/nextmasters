@@ -5,7 +5,6 @@ import {
 	useElements,
 } from '@stripe/react-stripe-js';
 import { AddToPaymentButton } from '@/components/atoms/AddToPaymentButton';
-import '../../styles/stripe.css';
 
 export function CheckoutForm() {
 	const stripe = useStripe();
@@ -58,7 +57,7 @@ export function CheckoutForm() {
 			elements,
 			confirmParams: {
 				// Make sure to change this to your payment completion page
-				return_url: 'http://localhost:3000/',
+				return_url: `http://localhost:3000/cart/tt/payment/success/`,
 			},
 		});
 
