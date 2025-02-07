@@ -1,9 +1,10 @@
 'use server';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import { revalidatePath, revalidateTag } from 'next/cache';
+import Stripe from 'stripe';
 import {
 	addToCart,
+	getCartByFromCookies,
 	getOrCreateCart,
 	removeItemFromCart,
 	updateItemQuantity,
@@ -24,7 +25,7 @@ export const addToCartAction = async (formData: FormData) => {
 	if (item) {
 		await updateItemQuantity(item.id, item.quantity + 1);
 		revalidateTag('cart');
-		redirect('/cart');
+		return;
 	}
 	await addToCart(cart.id, product.id, 1, 1 * product.price);
 	revalidateTag('cart');
@@ -32,7 +33,6 @@ export const addToCartAction = async (formData: FormData) => {
 	if (!cart) {
 		throw new Error('Could not create cart');
 	}
-	redirect('/cart');
 
 	cookies().set('cartId', cart.id);
 };
@@ -55,4 +55,33 @@ export const removeItemFromCartAction = async (
 	}
 	await removeItemFromCart(itemId);
 	revalidateTag('cart');
+};
+
+export const handlePaymentAction = async () => {
+	if (!process.env.STRIPE_SECRET_KEY) {
+		throw new Error('Missing Stripe secret key');
+	}
+	const cart = await getCartByFromCookies();
+	if (!cart) {
+		throw new Error('Cart not found');
+	}
+
+	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+		apiVersion: '2024-04-10',
+		typescript: true,
+	});
+
+	const paymentIntent = await stripe.paymentIntents.create({
+		amount: cart.totalAmount * 100,
+		currency: 'pln',
+		automatic_payment_methods: {
+			enabled: true,
+		},
+		metadata: { orderId: cart.id },
+	});
+
+	if (!paymentIntent.client_secret) {
+		throw new Error('Could not create payment intent');
+	}
+	return paymentIntent.client_secret;
 };

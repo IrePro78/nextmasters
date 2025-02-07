@@ -65,7 +65,7 @@ export const Navbar = async () => {
 					Categories
 				</ActiveLink>
 
-				<Link href={'/cart' as Route} role="button">
+				<Link href={`/cart/${cart?.id}` as Route} role="button">
 					<div className="flex grid-cols-1 gap-1">
 						<ShoppingCart />
 

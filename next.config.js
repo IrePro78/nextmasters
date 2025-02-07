@@ -5,7 +5,6 @@ const nextConfig = {
 	experimental: {
 		typedRoutes: true,
 		mdxRs: true,
-		serverActions: true,
 	},
 	output: 'standalone',
 
@@ -16,7 +15,6 @@ const nextConfig = {
 				hostname: '**',
 			},
 		],
-		// domains: ['localhost', 'api_graphql'],
 	},
 	redirects: async () => {
 		return [

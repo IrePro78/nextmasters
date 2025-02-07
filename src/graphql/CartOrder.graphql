@@ -10,6 +10,7 @@ fragment Cart on Order {
 			id
 			name
 			price
+			product_image
 		}
 	}
 }

@@ -1,5 +1,5 @@
-mutation CartCreate {
-	createOrder(createOrderData: { totalAmount: 0 }) {
+mutation CartCreate($totalAmount: Float!) {
+	createOrder(createOrderData: { totalAmount: $totalAmount }) {
 		...Cart
 	}
 }

@@ -17,8 +17,9 @@ export default function RootLayout({
 				<body className={inter.className}>
 					<Navbar />
 					{children}
-					<footer>
-						<p className="text-center text-sm ">© 2024</p>
+					<footer className="flex items-center justify-between px-4 text-xs font-light ">
+						<p>© 2024 by @IrePro. All rights reserved</p>
+						<p>Powered by NextJS & NestJS</p>
 					</footer>
 				</body>
 			</html>

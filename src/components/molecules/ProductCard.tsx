@@ -43,13 +43,7 @@ export const ProductCard = async ({
 								value={product.id}
 								name="productId"
 							/>
-							{/* <div
-								className="ml-5 flex justify-between gap-4"
-								
-							> */}
-							{/* <ProductQuantitySelector /> */}
 							<AddToCartButton />
-							{/* </div> */}
 						</form>
 					</div>
 				</div>
